@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+  "name": "weAutoPagerize",
+  "description": "__MSG_extensionDescription__",
+  "version": "0.0.1",
+  "developer": {
+    "name": "wantora",
+    "url": "https://github.com/wantora/weautopagerize"
+  },
+  "applications": {
+    "gecko": {
+      "id": "weautopagerize@wantora.github.io",
+      "strict_min_version": "57.0"
+    }
+  },
+  "default_locale": "en",
+  "permissions": [
+    "*://*/*",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "weautopagerize",
+  "description": "Automatically inserts the next page.",
+  "version": "0.0.1",
+  "author": "wantora <wantora@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/wantora/weautopagerize/issues"
+  },
+  "dependencies": {
+    "events": "^1.1.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "copy-webpack-plugin": "^4.2.0",
+    "eslint": "^4.10.0",
+    "eslint-loader": "^1.9.0",
+    "npm-run-all": "^4.1.2",
+    "web-ext": "^2.2.2",
+    "webpack": "^3.8.1"
+  },
+  "homepage": "https://github.com/wantora/weautopagerize#readme",
+  "license": "GPL-3.0+",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wantora/weautopagerize.git"
+  },
+  "scripts": {
+    "build": "npm-run-all -s build:js build:ext",
+    "build:ext": "web-ext build --source-dir dist",
+    "build:js": "webpack --env.production true",
+    "lint": "eslint .",
+    "start": "web-ext run --source-dir dist",
+    "watch": "webpack --watch"
+  }
+}
