@@ -1,5 +1,8 @@
 {
   "extensionDescription": {
     "message": "Automatically inserts the next page."
+  },
+  "excludeListLabel": {
+    "message": "Exclude URL (RegExp)"
   }
 }

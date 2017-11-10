@@ -33,6 +33,7 @@ module.exports = function(options) {
     entry: {
       "background": "./src/background.js",
       "content": "./src/content.js",
+      "options": "./src/options.js",
     },
     output: {
       path: path.join(__dirname, "dist"),
