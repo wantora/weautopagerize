@@ -18,6 +18,7 @@ module.exports = function(options) {
   
   if (production) {
     plugins.push(...[
+      new webpack.optimize.ModuleConcatenationPlugin(),
       new webpack.LoaderOptionsPlugin({
         debug: false,
       }),
