@@ -2,7 +2,7 @@
   "presets": [
     ["env", {
       "targets": {
-        "browsers": ["Firefox 57"]
+        "browsers": ["Firefox 56"]
       },
       "modules": false
     }]
