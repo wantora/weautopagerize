@@ -22,8 +22,10 @@
   "background": {
     "scripts": ["background.js"]
   },
-  "options_ui": {
-    "page": "options.html"
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": "button.svg#default",
+    "default_title": "__MSG_browserActionLabel__"
   },
   "content_scripts": [
     {
@@ -31,5 +33,8 @@
       "js": ["content.js"],
       "run_at": "document_end"
     }
-  ]
+  ],
+  "options_ui": {
+    "page": "options.html"
+  }
 }

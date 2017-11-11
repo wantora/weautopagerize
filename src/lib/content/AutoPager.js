@@ -1,3 +1,4 @@
+import Info from "./Info";
 import ScrollListener from "./ScrollListener";
 import Request from "./Request";
 import {xpath, xpathAt, getDir} from "../util";
@@ -59,9 +60,13 @@ export default class AutoPager {
     console.log("weAutoPagerize_start", this._url.href, this._doc, this._pageNo);
     
     if (!this._updateInsertPoint()) {
+      Info.updateStatus("error");
+      // eslint-disable-next-line no-console
+      console.error(`insertPoint not found (insertBefore: ${this._info.insertBefore})`);
       return;
     }
     
+    Info.updateStatus("next");
     this._scrollListener.enable();
     this._onScroll();
   }
@@ -102,30 +107,34 @@ export default class AutoPager {
     
     if (scrollBottom > borderLine) {
       this._scrollListener.disable();
-      this._loadNext().catch((error) => {
-        console.error(error); // eslint-disable-line no-console
-      });
+      this._loadNext();
     }
   }
   _loadNext() {
-    return Request.getDocument(this._nextURL).then(({realURL, doc}) => {
-      if (this._loadedURLs.has(realURL.href)) {
-        return;
-      }
-      this._loadedURLs.add(this._nextURL.href);
-      this._loadedURLs.add(realURL.href);
-      
-      const nextAutoPager = new AutoPager(this._info, realURL, doc, {
-        pageNo: this._pageNo + 1,
-        loadedURLs: this._loadedURLs,
-        insertPoint: this._insertPoint,
-      });
-      
-      if (nextAutoPager.insertPageElements()) {
-        if (nextAutoPager.test()) {
-          nextAutoPager.start();
+    Info.updateStatus("loading");
+    
+    Request.getDocument(this._nextURL).then(({realURL, doc}) => {
+      if (!this._loadedURLs.has(realURL.href)) {
+        this._loadedURLs.add(this._nextURL.href);
+        this._loadedURLs.add(realURL.href);
+        
+        const nextAutoPager = new AutoPager(this._info, realURL, doc, {
+          pageNo: this._pageNo + 1,
+          loadedURLs: this._loadedURLs,
+          insertPoint: this._insertPoint,
+        });
+        
+        if (nextAutoPager.insertPageElements()) {
+          if (nextAutoPager.test()) {
+            nextAutoPager.start();
+            return;
+          }
         }
       }
+      Info.updateStatus("default");
+    }).catch((error) => {
+      Info.updateStatus("error");
+      console.error(error); // eslint-disable-line no-console
     });
   }
   _getBaseURL() {
@@ -167,8 +176,6 @@ export default class AutoPager {
       this._insertPoint = newInsertPoint;
       
       if (!this._insertPoint) {
-        // eslint-disable-next-line no-console
-        console.log(`insertPoint not found (insertBefore: ${this._info.insertBefore})`);
         return false;
       }
     }

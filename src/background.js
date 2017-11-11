@@ -7,14 +7,21 @@ const excludeList = new ExcludeList();
 siteinfoManager.init();
 excludeList.init();
 
-browser.runtime.onMessage.addListener((message) => {
+browser.runtime.onMessage.addListener((message, sender) => {
   if (!message) { return null; }
   
   if (message.type === "getSiteinfo") {
     if (excludeList.check(message.url)) {
-      return Promise.resolve([]);
+      return Promise.resolve(null);
     } else {
       return Promise.resolve(siteinfoManager.getSiteinfo(message.url));
+    }
+  } else if (message.type === "updateStatus") {
+    if (sender.tab) {
+      browser.browserAction.setIcon({
+        path: `button.svg#${message.status}`,
+        tabId: sender.tab.id,
+      });
     }
   }
   

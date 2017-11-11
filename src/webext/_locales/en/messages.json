@@ -2,6 +2,9 @@
   "extensionDescription": {
     "message": "Automatically inserts the next page."
   },
+  "browserActionLabel": {
+    "message": "weAutoPagerize"
+  },
   "excludeListLabel": {
     "message": "Exclude URL (RegExp)"
   }
