@@ -7,7 +7,7 @@ body {
   margin: 0;
 }
 
-body {
+html {
   font: message-box;
   -moz-user-select: none;
   user-select: none;
@@ -26,6 +26,8 @@ fieldset {
 .options > li {
   margin: 0;
   padding: 0;
+  display: grid;
+  grid-template-columns: 15em 1fr;
 }
 
 .options > li:not(:first-child) {
@@ -35,8 +37,8 @@ fieldset {
 }
 
 label {
-  display: inline-block;
-  width: 30%;
+  display: block;
+  grid-column: 1 / 1;
 }
 
 label .description {
@@ -45,9 +47,7 @@ label .description {
 }
 
 .inputBox {
-  display: inline-block;
-  width: calc(100% - 30% - 1%);
-  vertical-align: top;
+  grid-column: 2 / 2;
 }
 
 .inputBox input[type="text"],
