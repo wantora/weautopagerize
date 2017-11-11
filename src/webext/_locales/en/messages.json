@@ -6,6 +6,9 @@
     "message": "weAutoPagerize"
   },
   "excludeListLabel": {
-    "message": "Exclude URL (RegExp)"
+    "message": "Exclude URL"
+  },
+  "excludeListPatternLabel": {
+    "message": "glob"
   }
 }

@@ -1,4 +1,5 @@
 import Prefs from "./Prefs";
+import {parseGlob} from "../util";
 
 export default class ExcludeList {
   constructor() {
@@ -21,7 +22,7 @@ export default class ExcludeList {
     
     excludeList.forEach((str) => {
       try {
-        newList.push(new RegExp(str));
+        newList.push(parseGlob(str));
       } catch (error) {
         console.error(error); // eslint-disable-line no-console
       }
