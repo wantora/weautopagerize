@@ -66,7 +66,7 @@ export default class AutoPager {
       return;
     }
     
-    Info.updateStatus("next");
+    Info.updateStatus("enable");
     this._scrollListener.enable();
     this._onScroll();
   }

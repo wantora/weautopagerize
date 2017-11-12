@@ -5,7 +5,7 @@ document.dispatchEvent(new Event("GM_AutoPagerizeLoaded", {bubbles: true}));
 
 browser.runtime.sendMessage({type: "getSiteinfo", url: location.href}).then((siteinfo) => {
   if (siteinfo === null) {
-    Info.updateStatus("off");
+    Info.updateStatus("disable");
     return;
   }
   

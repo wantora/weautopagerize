@@ -5,20 +5,20 @@
   viewBox="0 0 16 16"
 >
   <style>
-    #off:target {
-      fill: #a9abad;
-    }
-    
     #default:target {
       fill: #5a5b5c;
     }
     
-    #next:target {
-      fill: #0a84ff;
+    #disable:target {
+      fill: #a9abad;
+    }
+    
+    #enable:target {
+      fill: #0ba610;
     }
     
     #loading:target {
-      fill: #0a84ff;
+      fill: #0ba610;
     }
     #loading:target #line {
       display: none;
@@ -42,7 +42,7 @@
       fill: #a60b0b;
     }
   </style>
-  <g id="off"><g id="default"><g id="next"><g id="loading"><g id="error">
+  <g id="default"><g id="disable"><g id="enable"><g id="loading"><g id="error">
     <path id="top" d="m4 5 h8 v-5 h-2 v3 h-4 v-3 h-2 z" />
     <rect id="line" x="1.5" y="7" width="13" height="2" />
     <circle id="loadingIcon" cx="3" cy="8" r="2"/>
