@@ -186,7 +186,7 @@ export default class AutoPager {
       return;
     }
     
-    xpath("descendant-or-self::a/@href | descendant-or-self::img/@src", element).forEach((attr) => {
+    xpath("descendant-or-self::a/@href | descendant-or-self::area/@href | descendant-or-self::img/@src", element).forEach((attr) => {
       const value = attr.value;
       if (value.startsWith("/") || value.startsWith("#")) { return; }
       
