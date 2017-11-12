@@ -20,7 +20,7 @@ browser.runtime.onMessage.addListener((message, sender) => {
     } else {
       return Promise.resolve(siteinfoManager.getSiteinfo(url));
     }
-  } else if (message.type === "setState") {
+  } else if (message.type === "setButtonState") {
     if (sender.tab) {
       buttonManager.setState(sender.tab.id, message.value);
     }

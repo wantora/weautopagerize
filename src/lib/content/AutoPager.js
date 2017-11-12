@@ -28,7 +28,6 @@ export default class AutoPager {
       const autoPager = new AutoPager(info, new URL(location.href), document, {});
       
       if (autoPager.test()) {
-        console.log("weAutoPagerize_siteinfo", info);
         return autoPager;
       }
     }
@@ -49,6 +48,15 @@ export default class AutoPager {
       this._onScroll();
     });
   }
+  get info() {
+    return this._info;
+  }
+  get url() {
+    return this._url;
+  }
+  get pageNo() {
+    return this._pageNo;
+  }
   test() {
     if (this._nextURL && xpathAt(this._info.pageElement, this._doc)) {
       return !this._loadedURLs.has(this._nextURL.href);
@@ -57,12 +65,8 @@ export default class AutoPager {
     }
   }
   start() {
-    console.log("weAutoPagerize_start", this._url.href, this._doc, this._pageNo);
-    
     if (!this._updateInsertPoint()) {
-      PageInfo.update({state: "error"});
-      // eslint-disable-next-line no-console
-      console.error(`insertPoint not found (insertBefore: ${this._info.insertBefore})`);
+      PageInfo.update({state: "default"});
       return;
     }
     
@@ -80,8 +84,6 @@ export default class AutoPager {
     if (pageElements.length === 0) {
       return false;
     }
-    
-    console.log("weAutoPagerize_insert", this._url.href, this._insertPoint, pageElements);
     
     const fragment = this._getSeparatorFragment(
       pageElements[0].nodeType === Node.ELEMENT_NODE &&
@@ -125,6 +127,8 @@ export default class AutoPager {
         });
         
         if (nextAutoPager.insertPageElements()) {
+          PageInfo.appendInsertPage({url: nextAutoPager.url.href, pageNo: nextAutoPager.pageNo});
+          
           if (nextAutoPager.test()) {
             nextAutoPager.start();
             return;

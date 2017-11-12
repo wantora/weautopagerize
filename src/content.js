@@ -12,6 +12,7 @@ browser.runtime.sendMessage({type: "getSiteinfo", value: location.href}).then((s
   try {
     const autoPager = AutoPager.create(siteinfo);
     if (autoPager) {
+      PageInfo.update({siteinfo: autoPager.info});
       autoPager.start();
     } else {
       PageInfo.update({state: "default"});

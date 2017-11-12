@@ -25,7 +25,8 @@
   "browser_action": {
     "browser_style": true,
     "default_icon": "button.svg#default",
-    "default_title": "__MSG_browserActionLabel__"
+    "default_title": "__MSG_browserActionLabel__",
+    "default_popup": "popup.html"
   },
   "content_scripts": [
     {

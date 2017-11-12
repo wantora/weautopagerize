@@ -34,6 +34,7 @@ module.exports = function(options) {
       "background": "./src/background.js",
       "content": "./src/content.js",
       "options": "./src/options.js",
+      "popup": "./src/popup.js",
     },
     output: {
       path: path.join(__dirname, "dist"),
