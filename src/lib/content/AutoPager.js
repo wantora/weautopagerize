@@ -23,9 +23,9 @@ function getBorderLine(element) {
 }
 
 export default class AutoPager {
-  static create(siteinfo) {
+  static create(siteinfo, options) {
     for (const info of siteinfo) {
-      const autoPager = new AutoPager(info, new URL(location.href), document, {});
+      const autoPager = new AutoPager(info, new URL(location.href), document, options);
       
       if (autoPager.test()) {
         return autoPager;
@@ -33,10 +33,11 @@ export default class AutoPager {
     }
     return null;
   }
-  constructor(info, url, doc, {pageNo = 1, loadedURLs = [], insertPoint = null}) {
+  constructor(info, url, doc, {prefs, pageNo = 1, loadedURLs = [], insertPoint = null}) {
     this._info = info;
     this._url = url;
     this._doc = doc;
+    this._prefs = prefs;
     this._pageNo = pageNo;
     this._loadedURLs = new Set(loadedURLs);
     this._loadedURLs.add(this._url.href);
@@ -90,6 +91,9 @@ export default class AutoPager {
       pageElements[0].tagName.toLowerCase() === "tr"
     );
     pageElements.forEach((pageElement) => {
+      if (this._prefs.openLinkInNewTab) {
+        this._openInNewTabElementLink(pageElement);
+      }
       this._expandElementURL(pageElement);
       fragment.appendChild(pageElement);
     });
@@ -121,6 +125,7 @@ export default class AutoPager {
         this._loadedURLs.add(realURL.href);
         
         const nextAutoPager = new AutoPager(this._info, realURL, doc, {
+          prefs: this._prefs,
           pageNo: this._pageNo + 1,
           loadedURLs: this._loadedURLs,
           insertPoint: this._insertPoint,
@@ -184,6 +189,18 @@ export default class AutoPager {
       }
     }
     return true;
+  }
+  _openInNewTabElementLink(element) {
+    xpath("descendant-or-self::a[@href] | descendant-or-self::area[@href]", element).forEach((anchor) => {
+      if (
+        (anchor.protocol === "http:" || anchor.protocol === "https:") &&
+        !anchor.getAttribute("href").startsWith("#") &&
+        !anchor.hasAttribute("target")
+      ) {
+        anchor.target = "_blank";
+        anchor.relList.add("noopener");
+      }
+    });
   }
   _expandElementURL(element) {
     if (getDir(this._baseURL).href === getDir(new URL(location.href)).href) {

@@ -38,4 +38,5 @@ export default new Prefs({
   siteinfoCache: {},
   userSiteinfo: "",
   excludeList: [],
+  openLinkInNewTab: true,
 });

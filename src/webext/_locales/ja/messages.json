@@ -5,6 +5,9 @@
   "browserActionLabel": {
     "message": "weAutoPagerize"
   },
+  "openLinkInNewTabLabel": {
+    "message": "リンクを新しいタブで開く"
+  },
   "excludeListLabel": {
     "message": "除外URL"
   },

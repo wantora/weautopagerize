@@ -5,6 +5,9 @@
   "browserActionLabel": {
     "message": "weAutoPagerize"
   },
+  "openLinkInNewTabLabel": {
+    "message": "Open link in new tab"
+  },
   "excludeListLabel": {
     "message": "Exclude URL"
   },

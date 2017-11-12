@@ -3,14 +3,14 @@ import AutoPager from "./lib/content/AutoPager";
 
 document.dispatchEvent(new Event("GM_AutoPagerizeLoaded", {bubbles: true}));
 
-browser.runtime.sendMessage({type: "getSiteinfo", value: location.href}).then((siteinfo) => {
-  if (siteinfo === null) {
+browser.runtime.sendMessage({type: "getData", value: location.href}).then(({exclude, siteinfo, prefs}) => {
+  if (exclude) {
     PageInfo.update({state: "disable"});
     return;
   }
   
   try {
-    const autoPager = AutoPager.create(siteinfo);
+    const autoPager = AutoPager.create(siteinfo, {prefs});
     if (autoPager) {
       PageInfo.update({siteinfo: autoPager.info});
       autoPager.start();
