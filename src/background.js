@@ -1,27 +1,28 @@
 import SiteinfoManager from "./lib/background/SiteinfoManager";
 import ExcludeList from "./lib/background/ExcludeList";
+import ButtonManager from "./lib/background/ButtonManager";
 
 const siteinfoManager = new SiteinfoManager();
 const excludeList = new ExcludeList();
+const buttonManager = new ButtonManager();
 
 siteinfoManager.init();
 excludeList.init();
+buttonManager.init();
 
 browser.runtime.onMessage.addListener((message, sender) => {
   if (!message) { return null; }
   
   if (message.type === "getSiteinfo") {
-    if (excludeList.check(message.url)) {
+    const url = message.value;
+    if (excludeList.check(url)) {
       return Promise.resolve(null);
     } else {
-      return Promise.resolve(siteinfoManager.getSiteinfo(message.url));
+      return Promise.resolve(siteinfoManager.getSiteinfo(url));
     }
-  } else if (message.type === "updateStatus") {
+  } else if (message.type === "setState") {
     if (sender.tab) {
-      browser.browserAction.setIcon({
-        path: `button.svg#${message.status}`,
-        tabId: sender.tab.id,
-      });
+      buttonManager.setState(sender.tab.id, message.value);
     }
   }
   

@@ -1,4 +1,4 @@
-import Info from "./Info";
+import PageInfo from "./PageInfo";
 import ScrollListener from "./ScrollListener";
 import Request from "./Request";
 import {xpath, xpathAt, getDir} from "../util";
@@ -60,13 +60,13 @@ export default class AutoPager {
     console.log("weAutoPagerize_start", this._url.href, this._doc, this._pageNo);
     
     if (!this._updateInsertPoint()) {
-      Info.updateStatus("error");
+      PageInfo.update({state: "error"});
       // eslint-disable-next-line no-console
       console.error(`insertPoint not found (insertBefore: ${this._info.insertBefore})`);
       return;
     }
     
-    Info.updateStatus("enable");
+    PageInfo.update({state: "enable"});
     this._scrollListener.enable();
     this._onScroll();
   }
@@ -111,7 +111,7 @@ export default class AutoPager {
     }
   }
   _loadNext() {
-    Info.updateStatus("loading");
+    PageInfo.update({state: "loading"});
     
     Request.getDocument(this._nextURL).then(({realURL, doc}) => {
       if (!this._loadedURLs.has(realURL.href)) {
@@ -131,9 +131,9 @@ export default class AutoPager {
           }
         }
       }
-      Info.updateStatus("default");
+      PageInfo.update({state: "default"});
     }).catch((error) => {
-      Info.updateStatus("error");
+      PageInfo.update({state: "error"});
       console.error(error); // eslint-disable-line no-console
     });
   }

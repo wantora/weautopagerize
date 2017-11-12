@@ -8,13 +8,13 @@ export default class ScrollListener {
       return;
     }
     
-    let timeoutID = null;
+    let timeoutId = null;
     this._listener = () => {
-      if (timeoutID) {
-        clearTimeout(timeoutID);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
       }
-      timeoutID = setTimeout(() => {
-        timeoutID = null;
+      timeoutId = setTimeout(() => {
+        timeoutId = null;
         this._callback.call(null);
       }, 200);
     };

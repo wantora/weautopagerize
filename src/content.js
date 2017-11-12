@@ -1,11 +1,11 @@
-import Info from "./lib/content/Info";
+import PageInfo from "./lib/content/PageInfo";
 import AutoPager from "./lib/content/AutoPager";
 
 document.dispatchEvent(new Event("GM_AutoPagerizeLoaded", {bubbles: true}));
 
-browser.runtime.sendMessage({type: "getSiteinfo", url: location.href}).then((siteinfo) => {
+browser.runtime.sendMessage({type: "getSiteinfo", value: location.href}).then((siteinfo) => {
   if (siteinfo === null) {
-    Info.updateStatus("disable");
+    PageInfo.update({state: "disable"});
     return;
   }
   
@@ -13,9 +13,11 @@ browser.runtime.sendMessage({type: "getSiteinfo", url: location.href}).then((sit
     const autoPager = AutoPager.create(siteinfo);
     if (autoPager) {
       autoPager.start();
+    } else {
+      PageInfo.update({state: "default"});
     }
   } catch (error) {
-    Info.updateStatus("error");
+    PageInfo.update({state: "error"});
     console.error(error); // eslint-disable-line no-console
   }
 });
