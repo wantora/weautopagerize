@@ -12,6 +12,6 @@
     "message": "Exclude URL"
   },
   "excludeListPatternLabel": {
-    "message": "glob"
+    "message": "Wildcard & Regexp"
   }
 }

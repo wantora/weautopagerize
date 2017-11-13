@@ -12,6 +12,6 @@
     "message": "除外URL"
   },
   "excludeListPatternLabel": {
-    "message": "glob"
+    "message": "ワイルドカードと正規表現"
   }
 }
