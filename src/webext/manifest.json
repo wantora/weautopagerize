@@ -14,6 +14,9 @@
     }
   },
   "default_locale": "en",
+  "icons": {
+    "48": "icon.svg"
+  },
   "permissions": [
     "*://*/*",
     "storage",

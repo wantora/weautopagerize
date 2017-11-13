@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+  width="48"
+  height="48"
+  viewBox="0 0 16 16"
+>
+  <style>
+    #default {
+      fill: #5a5b5c;
+    }
+  </style>
+  <g id="default"><g id="disable"><g id="enable"><g id="loading"><g id="error">
+    <path id="top" d="m4 5 h8 v-5 h-2 v3 h-4 v-3 h-2 z" />
+    <rect id="line" x="1.5" y="7" width="13" height="2" />
+    <use id="bottom" xlink:href="#top" transform="matrix(1 0 0 -1 0 16)" x="0" y="0" width="100%" height="100%" />
+  </g></g></g></g></g>
+</svg>
