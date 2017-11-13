@@ -11,6 +11,7 @@ module.exports = function(options) {
     }),
     new CopyWebpackPlugin([
       {from: "./src/webext"},
+      {from: "./README.md"},
       {from: "./LICENSE.md"},
       {from: "./gpl-3.0.txt"},
     ]),
