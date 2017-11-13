@@ -48,6 +48,11 @@ export default class AutoPager {
     this._scrollListener = new ScrollListener(() => {
       this._onScroll();
     });
+    this._userActiveListener = (newValue, oldValue) => {
+      if (newValue && !oldValue) {
+        this._onScroll();
+      }
+    };
   }
   get info() {
     return this._info;
@@ -72,6 +77,7 @@ export default class AutoPager {
     }
     
     PageInfo.update({state: "enable"});
+    PageInfo.emitter.on("userActive", this._userActiveListener);
     this._scrollListener.enable();
     this._onScroll();
   }
@@ -107,11 +113,16 @@ export default class AutoPager {
     return true;
   }
   _onScroll() {
+    if (!PageInfo.data.userActive) {
+      return;
+    }
+    
     const scrollingElement = document.scrollingElement;
     const scrollBottom = scrollingElement.scrollTop + scrollingElement.clientHeight;
     const borderLine = getBorderLine(this._insertPoint);
     
     if (scrollBottom > borderLine) {
+      PageInfo.emitter.removeListener("userActive", this._userActiveListener);
       this._scrollListener.disable();
       this._loadNext();
     }
@@ -209,7 +220,9 @@ export default class AutoPager {
     
     xpath("descendant-or-self::a/@href | descendant-or-self::area/@href | descendant-or-self::img/@src", element).forEach((attr) => {
       const value = attr.value;
-      if (value.startsWith("/") || value.startsWith("#")) { return; }
+      if (value.startsWith("/") || value.startsWith("#")) {
+        return;
+      }
       
       try {
         // 相対パスなら例外発生

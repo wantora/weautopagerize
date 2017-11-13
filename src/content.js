@@ -3,10 +3,9 @@ import AutoPager from "./lib/content/AutoPager";
 
 document.dispatchEvent(new Event("GM_AutoPagerizeLoaded", {bubbles: true}));
 
-browser.runtime.sendMessage({type: "getData", value: location.href}).then(({exclude, siteinfo, prefs}) => {
-  if (exclude) {
-    PageInfo.update({state: "disable"});
-    return;
+browser.runtime.sendMessage({type: "getData", value: location.href}).then(({userActive, siteinfo, prefs}) => {
+  if (!userActive) {
+    PageInfo.update({userActive: userActive});
   }
   
   try {

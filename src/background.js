@@ -14,23 +14,30 @@ syncPrefs.init();
 buttonManager.init();
 
 browser.runtime.onMessage.addListener((message, sender) => {
-  if (!message) { return null; }
-  
-  if (message.type === "getData") {
-    const url = message.value;
-    
-    return Promise.resolve({
-      exclude: excludeList.check(url),
-      siteinfo: siteinfoManager.getSiteinfo(url),
-      prefs: {
-        openLinkInNewTab: syncPrefs.get("openLinkInNewTab"),
-      },
-    });
-  } else if (message.type === "setButtonState") {
-    if (sender.tab) {
-      buttonManager.setState(sender.tab.id, message.value);
+  try {
+    if (!message) {
+      return null;
     }
+    
+    if (message.type === "getData") {
+      const url = message.value;
+      const data = {
+        userActive: !excludeList.check(url),
+        siteinfo: siteinfoManager.getSiteinfo(url),
+        prefs: {
+          openLinkInNewTab: syncPrefs.get("openLinkInNewTab"),
+        },
+      };
+      return Promise.resolve(data);
+    } else if (message.type === "setButtonState") {
+      if (sender.tab) {
+        buttonManager.setState(sender.tab.id, message.value);
+      }
+    }
+    
+    return null;
+  } catch (error) {
+    console.error(error); // eslint-disable-line no-console
+    return null;
   }
-  
-  return null;
 });

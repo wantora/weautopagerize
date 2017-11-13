@@ -1,0 +1,80 @@
+html,
+body {
+  margin: 0;
+}
+
+html {
+  font: message-box;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+body {
+  padding: 10px;
+}
+
+.toggleButton,
+.toggleButton::before,
+.toggleButton::after {
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+.toggleButton {
+  --buttonSize: 25px;
+  --buttonSpace: 4px;
+  --buttonBorder: 1px;
+  font: inherit;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  width: calc(var(--buttonSize) * 2);
+  height: var(--buttonSize);
+  border-radius: calc(var(--buttonSize) / 2);
+  border: var(--buttonBorder) solid #c1c1c1;
+  background-color: #ffffff;
+  transition-property: background-color;
+}
+.toggleButton::-moz-focus-inner {
+  border: none;
+}
+.toggleButton:enabled:hover {
+  border-color: #9b9b9b;
+}
+.toggleButton:enabled[data-checked="true"] {
+  background-color: #ecf9ee;
+}
+
+.toggleButton::before {
+  --switchSize: calc(var(--buttonSize) - var(--buttonSpace) * 2 - var(--buttonBorder) * 2);
+  content: "";
+  position: absolute;
+  top: var(--buttonSpace);
+  left: var(--buttonSpace);
+  width: var(--switchSize);
+  height: var(--switchSize);
+  border-radius: calc(var(--switchSize) / 2);
+  background-color: #9b9b9b;
+}
+.toggleButton:enabled[data-checked="true"]::before {
+  left: calc(var(--buttonSpace) + var(--buttonSize));
+  background-color: #0ba610;
+}
+
+.toggleButton::after {
+  content: "OFF";
+  font-size: calc(var(--buttonSize) / 2);
+  position: absolute;
+  top: 0;
+  right: var(--buttonSpace);
+  line-height: calc(var(--buttonSize) - var(--buttonBorder) * 2);
+  color: #9b9b9b;
+}
+.toggleButton:enabled[data-checked="true"]::after {
+  content: "ON";
+  left: var(--buttonSpace);
+  color: #0ba610;
+}
+.toggleButton:disabled::after {
+  display: none;
+}
