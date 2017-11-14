@@ -8,16 +8,20 @@ browser.runtime.sendMessage({type: "getData", value: location.href}).then(({user
     PageInfo.update({userActive: userActive});
   }
   
-  try {
-    const autoPager = AutoPager.create(siteinfo, {prefs});
-    if (autoPager) {
-      PageInfo.update({siteinfo: autoPager.info});
-      autoPager.start();
-    } else {
-      PageInfo.update({state: "default"});
-    }
-  } catch (error) {
-    PageInfo.update({state: "error"});
-    console.error(error); // eslint-disable-line no-console
+  const autoPager = AutoPager.create(siteinfo, {prefs});
+  if (autoPager) {
+    PageInfo.log({type: "start"});
+    PageInfo.update({siteinfo: autoPager.info});
+    autoPager.start();
+  } else {
+    PageInfo.update({state: "default"});
   }
+}).catch((error) => {
+  // 起動時のエラーを無視
+  if (error.message === "Could not establish connection. Receiving end does not exist.") {
+    return;
+  }
+  
+  PageInfo.logError(error);
+  PageInfo.update({state: "error"});
 });

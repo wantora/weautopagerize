@@ -5,7 +5,7 @@ class PageInfo {
     this._data = {
       state: null,
       siteinfo: null,
-      insertPages: [], // [{url, pageNo}]
+      logList: [],
       userActive: true,
     };
     this._listenerInitialized = false;
@@ -34,11 +34,15 @@ class PageInfo {
       }
     }
     
-    this._initPort();
     this._postPort();
   }
-  appendInsertPage(insertPage) {
-    this._data.insertPages.push(insertPage);
+  log(data) {
+    this._data.logList.push(Object.assign({time: Date.now()}, data));
+    this._postPort();
+  }
+  logError(error) {
+    console.error(error); // eslint-disable-line no-console
+    this.log({type: "error", name: error.name, message: error.message});
   }
   _initListener() {
     if (this._listenerInitialized) {
@@ -77,6 +81,8 @@ class PageInfo {
     });
   }
   _postPort() {
+    this._initPort();
+    
     for (const port of this._ports) {
       port.postMessage(this._data);
     }

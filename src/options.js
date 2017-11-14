@@ -38,7 +38,8 @@ function updateLastUpdatedTime() {
     if (times.length === 0) {
       lastUpdatedTimeElement.textContent = "";
     } else {
-      lastUpdatedTimeElement.textContent = new Date(Math.max(...times)).toLocaleString();
+      const timeStr = new Date(Math.max(...times)).toLocaleString([], {hour12: false});
+      lastUpdatedTimeElement.textContent = timeStr;
     }
   });
 }

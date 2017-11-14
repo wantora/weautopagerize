@@ -20,12 +20,6 @@
   "options_updateSiteinfoButton_label": {
     "message": "SITEINFOを更新"
   },
-  "popup_siteinfo_label": {
-    "message": "SITEINFO"
-  },
-  "popup_insertedPages_label": {
-    "message": "追加ページ"
-  },
   "popup_openOptionsButton_label": {
     "message": "設定"
   }

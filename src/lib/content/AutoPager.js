@@ -46,11 +46,21 @@ export default class AutoPager {
     this._baseURL = this._getBaseURL();
     this._nextURL = this._getNextURL();
     this._scrollListener = new ScrollListener(() => {
-      this._onScroll();
+      try {
+        this._onScroll();
+      } catch (error) {
+        PageInfo.logError(error);
+        PageInfo.update({state: "error"});
+      }
     });
     this._userActiveListener = (newValue, oldValue) => {
-      if (newValue && !oldValue) {
-        this._onScroll();
+      try {
+        if (newValue && !oldValue) {
+          this._onScroll();
+        }
+      } catch (error) {
+        PageInfo.logError(error);
+        PageInfo.update({state: "error"});
       }
     };
   }
@@ -72,7 +82,9 @@ export default class AutoPager {
   }
   start() {
     if (!this._updateInsertPoint()) {
-      PageInfo.update({state: "default"});
+      const error = new Error("insertPoint not found");
+      PageInfo.logError(error);
+      PageInfo.update({state: "error"});
       return;
     }
     
@@ -128,6 +140,7 @@ export default class AutoPager {
     }
   }
   _loadNext() {
+    PageInfo.log({type: "loading", url: this._nextURL.href});
     PageInfo.update({state: "loading"});
     
     Request.getDocument(this._nextURL).then(({realURL, doc}) => {
@@ -143,18 +156,19 @@ export default class AutoPager {
         });
         
         if (nextAutoPager.insertPageElements()) {
-          PageInfo.appendInsertPage({url: nextAutoPager.url.href, pageNo: nextAutoPager.pageNo});
-          
+          PageInfo.log({type: "insert", url: nextAutoPager.url.href, pageNo: nextAutoPager.pageNo});
           if (nextAutoPager.test()) {
             nextAutoPager.start();
             return;
           }
         }
       }
+      
+      PageInfo.log({type: "end"});
       PageInfo.update({state: "default"});
     }).catch((error) => {
+      PageInfo.logError(error);
       PageInfo.update({state: "error"});
-      console.error(error); // eslint-disable-line no-console
     });
   }
   _getBaseURL() {

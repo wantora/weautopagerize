@@ -3,7 +3,7 @@ export default class ButtonManager {
     // empty
   }
   setState(tabId, state) {
-    browser.browserAction.setIcon({
+    return browser.browserAction.setIcon({
       path: `button.svg#${state}`,
       tabId: tabId,
     });

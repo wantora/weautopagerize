@@ -20,12 +20,6 @@
   "options_updateSiteinfoButton_label": {
     "message": "Update SITEINFO"
   },
-  "popup_siteinfo_label": {
-    "message": "SITEINFO"
-  },
-  "popup_insertedPages_label": {
-    "message": "Inserted pages"
-  },
   "popup_openOptionsButton_label": {
     "message": "Options"
   }

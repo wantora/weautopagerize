@@ -8,8 +8,8 @@ class PageInfoPanel {
     this._userActiveButton = document.getElementById("userActive");
     this._siteinfoElement = document.getElementById("siteinfo");
     this._siteinfoElements = new Map();
-    this._insertPagesElement = document.getElementById("insertPages");
-    this._insertPages = new Map();
+    this._logListElement = document.getElementById("logList");
+    this._logListLength = 0;
     
     document.getElementById("openOptionsButton").addEventListener("click", () => {
       browser.runtime.openOptionsPage();
@@ -28,8 +28,8 @@ class PageInfoPanel {
       if (data.siteinfo) {
         this._updateSiteinfo(data.siteinfo);
       }
-      if (data.insertPages) {
-        this._updateInsertPages(data.insertPages);
+      if (data.logList) {
+        this._updateLogList(data.logList);
       }
     });
     
@@ -71,20 +71,48 @@ class PageInfoPanel {
       this._siteinfoElements.get(key).textContent = siteinfo[key];
     });
   }
-  _updateInsertPages(insertPages) {
-    insertPages.forEach(({url, pageNo}) => {
-      if (this._insertPages.has(pageNo)) {
+  _updateLogList(logList) {
+    logList.forEach((data, index) => {
+      if (index < this._logListLength) {
         return;
       }
-      this._insertPages.set(pageNo, url);
       
       const li = document.createElement("li");
-      const anchor = document.createElement("a");
-      anchor.href = url;
-      anchor.textContent = url;
-      li.appendChild(anchor);
-      this._insertPagesElement.appendChild(li);
+      
+      const time = document.createElement("span");
+      time.classList.add("time");
+      time.textContent = new Date(data.time).toLocaleTimeString("en-US", {hour12: false});
+      li.appendChild(time);
+      
+      const type = document.createElement("span");
+      type.classList.add("type");
+      type.textContent = data.type;
+      li.appendChild(type);
+      
+      if (data.type === "loading") {
+        const url = document.createElement("a");
+        url.classList.add("url");
+        url.href = data.url;
+        url.title = data.url;
+        url.textContent = data.url;
+        li.appendChild(url);
+      } else if (data.type === "insert") {
+        const pageNo = document.createElement("span");
+        pageNo.classList.add("pageNo");
+        pageNo.textContent = String(data.pageNo);
+        li.appendChild(pageNo);
+      } else if (data.type === "error") {
+        const error = document.createElement("span");
+        error.classList.add("error");
+        error.title = data.message;
+        error.textContent = data.message;
+        li.appendChild(error);
+      }
+      
+      this._logListElement.appendChild(li);
+      this._logListElement.scrollTo(0, this._logListElement.scrollHeight);
     });
+    this._logListLength = logList.length;
   }
 }
 

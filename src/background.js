@@ -31,7 +31,7 @@ browser.runtime.onMessage.addListener((message, sender) => {
       return Promise.resolve(data);
     } else if (message.type === "setButtonState") {
       if (sender.tab) {
-        buttonManager.setState(sender.tab.id, message.value);
+        return buttonManager.setState(sender.tab.id, message.value);
       }
     } else if (message.type === "forceUpdateSiteinfo") {
       return siteinfoManager.forceUpdateSiteinfo();
@@ -39,7 +39,6 @@ browser.runtime.onMessage.addListener((message, sender) => {
     
     return null;
   } catch (error) {
-    console.error(error); // eslint-disable-line no-console
-    return null;
+    return Promise.reject(error);
   }
 });
