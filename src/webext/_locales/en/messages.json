@@ -1,32 +1,32 @@
 {
-  "extensionDescription": {
+  "extension_description": {
     "message": "Automatically inserts the next page."
   },
-  "browserActionLabel": {
+  "browserAction_label": {
     "message": "weAutoPagerize"
   },
-  "openLinkInNewTabLabel": {
+  "options_openLinkInNewTab_label": {
     "message": "Open link in new tab"
   },
-  "excludeListLabel": {
+  "options_excludeList_label": {
     "message": "Exclude URL"
   },
-  "excludeListPatternLabel": {
+  "options_excludeList_pattern": {
     "message": "Wildcard & Regexp"
   },
-  "lastUpdatedTimeLabel": {
+  "options_lastUpdatedTime_label": {
     "message": "Last updated time"
   },
-  "updateSiteinfoButtonLabel": {
+  "options_updateSiteinfoButton_label": {
     "message": "Update SITEINFO"
   },
-  "siteinfoLabel": {
+  "popup_siteinfo_label": {
     "message": "SITEINFO"
   },
-  "insertedPagesLabel": {
+  "popup_insertedPages_label": {
     "message": "Inserted pages"
   },
-  "openOptionsButtonLabel": {
+  "popup_openOptionsButton_label": {
     "message": "Options"
   }
 }

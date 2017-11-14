@@ -1,32 +1,32 @@
 {
-  "extensionDescription": {
+  "extension_description": {
     "message": "自動的に次のページを挿入します。"
   },
-  "browserActionLabel": {
+  "browserAction_label": {
     "message": "weAutoPagerize"
   },
-  "openLinkInNewTabLabel": {
+  "options_openLinkInNewTab_label": {
     "message": "リンクを新しいタブで開く"
   },
-  "excludeListLabel": {
+  "options_excludeList_label": {
     "message": "除外URL"
   },
-  "excludeListPatternLabel": {
+  "options_excludeList_pattern": {
     "message": "ワイルドカードと正規表現"
   },
-  "lastUpdatedTimeLabel": {
+  "options_lastUpdatedTime_label": {
     "message": "最終更新日時"
   },
-  "updateSiteinfoButtonLabel": {
+  "options_updateSiteinfoButton_label": {
     "message": "SITEINFOを更新"
   },
-  "siteinfoLabel": {
+  "popup_siteinfo_label": {
     "message": "SITEINFO"
   },
-  "insertedPagesLabel": {
+  "popup_insertedPages_label": {
     "message": "追加ページ"
   },
-  "openOptionsButtonLabel": {
+  "popup_openOptionsButton_label": {
     "message": "設定"
   }
 }

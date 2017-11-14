@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "weAutoPagerize",
-  "description": "__MSG_extensionDescription__",
+  "description": "__MSG_extension_description__",
   "version": "0.0.1",
   "developer": {
     "name": "wantora",
@@ -28,7 +28,7 @@
   "browser_action": {
     "browser_style": true,
     "default_icon": "button.svg#default",
-    "default_title": "__MSG_browserActionLabel__",
+    "default_title": "__MSG_browserAction_label__",
     "default_popup": "popup.html"
   },
   "content_scripts": [
