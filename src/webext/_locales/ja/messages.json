@@ -19,5 +19,14 @@
   },
   "updateSiteinfoButtonLabel": {
     "message": "SITEINFOを更新"
+  },
+  "siteinfoLabel": {
+    "message": "SITEINFO"
+  },
+  "insertedPagesLabel": {
+    "message": "追加ページ"
+  },
+  "openOptionsButtonLabel": {
+    "message": "設定"
   }
 }

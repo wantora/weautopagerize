@@ -19,5 +19,14 @@
   },
   "updateSiteinfoButtonLabel": {
     "message": "Update SITEINFO"
+  },
+  "siteinfoLabel": {
+    "message": "SITEINFO"
+  },
+  "insertedPagesLabel": {
+    "message": "Inserted pages"
+  },
+  "openOptionsButtonLabel": {
+    "message": "Options"
   }
 }

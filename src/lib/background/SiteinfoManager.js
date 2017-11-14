@@ -18,6 +18,7 @@ function buildSiteinfo(siteinfo) {
     ) {
       try {
         newSiteinfo.push({
+          url: info.url,
           urlRegExp: new RegExp(info.url),
           nextLink: info.nextLink,
           pageElement: info.pageElement,
@@ -34,7 +35,7 @@ function buildSiteinfo(siteinfo) {
 
 const MICROFORMAT = buildSiteinfo([
   {
-    url: "^https?://",
+    url: "^https?://.*$",
     nextLink: '//a[@rel="next"] | //link[@rel="next"]',
     pageElement: '//*[contains(@class, "autopagerize_page_element")]',
     insertBefore: '//*[contains(@class, "autopagerize_insert_before")]',

@@ -1,16 +1,8 @@
-html,
-body {
-  margin: 0;
-}
-
-body {
-  font: message-box;
-  -moz-user-select: none;
-  user-select: none;
-}
+@import "base.css";
 
 fieldset {
   border: 1px solid #c1c1c1;
+  margin: 0.5em 0;
 }
 
 .deflist {

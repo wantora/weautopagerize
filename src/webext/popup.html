@@ -6,7 +6,23 @@
   <link href="popup.css" rel="stylesheet">
 </head>
 <body>
-  <button class="toggleButton" id="userActive" data-checked="false" disabled></button>
+  <header>
+    <button class="toggleButton" id="userActive" data-checked="false" disabled></button>
+  </header>
+  
+  <div class="info">
+    <h1 data-i18n="siteinfoLabel"></h1>
+    <dl id="siteinfo"></dl>
+  </div>
+  
+  <div class="info">
+    <h1 data-i18n="insertedPagesLabel"></h1>
+    <ul id="insertPages"></ul>
+  </div>
+  
+  <footer>
+    <button id="openOptionsButton" class="openOptionsButton" data-i18n="openOptionsButtonLabel"></button>
+  </footer>
   
   <script src="popup.js"></script>
 </body>

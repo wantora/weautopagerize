@@ -1,0 +1,23 @@
+html,
+body {
+  margin: 0;
+}
+
+body {
+  font: message-box;
+  line-height: 1.3;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+  color: #217ab9;
+}
+a:hover {
+  text-decoration: underline;
+}
+a:active {
+  text-decoration: none;
+}
