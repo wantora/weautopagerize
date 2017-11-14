@@ -89,6 +89,13 @@ export default class SiteinfoManager {
     
     return siteinfo;
   }
+  forceUpdateSiteinfo() {
+    this._siteinfoCache.clean([]);
+    
+    return Prefs.get(["siteinfoList"]).then(({siteinfoList}) => {
+      return this._updateSiteinfo(siteinfoList);
+    });
+  }
   _updateSiteinfo(siteinfoList) {
     this._siteinfoCache.clean(siteinfoList);
     

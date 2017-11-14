@@ -9,19 +9,27 @@
   <fieldset>
     <legend>Options</legend>
     
-    <ul class="options">
-      <li>
-          <label for="pref_openLinkInNewTab" data-i18n="openLinkInNewTabLabel"></label>
-          <div class="inputBox"><input type="checkbox" id="pref_openLinkInNewTab"></div>
-      </li>
-      <li>
-          <label for="pref_excludeList">
-            <span data-i18n="excludeListLabel"></span><br>
-            (<a href="https://wiki.greasespot.net/Include_and_exclude_rules" data-i18n="excludeListPatternLabel"></a>)
-          </label>
-          <div class="inputBox"><textarea id="pref_excludeList"></textarea></div>
-      </li>
-    </ul>
+    <dl class="deflist">
+      <dt><label for="pref_openLinkInNewTab" data-i18n="openLinkInNewTabLabel"></label></dt>
+      <dd><input type="checkbox" id="pref_openLinkInNewTab"></dd>
+      <dt>
+        <label for="pref_excludeList">
+          <span data-i18n="excludeListLabel"></span><br>
+          (<a href="https://wiki.greasespot.net/Include_and_exclude_rules" data-i18n="excludeListPatternLabel"></a>)
+        </label>
+      </dt>
+      <dd><textarea id="pref_excludeList"></textarea></dd>
+    </dl>
+  </fieldset>
+  
+  <fieldset>
+    <legend>SITEINFO</legend>
+    
+    <dl class="deflist">
+      <dt data-i18n="lastUpdatedTimeLabel"></dt>
+      <dd id="lastUpdatedTime"></dd>
+      <dd><button id="updateSiteinfoButton" data-i18n="updateSiteinfoButtonLabel"></button></dd>
+    </dl>
   </fieldset>
   
   <script src="options.js"></script>

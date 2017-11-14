@@ -1,5 +1,6 @@
 import I18n from "./lib/I18n";
 import OptionManager from "./lib/background/OptionManager";
+import Prefs from "./lib/background/Prefs";
 
 const BooleanCheckbox = {
   load(element, value) {
@@ -26,3 +27,26 @@ const optionManager = new OptionManager([
   {name: "excludeList", updater: ArrayTextarea},
 ]);
 optionManager.init();
+
+const lastUpdatedTimeElement = document.getElementById("lastUpdatedTime");
+const updateSiteinfoButton = document.getElementById("updateSiteinfoButton");
+
+function updateLastUpdatedTime() {
+  Prefs.get(["siteinfoCache"]).then(({siteinfoCache}) => {
+    const times = Object.values(siteinfoCache).map((d) => d.time);
+    
+    if (times.length === 0) {
+      lastUpdatedTimeElement.textContent = "";
+    } else {
+      lastUpdatedTimeElement.textContent = new Date(Math.max(...times)).toLocaleString();
+    }
+  });
+}
+
+updateSiteinfoButton.addEventListener("click", () => {
+  browser.runtime.sendMessage({type: "forceUpdateSiteinfo"}).then(() => {
+    updateLastUpdatedTime();
+  });
+});
+
+updateLastUpdatedTime();

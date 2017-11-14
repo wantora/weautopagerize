@@ -3,7 +3,7 @@ body {
   margin: 0;
 }
 
-html {
+body {
   font: message-box;
   -moz-user-select: none;
   user-select: none;
@@ -13,44 +13,37 @@ fieldset {
   border: 1px solid #c1c1c1;
 }
 
-.options {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.options > li {
-  margin: 0;
-  padding: 0;
+.deflist {
   display: grid;
   grid-template-columns: 15em 1fr;
+  margin: 0;
 }
 
-.options > li:not(:first-child) {
+.deflist > dd {
+  margin: 0;
+}
+.deflist > dt:not(:first-of-type),
+.deflist > dd:not(:first-of-type) {
   margin-top: 0.5em;
   padding-top: 0.5em;
   border-top: 1px solid #c1c1c1;
 }
 
-label {
-  display: block;
-  grid-column: 1 / 1;
+.deflist > dt {
+  grid-column: 1;
 }
-
-label .description {
+.deflist > dt .description {
   color: #666;
   margin-left: 1em;
 }
 
-.inputBox {
-  grid-column: 2 / 2;
+.deflist > dd {
+  grid-column: 2;
 }
-
-.inputBox input[type="text"],
-.inputBox textarea {
+.deflist > dd input[type="text"],
+.deflist > dd textarea {
   width: 100%;
 }
-
-.inputBox textarea {
+.deflist > dd textarea {
   height: 10em;
 }

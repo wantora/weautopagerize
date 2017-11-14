@@ -13,5 +13,11 @@
   },
   "excludeListPatternLabel": {
     "message": "ワイルドカードと正規表現"
+  },
+  "lastUpdatedTimeLabel": {
+    "message": "最終更新日時"
+  },
+  "updateSiteinfoButtonLabel": {
+    "message": "SITEINFOを更新"
   }
 }

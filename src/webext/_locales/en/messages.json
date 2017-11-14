@@ -13,5 +13,11 @@
   },
   "excludeListPatternLabel": {
     "message": "Wildcard & Regexp"
+  },
+  "lastUpdatedTimeLabel": {
+    "message": "Last updated time"
+  },
+  "updateSiteinfoButtonLabel": {
+    "message": "Update SITEINFO"
   }
 }

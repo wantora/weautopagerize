@@ -33,6 +33,8 @@ browser.runtime.onMessage.addListener((message, sender) => {
       if (sender.tab) {
         buttonManager.setState(sender.tab.id, message.value);
       }
+    } else if (message.type === "forceUpdateSiteinfo") {
+      return siteinfoManager.forceUpdateSiteinfo();
     }
     
     return null;
