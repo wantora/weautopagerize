@@ -1,8 +1,24 @@
+import JSON5 from "json5";
 import Prefs from "./Prefs";
 import SiteinfoCache from "./SiteinfoCache";
 
-function buildSiteinfo(siteinfo) {
+export function parseSiteinfo(str) {
+  if (/^\s*$/.test(str)) {
+    return null;
+  }
+  return JSON5.parse(str);
+}
+
+export function buildSiteinfo(siteinfo, errorCallback = null) {
+  const errorCallback2 = errorCallback || ((error) => {
+    console.error(error); // eslint-disable-line no-console
+  });
+  
+  if (siteinfo === null) {
+    return [];
+  }
   if (!Array.isArray(siteinfo)) {
+    errorCallback2(new Error(`invalid SITEINFO: ${JSON.stringify(siteinfo)}`));
     return [];
   }
   
@@ -25,8 +41,10 @@ function buildSiteinfo(siteinfo) {
           insertBefore: info.insertBefore === undefined ? null : info.insertBefore,
         });
       } catch (error) {
-        console.error(error); // eslint-disable-line no-console
+        errorCallback2(error);
       }
+    } else {
+      errorCallback2(new Error(`invalid SITEINFO item: ${JSON.stringify(info)}`));
     }
   });
   
@@ -119,13 +137,8 @@ export default class SiteinfoManager {
   _updateUserSiteinfo(userSiteinfo) {
     this._userSiteinfo = [];
     
-    if (/^\s*$/.test(userSiteinfo)) {
-      return;
-    }
-    
     try {
-      const siteinfo = JSON.parse(userSiteinfo);
-      this._userSiteinfo = buildSiteinfo(siteinfo);
+      this._userSiteinfo = buildSiteinfo(parseSiteinfo(userSiteinfo));
     } catch (error) {
       console.error(error); // eslint-disable-line no-console
     }

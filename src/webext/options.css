@@ -34,17 +34,20 @@ fieldset {
 }
 .deflist > dd input[type="text"],
 .deflist > dd textarea {
+  font-size: inherit;
   width: 100%;
 }
 .deflist > dd textarea {
-  height: 10em;
+  height: 15em;
 }
 .deflist .messageBox {
-  color: #ff1616;
-  font-weight: bold;
+  position: absolute;
+  background-color: #ffdfdf;
+  color: #333;
+  font-style: italic;
+  overflow-wrap: break-word;
   white-space: pre-wrap;
   font-family: monospace;
   -moz-user-select: text;
   user-select: text;
-  cursor: text;
 }

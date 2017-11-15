@@ -7,7 +7,8 @@
     "url": "https://github.com/wantora/weautopagerize/issues"
   },
   "dependencies": {
-    "events": "^1.1.1"
+    "events": "^1.1.1",
+    "json5": "^0.5.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

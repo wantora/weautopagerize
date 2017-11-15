@@ -17,7 +17,7 @@ Automatically inserts the next page.
 
   // sample
   {
-    url: '^https://blog\\.mozilla\\.org/futurereleases/(page/\d+/)?$',
+    url: '^https://blog\\.mozilla\\.org/futurereleases/(page/\\d+/)?$',
     nextLink: '//li[@class="prev"]//a',
     pageElement: '//article',
     insertBefore: '//nav[@class="nav-paging"]',
@@ -26,7 +26,17 @@ Automatically inserts the next page.
 ]
 ```
 
-### Separator elements
+### Classes
+
+#### autopagerize_page_element
+
+#### autopagerize_insert_before
+
+#### autopagerize_page_separator
+
+#### autopagerize_page_info
+
+#### autopagerize_link
 
 ```html
 <hr class="autopagerize_page_separator">

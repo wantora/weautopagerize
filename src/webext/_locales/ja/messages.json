@@ -14,11 +14,14 @@
   "options_excludeList_pattern": {
     "message": "ワイルドカードと正規表現"
   },
+  "options_userSiteinfo_label": {
+    "message": "ユーザー SITEINFO"
+  },
   "options_lastUpdatedTime_label": {
     "message": "最終更新日時"
   },
   "options_updateSiteinfoButton_label": {
-    "message": "SITEINFOを更新"
+    "message": "SITEINFO を更新"
   },
   "popup_openOptionsButton_label": {
     "message": "設定"

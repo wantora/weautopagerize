@@ -25,9 +25,12 @@ export default class OptionManager {
           clearTimeout(timeoutId);
           timeoutId = setTimeout(() => {
             onChange();
-          }, 200);
+          }, 500);
         });
-        element.addEventListener("change", onChange);
+        element.addEventListener("change", () => {
+          clearTimeout(timeoutId);
+          onChange();
+        });
       });
     });
   }

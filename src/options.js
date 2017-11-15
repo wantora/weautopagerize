@@ -2,6 +2,7 @@ import I18n from "./lib/I18n";
 import OptionManager from "./lib/background/OptionManager";
 import Prefs from "./lib/background/Prefs";
 import {parseGlob} from "./lib/util";
+import {parseSiteinfo, buildSiteinfo} from "./lib/background/SiteinfoManager";
 
 const BooleanCheckbox = {
   load(element, value) {
@@ -21,9 +22,17 @@ const ArrayTextarea = {
   },
 };
 
+const StringTextarea = {
+  load(element, value) {
+    element.value = value;
+  },
+  save(element) {
+    return element.value;
+  },
+};
+
 const ExcludeListValidator = (value) => {
   let message = "";
-  
   value.forEach((str) => {
     try {
       parseGlob(str);
@@ -34,11 +43,24 @@ const ExcludeListValidator = (value) => {
   return message;
 };
 
+const UserSiteinfoValidator = (value) => {
+  let message = "";
+  try {
+    buildSiteinfo(parseSiteinfo(value), (error) => {
+      message += `${error.name}: ${error.message}\n`;
+    });
+  } catch (error) {
+    message += `${error.name}: ${error.message}\n`;
+  }
+  return message;
+};
+
 I18n.initHTML();
 
 const optionManager = new OptionManager([
   {name: "openLinkInNewTab", updater: BooleanCheckbox},
   {name: "excludeList", updater: ArrayTextarea, validator: ExcludeListValidator},
+  {name: "userSiteinfo", updater: StringTextarea, validator: UserSiteinfoValidator},
 ]);
 optionManager.init();
 
