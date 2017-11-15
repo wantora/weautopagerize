@@ -39,3 +39,12 @@ fieldset {
 .deflist > dd textarea {
   height: 10em;
 }
+.deflist .messageBox {
+  color: #ff1616;
+  font-weight: bold;
+  white-space: pre-wrap;
+  font-family: monospace;
+  -moz-user-select: text;
+  user-select: text;
+  cursor: text;
+}

@@ -9,13 +9,31 @@ export default class OptionManager {
       this._options.forEach((opt) => {
         const value = values[opt.name];
         const element = document.getElementById(`pref_${opt.name}`);
+        const messageElement = document.getElementById(`prefMessage_${opt.name}`);
         
         opt.updater.load(element, value);
+        this._validate(opt, messageElement, value);
         
-        element.addEventListener("change", () => {
-          Prefs.set({[opt.name]: opt.updater.save(element)});
+        const onChange = () => {
+          const newValue = opt.updater.save(element);
+          Prefs.set({[opt.name]: newValue});
+          this._validate(opt, messageElement, newValue);
+        };
+        
+        let timeoutId;
+        element.addEventListener("input", () => {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => {
+            onChange();
+          }, 200);
         });
+        element.addEventListener("change", onChange);
       });
     });
+  }
+  _validate(opt, messageElement, value) {
+    if (opt.validator && messageElement) {
+      messageElement.textContent = opt.validator(value);
+    }
   }
 }

@@ -1,6 +1,7 @@
 import I18n from "./lib/I18n";
 import OptionManager from "./lib/background/OptionManager";
 import Prefs from "./lib/background/Prefs";
+import {parseGlob} from "./lib/util";
 
 const BooleanCheckbox = {
   load(element, value) {
@@ -20,11 +21,24 @@ const ArrayTextarea = {
   },
 };
 
+const ExcludeListValidator = (value) => {
+  let message = "";
+  
+  value.forEach((str) => {
+    try {
+      parseGlob(str);
+    } catch (error) {
+      message += `${error.name}: ${error.message}\n`;
+    }
+  });
+  return message;
+};
+
 I18n.initHTML();
 
 const optionManager = new OptionManager([
   {name: "openLinkInNewTab", updater: BooleanCheckbox},
-  {name: "excludeList", updater: ArrayTextarea},
+  {name: "excludeList", updater: ArrayTextarea, validator: ExcludeListValidator},
 ]);
 optionManager.init();
 
@@ -33,14 +47,20 @@ const updateSiteinfoButton = document.getElementById("updateSiteinfoButton");
 
 function updateLastUpdatedTime() {
   Prefs.get(["siteinfoCache"]).then(({siteinfoCache}) => {
-    const times = Object.values(siteinfoCache).map((d) => d.time);
+    lastUpdatedTimeElement.textContent = "";
     
-    if (times.length === 0) {
-      lastUpdatedTimeElement.textContent = "";
-    } else {
-      const timeStr = new Date(Math.max(...times)).toLocaleString([], {hour12: false});
-      lastUpdatedTimeElement.textContent = timeStr;
-    }
+    Object.entries(siteinfoCache).forEach(([url, {time}]) => {
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.textContent = anchor;
+      
+      const element = document.createElement("div");
+      const timeStr = new Date(time).toLocaleString([], {hour12: false});
+      element.appendChild(document.createTextNode(`${timeStr} (`));
+      element.appendChild(anchor);
+      element.appendChild(document.createTextNode(")"));
+      lastUpdatedTimeElement.appendChild(element);
+    });
   });
 }
 

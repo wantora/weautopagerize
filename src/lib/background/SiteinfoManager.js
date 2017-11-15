@@ -119,7 +119,7 @@ export default class SiteinfoManager {
   _updateUserSiteinfo(userSiteinfo) {
     this._userSiteinfo = [];
     
-    if (userSiteinfo.trim() === "") {
+    if (/^\s*$/.test(userSiteinfo)) {
       return;
     }
     
