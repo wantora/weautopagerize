@@ -91,19 +91,17 @@ export default class SiteinfoManager {
     return siteinfo;
   }
   forceUpdateSiteinfo() {
-    this._siteinfoCache.clean([]);
-    
     return Prefs.get(["siteinfoList"]).then(({siteinfoList}) => {
-      return this._updateSiteinfo(siteinfoList);
+      return this._updateSiteinfo(siteinfoList, true);
     });
   }
-  _updateSiteinfo(siteinfoList) {
+  _updateSiteinfo(siteinfoList, forceUpdate = false) {
     this._siteinfoCache.clean(siteinfoList);
     
     return Promise.all(siteinfoList.map((url) => {
       const cacheData = this._siteinfoCache.get(url);
       
-      if (cacheData) {
+      if (!forceUpdate && cacheData) {
         return cacheData;
       } else {
         return fetch(url, {redirect: "follow"}).then((res) => res.json()).then((data) => {
