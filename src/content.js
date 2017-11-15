@@ -1,27 +1,36 @@
 import PageInfo from "./lib/content/PageInfo";
 import AutoPager from "./lib/content/AutoPager";
+import {sleep} from "./lib/util";
 
-browser.runtime.sendMessage({type: "getData", value: location.href}).then(({userActive, siteinfo, prefs}) => {
-  const autoPager = AutoPager.create(siteinfo, {prefs});
-  if (autoPager) {
-    document.dispatchEvent(new Event("GM_AutoPagerizeLoaded", {bubbles: true}));
-    
-    if (!userActive) {
-      PageInfo.update({userActive: userActive});
+function initAutoPager(retryCount) {
+  return browser.runtime.sendMessage({type: "getData", value: location.href}).then(({
+    userActive,
+    siteinfo,
+    prefs,
+  }) => {
+    const autoPager = AutoPager.create(siteinfo, {prefs});
+    if (autoPager) {
+      document.dispatchEvent(new Event("GM_AutoPagerizeLoaded", {bubbles: true}));
+      
+      if (!userActive) {
+        PageInfo.update({userActive: userActive});
+      }
+      
+      PageInfo.log({type: "start"});
+      PageInfo.update({siteinfo: autoPager.info});
+      autoPager.start();
+    } else {
+      PageInfo.update({state: "default"});
+    }
+  }).catch((error) => {
+    if (retryCount < 5 && error && error.message === "Could not establish connection. Receiving end does not exist.") {
+      return sleep(500).then(() => initAutoPager(retryCount + 1));
     }
     
-    PageInfo.log({type: "start"});
-    PageInfo.update({siteinfo: autoPager.info});
-    autoPager.start();
-  } else {
-    PageInfo.update({state: "default"});
-  }
-}).catch((error) => {
-  // 起動時のエラーを無視
-  if (error.message === "Could not establish connection. Receiving end does not exist.") {
-    return;
-  }
-  
-  PageInfo.logError(error);
-  PageInfo.update({state: "error"});
-});
+    PageInfo.logError(error);
+    PageInfo.update({state: "error"});
+    return null;
+  });
+}
+
+initAutoPager(0);
