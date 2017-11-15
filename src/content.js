@@ -2,13 +2,13 @@ import PageInfo from "./lib/content/PageInfo";
 import AutoPager from "./lib/content/AutoPager";
 
 browser.runtime.sendMessage({type: "getData", value: location.href}).then(({userActive, siteinfo, prefs}) => {
-  if (!userActive) {
-    PageInfo.update({userActive: userActive});
-  }
-  
   const autoPager = AutoPager.create(siteinfo, {prefs});
   if (autoPager) {
     document.dispatchEvent(new Event("GM_AutoPagerizeLoaded", {bubbles: true}));
+    
+    if (!userActive) {
+      PageInfo.update({userActive: userActive});
+    }
     
     PageInfo.log({type: "start"});
     PageInfo.update({siteinfo: autoPager.info});
