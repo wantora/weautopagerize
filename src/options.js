@@ -2,7 +2,7 @@ import I18n from "./lib/I18n";
 import OptionManager from "./lib/background/OptionManager";
 import Prefs from "./lib/background/Prefs";
 import {parseGlob} from "./lib/util";
-import {parseSiteinfo, buildSiteinfo} from "./lib/background/SiteinfoManager";
+import {parseUserSiteinfo, buildSiteinfo} from "./lib/background/SiteinfoManager";
 
 const BooleanCheckbox = {
   load(element, value) {
@@ -46,7 +46,7 @@ const ExcludeListValidator = (value) => {
 const UserSiteinfoValidator = (value) => {
   let message = "";
   try {
-    buildSiteinfo(parseSiteinfo(value), (error) => {
+    buildSiteinfo(parseUserSiteinfo(value), (error) => {
       message += `${error.name}: ${error.message}\n`;
     });
   } catch (error) {

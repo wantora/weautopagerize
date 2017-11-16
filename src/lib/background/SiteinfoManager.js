@@ -2,7 +2,7 @@ import JSON5 from "json5";
 import Prefs from "./Prefs";
 import SiteinfoCache from "./SiteinfoCache";
 
-export function parseSiteinfo(str) {
+export function parseUserSiteinfo(str) {
   if (/^\s*$/.test(str)) {
     return null;
   }
@@ -138,7 +138,7 @@ export default class SiteinfoManager {
     this._userSiteinfo = [];
     
     try {
-      this._userSiteinfo = buildSiteinfo(parseSiteinfo(userSiteinfo));
+      this._userSiteinfo = buildSiteinfo(parseUserSiteinfo(userSiteinfo));
     } catch (error) {
       console.error(error); // eslint-disable-line no-console
     }
