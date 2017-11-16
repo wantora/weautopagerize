@@ -8,20 +8,21 @@ function initAutoPager(retryCount) {
     siteinfo,
     prefs,
   }) => {
-    const autoPager = AutoPager.create(siteinfo, {prefs});
-    if (autoPager) {
-      document.dispatchEvent(new Event("GM_AutoPagerizeLoaded", {bubbles: true}));
-      
-      if (!userActive) {
-        PageInfo.update({userActive: userActive});
+    return AutoPager.create(siteinfo, {prefs}).then((autoPager) => {
+      if (autoPager) {
+        document.dispatchEvent(new Event("GM_AutoPagerizeLoaded", {bubbles: true}));
+        
+        if (!userActive) {
+          PageInfo.update({userActive: userActive});
+        }
+        
+        PageInfo.log({type: "start"});
+        PageInfo.update({siteinfo: autoPager.info});
+        autoPager.start();
+      } else {
+        PageInfo.update({state: "default"});
       }
-      
-      PageInfo.log({type: "start"});
-      PageInfo.update({siteinfo: autoPager.info});
-      autoPager.start();
-    } else {
-      PageInfo.update({state: "default"});
-    }
+    });
   }).catch((error) => {
     if (retryCount < 5 && error && error.message === "Could not establish connection. Receiving end does not exist.") {
       return sleep(500).then(() => initAutoPager(retryCount + 1));
