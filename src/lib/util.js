@@ -1,6 +1,9 @@
 
 export function checkOrigin(url) {
-  return url.host === location.host;
+  return (
+    !(location.protocol === "https:" && url.protocol !== "https:") &&
+    url.host === location.host
+  );
 }
 
 export function getDir(url) {
