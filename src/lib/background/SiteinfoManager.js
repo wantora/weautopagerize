@@ -131,7 +131,13 @@ export default class SiteinfoManager {
         });
       }
     })).then((jsons) => {
-      this._siteinfo = buildSiteinfo([].concat(...jsons).map((d) => d.data));
+      const ary = [].concat(...jsons).map((d, index) => ({value: d.data, index}));
+      
+      ary.sort((a, b) => {
+        return (b.value.url.length - a.value.url.length) || (a.index - b.index);
+      });
+      
+      this._siteinfo = buildSiteinfo(ary.map(({value}) => value));
     });
   }
   _updateUserSiteinfo(userSiteinfo) {
