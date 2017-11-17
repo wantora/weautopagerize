@@ -23,28 +23,32 @@ function getBorderLine(element) {
 }
 
 function getContinueAutoPager(info, options) {
-  const links = Array.from(document.querySelectorAll("a.autopagerize_link[href]"));
-  if (links.length === 0) {
-    return Promise.resolve(null);
-  }
-  const lastLink = links[links.length - 1];
-  const url = new URL(lastLink.href);
-  const pageNo = parseInt(lastLink.textContent, 10);
-  if (Number.isNaN(pageNo)) {
-    return Promise.resolve(null);
-  }
-  
-  return Request.getDocument(url).then(({realURL, doc}) => {
-    const nextAutoPager = new AutoPager(info, realURL, doc, Object.assign({}, options, {
-      pageNo: pageNo,
-    }));
-    
-    if (nextAutoPager.test()) {
-      return nextAutoPager;
-    } else {
-      return null;
+  try {
+    const links = Array.from(document.querySelectorAll("a.autopagerize_link[href]"));
+    if (links.length === 0) {
+      return Promise.resolve(null);
     }
-  }).catch(() => null);
+    const lastLink = links[links.length - 1];
+    const url = new URL(lastLink.href);
+    const pageNo = parseInt(lastLink.textContent, 10);
+    if (Number.isNaN(pageNo)) {
+      return Promise.resolve(null);
+    }
+    
+    return Request.getDocument(url).then(({realURL, doc}) => {
+      const nextAutoPager = new AutoPager(info, realURL, doc, Object.assign({}, options, {
+        pageNo: pageNo,
+      }));
+      
+      if (nextAutoPager.test()) {
+        return nextAutoPager;
+      } else {
+        return null;
+      }
+    }).catch(() => null);
+  } catch (error) {
+    return Promise.resolve(null);
+  }
 }
 
 export default class AutoPager {
@@ -201,10 +205,13 @@ export default class AutoPager {
   _getBaseURL() {
     const base = this._doc.querySelector("base[href]");
     if (base) {
-      return new URL(base.getAttribute("href"), this._url);
-    } else {
-      return this._url;
+      try {
+        return new URL(base.getAttribute("href"), this._url);
+      } catch (error) {
+        // pass
+      }
     }
+    return this._url;
   }
   _getNextURL() {
     const element = xpathAt(this._info.nextLink, this._doc);
@@ -218,7 +225,12 @@ export default class AutoPager {
     }
     if (!value) { return null; }
     
-    const nextURL = new URL(value, this._baseURL);
+    let nextURL = null;
+    try {
+      nextURL = new URL(value, this._baseURL);
+    } catch (error) {
+      return null;
+    }
     if (nextURL.protocol !== "http:" && nextURL.protocol !== "https:") { return null; }
     
     return nextURL;
