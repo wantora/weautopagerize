@@ -1,4 +1,5 @@
 import I18n from "./lib/I18n";
+import {sleep} from "./lib/util";
 
 class PageInfoPanel {
   constructor() {
@@ -11,6 +12,10 @@ class PageInfoPanel {
     this._logListElement = document.getElementById("logList");
     this._logListLength = 0;
     
+    this._userActiveButton.addEventListener("click", () => {
+      this._onUserActiveButtonClick();
+    });
+    
     document.getElementById("openOptionsButton").addEventListener("click", () => {
       browser.runtime.openOptionsPage();
       window.close();
@@ -18,10 +23,16 @@ class PageInfoPanel {
   }
   init(tabId) {
     this._tabId = tabId;
-    
+    this._initPort();
+  }
+  _initPort() {
     this._port = browser.tabs.connect(this._tabId, {name: "pageInfoPort"});
-    this._port.onDisconnect.addListener((p) => {
+    this._port.onDisconnect.addListener(() => {
       this._onDisconnect();
+      
+      sleep(500).then(() => {
+        this._initPort();
+      });
     });
     this._port.onMessage.addListener((data) => {
       this._updateUserActive(data);
@@ -31,10 +42,6 @@ class PageInfoPanel {
       if (data.logList) {
         this._updateLogList(data.logList);
       }
-    });
-    
-    this._userActiveButton.addEventListener("click", () => {
-      this._onUserActiveButtonClick();
     });
   }
   _onUserActiveButtonClick() {
