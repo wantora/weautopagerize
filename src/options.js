@@ -46,8 +46,10 @@ const ExcludeListValidator = (value) => {
 const UserSiteinfoValidator = (value) => {
   let message = "";
   try {
-    buildSiteinfo(parseUserSiteinfo(value), (error) => {
-      message += `${error.name}: ${error.message}\n`;
+    buildSiteinfo(parseUserSiteinfo(value), {
+      errorCallback(error) {
+        message += `${error.name}: ${error.message}\n`;
+      },
     });
   } catch (error) {
     message += `${error.name}: ${error.message}\n`;

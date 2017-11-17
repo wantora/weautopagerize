@@ -1,5 +1,5 @@
 import I18n from "./lib/I18n";
-import {sleep} from "./lib/util";
+import {sleep, validateURL} from "./lib/util";
 
 class PageInfoPanel {
   constructor() {
@@ -61,10 +61,12 @@ class PageInfoPanel {
     }
   }
   _updateSiteinfo(siteinfo) {
-    ["url", "nextLink", "pageElement", "insertBefore"].forEach((key) => {
-      if (siteinfo[key] === null) {
+    ["url", "nextLink", "pageElement", "insertBefore", "resource_url"].forEach((key) => {
+      const value = siteinfo[key];
+      if (value === null) {
         return;
       }
+      
       if (!this._siteinfoElements.has(key)) {
         const dt = document.createElement("dt");
         dt.textContent = key;
@@ -75,7 +77,17 @@ class PageInfoPanel {
         
         this._siteinfoElements.set(key, dd);
       }
-      this._siteinfoElements.get(key).textContent = siteinfo[key];
+      const element = this._siteinfoElements.get(key);
+      
+      if (key === "resource_url" && validateURL(value)) {
+        const anchor = document.createElement("a");
+        anchor.href = value;
+        anchor.textContent = value;
+        element.textContent = "";
+        element.appendChild(anchor);
+      } else {
+        element.textContent = value;
+      }
     });
   }
   _updateLogList(logList) {

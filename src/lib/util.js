@@ -14,6 +14,15 @@ export function getDir(url) {
   return dirURL;
 }
 
+export function validateURL(urlStr) {
+  try {
+    new URL(urlStr);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
 export function sleep(ms, value = null) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {

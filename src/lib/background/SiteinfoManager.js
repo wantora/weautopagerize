@@ -9,42 +9,60 @@ export function parseUserSiteinfo(str) {
   return JSON5.parse(str);
 }
 
-export function buildSiteinfo(siteinfo, errorCallback = null) {
-  const errorCallback2 = errorCallback || ((error) => {
-    console.error(error); // eslint-disable-line no-console
-  });
+function checkInfo(info) {
+  return (
+    info &&
+    typeof info.url === "string" &&
+    typeof info.nextLink === "string" &&
+    typeof info.pageElement === "string" &&
+    (info.insertBefore === undefined || info.insertBefore === null || typeof info.insertBefore === "string")
+  );
+}
+
+export function buildSiteinfo(siteinfo, options = {}) {
+  const {errorCallback} = Object.assign({
+    errorCallback(error) {
+      console.error(error); // eslint-disable-line no-console
+    },
+  }, options);
   
   if (siteinfo === null) {
     return [];
   }
   if (!Array.isArray(siteinfo)) {
-    errorCallback2(new Error(`invalid SITEINFO: ${JSON.stringify(siteinfo)}`));
+    errorCallback(new Error(`invalid SITEINFO: ${JSON.stringify(siteinfo)}`));
     return [];
   }
   
   const newSiteinfo = [];
   
-  siteinfo.forEach((info) => {
-    if (
-      info &&
-      typeof info.url === "string" &&
-      typeof info.nextLink === "string" &&
-      typeof info.pageElement === "string" &&
-      (info.insertBefore === undefined || info.insertBefore === null || typeof info.insertBefore === "string")
-    ) {
-      try {
-        newSiteinfo.push({
-          url: info.url,
-          urlRegExp: new RegExp(info.url),
-          nextLink: info.nextLink,
-          pageElement: info.pageElement,
-          insertBefore: info.insertBefore === undefined ? null : info.insertBefore,
-        });
-      } catch (error) {
-        errorCallback2(error);
+  siteinfo.forEach((entry) => {
+    let info = null;
+    let resourceURL = null;
+    
+    if (checkInfo(entry)) {
+      info = entry;
+    } else if (entry && checkInfo(entry.data)) {
+      info = entry.data;
+      if (typeof entry["resource_url"] === "string") {
+        resourceURL = entry["resource_url"];
       }
     } else {
-      errorCallback2(new Error(`invalid SITEINFO item: ${JSON.stringify(info)}`));
+      errorCallback(new Error(`invalid SITEINFO item: ${JSON.stringify(entry)}`));
+      return;
+    }
+    
+    try {
+      newSiteinfo.push({
+        "url": info.url,
+        "urlRegExp": new RegExp(info.url),
+        "nextLink": info.nextLink,
+        "pageElement": info.pageElement,
+        "insertBefore": info.insertBefore === undefined ? null : info.insertBefore,
+        "resource_url": resourceURL,
+      });
+    } catch (error) {
+      errorCallback(error);
     }
   });
   
@@ -131,10 +149,14 @@ export default class SiteinfoManager {
         });
       }
     })).then((jsons) => {
-      const ary = [].concat(...jsons).map((d, index) => ({value: d.data, index}));
+      const ary = [].concat(...jsons).map((value, index) => ({
+        value,
+        index,
+        key: value.data.url.length,
+      }));
       
       ary.sort((a, b) => {
-        return (b.value.url.length - a.value.url.length) || (a.index - b.index);
+        return (b.key - a.key) || (a.index - b.index);
       });
       
       this._siteinfo = buildSiteinfo(ary.map(({value}) => value));
