@@ -210,7 +210,12 @@ export default class AutoPager {
     const element = xpathAt(this._info.nextLink, this._doc);
     if (!element) { return null; }
     
-    const value = element.getAttribute("href") || element.getAttribute("action") || element.value;
+    let value = null;
+    if (element.nodeType === Node.ELEMENT_NODE) {
+      value = element.getAttribute("href") || element.getAttribute("action");
+    } else if (element.nodeType === Attr.ATTRIBUTE_NODE) {
+      value = element.value;
+    }
     if (!value) { return null; }
     
     const nextURL = new URL(value, this._baseURL);
