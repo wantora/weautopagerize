@@ -20,7 +20,16 @@ const Request = {
     return fetch(url, {credentials: "include", redirect: "follow"}).then((response) => {
       const responseURL = new URL(response.url);
       if (!checkOrigin(responseURL)) {
-        throw new Error("Same-Origin Error");
+        throw new Error(`Same-Origin Error: ${responseURL.href}`);
+      }
+      
+      const contentType = response.headers.get("Content-Type");
+      if (contentType === null) {
+        throw new Error(`Content-Type Error: ${contentType}`);
+      }
+      const mediaType = contentType.replace(/[ \t]*;[\S\s]*/, "");
+      if (mediaType !== "text/html" && mediaType !== "application/xhtml+xml") {
+        throw new Error(`Content-Type Error: ${contentType}`);
       }
       
       return response.arrayBuffer().then((ab) => {
