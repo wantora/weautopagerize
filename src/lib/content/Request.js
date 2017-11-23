@@ -27,7 +27,7 @@ const Request = {
       if (contentType === null) {
         throw new Error(`Content-Type Error: ${contentType}`);
       }
-      const mediaType = contentType.replace(/[ \t]*;[\S\s]*/, "");
+      const mediaType = contentType.replace(/[ \t]*;[\S\s]*/, "").toLowerCase();
       if (mediaType !== "text/html" && mediaType !== "application/xhtml+xml") {
         throw new Error(`Content-Type Error: ${contentType}`);
       }
