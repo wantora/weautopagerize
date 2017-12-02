@@ -86,8 +86,13 @@ export default class AutoPager {
     });
     this._userActiveListener = (newValue, oldValue) => {
       try {
-        if (newValue && !oldValue) {
-          this._onScroll();
+        if (newValue !== oldValue) {
+          if (newValue) {
+            this._scrollListener.enable();
+            this._onScroll();
+          } else {
+            this._scrollListener.disable();
+          }
         }
       } catch (error) {
         PageInfo.logError(error);
@@ -121,8 +126,11 @@ export default class AutoPager {
     
     PageInfo.update({state: "enable"});
     PageInfo.emitter.on("userActive", this._userActiveListener);
-    this._scrollListener.enable();
-    this._onScroll();
+    
+    if (PageInfo.data.userActive) {
+      this._scrollListener.enable();
+      this._onScroll();
+    }
   }
   insertPageElements() {
     if (!this._updateInsertPoint()) {
@@ -156,10 +164,6 @@ export default class AutoPager {
     return true;
   }
   _onScroll() {
-    if (!PageInfo.data.userActive) {
-      return;
-    }
-    
     const scrollingElement = document.scrollingElement;
     const scrollBottom = scrollingElement.scrollTop + scrollingElement.clientHeight;
     const borderLine = getBorderLine(this._insertPoint);
