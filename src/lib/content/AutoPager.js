@@ -5,18 +5,35 @@ import {xpath, xpathAt, getDir} from "../util";
 
 const BASE_REMAIN_HEIGHT = 400;
 
+function getElementRect(element) {
+  const rect = element.getBoundingClientRect();
+  if (rect.top === 0 && rect.right === 0 && rect.bottom === 0 && rect.left === 0) {
+    return null;
+  } else {
+    return rect;
+  }
+}
+
 function getBorderLine(element) {
-  let top;
+  let top = null;
   
   if (element.nodeType === Node.ELEMENT_NODE) {
-    top = element.getBoundingClientRect().top + document.scrollingElement.scrollTop;
-  } else {
+    const rect = getElementRect(element);
+    if (rect) {
+      top = rect.top + document.scrollingElement.scrollTop;
+    }
+  }
+  if (top === null) {
     const prev = element.previousSibling;
     if (prev && prev.nodeType === Node.ELEMENT_NODE) {
-      top = prev.getBoundingClientRect().bottom + document.scrollingElement.scrollTop;
-    } else {
-      top = document.scrollingElement.scrollHeight * 0.8;
+      const rect = getElementRect(prev);
+      if (rect) {
+        top = rect.bottom + document.scrollingElement.scrollTop;
+      }
     }
+  }
+  if (top === null) {
+    top = document.scrollingElement.scrollHeight * 0.8;
   }
   
   return top - BASE_REMAIN_HEIGHT;
