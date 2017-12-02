@@ -149,17 +149,14 @@ export default class SiteinfoManager {
         });
       }
     })).then((jsons) => {
-      const ary = [].concat(...jsons).map((value, index) => ({
-        value,
-        index,
-        key: value.data.url.length,
-      }));
+      const ary = buildSiteinfo([].concat(...jsons))
+        .map((value, index) => ({value, index, key: value.url.length}));
       
       ary.sort((a, b) => {
         return (b.key - a.key) || (a.index - b.index);
       });
       
-      this._siteinfo = buildSiteinfo(ary.map(({value}) => value));
+      this._siteinfo = ary.map(({value}) => value);
     });
   }
   _updateUserSiteinfo(userSiteinfo) {
