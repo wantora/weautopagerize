@@ -16,6 +16,16 @@ function initAutoPager(retryCount) {
           PageInfo.update({userActive: userActive});
         }
         
+        document.addEventListener("AutoPagerizeToggleRequest", () => {
+          PageInfo.update({userActive: !PageInfo.data.userActive});
+        }, false);
+        document.addEventListener("AutoPagerizeEnableRequest", () => {
+          PageInfo.update({userActive: true});
+        }, false);
+        document.addEventListener("AutoPagerizeDisableRequest", () => {
+          PageInfo.update({userActive: false});
+        }, false);
+        
         PageInfo.log({type: "start"});
         PageInfo.update({siteinfo: autoPager.info});
         autoPager.start();

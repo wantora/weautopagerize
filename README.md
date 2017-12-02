@@ -60,3 +60,13 @@ document.addEventListener("AutoPagerize_DOMNodeInserted", function(event) {
   console.log("url: ", event.newValue);
 }, false);
 ```
+
+#### AutoPagerizeToggleRequest
+
+```js
+document.dispatchEvent(new Event("AutoPagerizeToggleRequest", {bubbles: true}));
+```
+
+#### AutoPagerizeEnableRequest
+
+#### AutoPagerizeDisableRequest
