@@ -135,7 +135,7 @@ export default class AutoPager {
       return false;
     }
     
-    const fragment = this._getSeparatorFragment(
+    const fragment = this._createSeparatorFragment(
       pageElements[0].nodeType === Node.ELEMENT_NODE &&
       pageElements[0].tagName.toLowerCase() === "tr"
     );
@@ -294,7 +294,7 @@ export default class AutoPager {
       }
     });
   }
-  _getSeparatorFragment(tableMode) {
+  _createSeparatorFragment(tableMode) {
     const fragment = document.createDocumentFragment();
     
     const paragraph = document.createElement("p");
@@ -305,6 +305,10 @@ export default class AutoPager {
     anchor.className = "autopagerize_link";
     anchor.href = this._url.href;
     anchor.textContent = String(this._pageNo);
+    if (this._prefs.openLinkInNewTab) {
+      anchor.target = "_blank";
+      anchor.relList.add("noopener");
+    }
     paragraph.appendChild(anchor);
     
     if (tableMode) {
