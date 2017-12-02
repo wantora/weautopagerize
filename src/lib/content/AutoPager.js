@@ -53,8 +53,11 @@ function getContinueAutoPager(info, options) {
 
 export default class AutoPager {
   static create(siteinfo, options) {
+    const url = new URL(location.href);
+    
     for (const info of siteinfo) {
-      const autoPager = new AutoPager(info, new URL(location.href), document, options);
+      const autoPager = new AutoPager(info, url, document, options);
+      PageInfo.log({type: "test", siteinfo: info});
       
       if (autoPager.test()) {
         return getContinueAutoPager(info, options).then((cont) => {

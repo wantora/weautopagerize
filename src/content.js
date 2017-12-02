@@ -30,6 +30,7 @@ function initAutoPager(retryCount) {
         PageInfo.update({siteinfo: autoPager.info});
         autoPager.start();
       } else {
+        PageInfo.log({type: "end"});
         PageInfo.update({state: "default"});
       }
     });

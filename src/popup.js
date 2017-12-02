@@ -1,6 +1,8 @@
 import I18n from "./lib/I18n";
 import {sleep, validateURL} from "./lib/util";
 
+const SITEINFO_KEYS = ["url", "nextLink", "pageElement", "insertBefore", "resource_url"];
+
 class PageInfoPanel {
   constructor() {
     this._tabId = null;
@@ -61,7 +63,7 @@ class PageInfoPanel {
     }
   }
   _updateSiteinfo(siteinfo) {
-    ["url", "nextLink", "pageElement", "insertBefore", "resource_url"].forEach((key) => {
+    SITEINFO_KEYS.forEach((key) => {
       const value = siteinfo[key];
       if (value === null) {
         return;
@@ -96,39 +98,62 @@ class PageInfoPanel {
         return;
       }
       
-      const li = document.createElement("li");
+      const line = document.createElement("div");
+      line.classList.add("line");
       
       const time = document.createElement("span");
       time.classList.add("time");
-      time.textContent = new Date(data.time).toLocaleTimeString("en-US", {hour12: false});
-      li.appendChild(time);
+      time.textContent = new Date(data.time).toLocaleTimeString("en-US", {hour12: false}) + " ";
+      line.appendChild(time);
       
       const type = document.createElement("span");
       type.classList.add("type");
       type.textContent = data.type;
-      li.appendChild(type);
+      line.appendChild(type);
       
-      if (data.type === "loading") {
+      if (data.type === "test") {
+        const siteinfo = document.createElement("a");
+        siteinfo.classList.add("siteinfo");
+        
+        if (data.siteinfo.resource_url) {
+          siteinfo.href = data.siteinfo.resource_url;
+        }
+        const newSiteinfo = {};
+        SITEINFO_KEYS.forEach((key) => {
+          const value = data.siteinfo[key];
+          if (value !== null) {
+            newSiteinfo[key] = value;
+          }
+        });
+        siteinfo.textContent = JSON.stringify(newSiteinfo);
+        siteinfo.title = JSON.stringify(newSiteinfo, null, 2);
+        
+        line.appendChild(document.createTextNode(": "));
+        line.appendChild(siteinfo);
+      } else if (data.type === "loading") {
         const url = document.createElement("a");
         url.classList.add("url");
         url.href = data.url;
         url.title = data.url;
         url.textContent = data.url;
-        li.appendChild(url);
+        line.appendChild(document.createTextNode(": "));
+        line.appendChild(url);
       } else if (data.type === "insert") {
         const pageNo = document.createElement("span");
         pageNo.classList.add("pageNo");
         pageNo.textContent = String(data.pageNo);
-        li.appendChild(pageNo);
+        line.appendChild(document.createTextNode(": "));
+        line.appendChild(pageNo);
       } else if (data.type === "error") {
         const error = document.createElement("span");
         error.classList.add("error");
         error.title = data.message;
         error.textContent = data.message;
-        li.appendChild(error);
+        line.appendChild(document.createTextNode(": "));
+        line.appendChild(error);
       }
       
-      this._logListElement.appendChild(li);
+      this._logListElement.appendChild(line);
       this._logListElement.scrollTo(0, this._logListElement.scrollHeight);
     });
     this._logListLength = logList.length;
