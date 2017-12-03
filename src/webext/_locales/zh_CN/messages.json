@@ -1,0 +1,29 @@
+{
+  "extension_description": {
+    "message": "自动追加下一页。"
+  },
+  "browserAction_label": {
+    "message": "weAutoPagerize"
+  },
+  "options_openLinkInNewTab_label": {
+    "message": "在新标签页打开链接"
+  },
+  "options_excludeList_label": {
+    "message": "排除网址"
+  },
+  "options_excludeList_pattern": {
+    "message": "通配符和正则表达式"
+  },
+  "options_userSiteinfo_label": {
+    "message": "用户配置的站点信息"
+  },
+  "options_lastUpdatedTime_label": {
+    "message": "上次更新时间"
+  },
+  "options_updateSiteinfoButton_label": {
+    "message": "更新站点信息"
+  },
+  "popup_openOptionsButton_label": {
+    "message": "选项"
+  }
+}
