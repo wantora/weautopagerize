@@ -1,6 +1,6 @@
 import PageInfo from "./PageInfo";
 import ScrollListener from "./ScrollListener";
-import Request from "./Request";
+import HTTPRequest from "./HTTPRequest";
 import {xpath, xpathAt, getDir} from "../util";
 
 const BASE_REMAIN_HEIGHT = 400;
@@ -154,7 +154,7 @@ export default class AutoPager {
     PageInfo.log({type: "loading", url: this._nextURL.href});
     PageInfo.update({state: "loading"});
     
-    Request.getDocument(this._nextURL).then(({realURL, doc}) => {
+    HTTPRequest.getDocument(this._nextURL).then(({realURL, doc}) => {
       if (!this._loadedURLs.has(realURL.href)) {
         this._loadedURLs.add(this._nextURL.href);
         this._loadedURLs.add(realURL.href);

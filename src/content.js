@@ -1,6 +1,6 @@
 import PageInfo from "./lib/content/PageInfo";
 import AutoPager from "./lib/content/AutoPager";
-import Request from "./lib/content/Request";
+import HTTPRequest from "./lib/content/HTTPRequest";
 import {sleep} from "./lib/util";
 
 function getContinueAutoPager(info, options) {
@@ -16,7 +16,7 @@ function getContinueAutoPager(info, options) {
       return Promise.resolve(null);
     }
     
-    return Request.getDocument(url).then(({realURL, doc}) => {
+    return HTTPRequest.getDocument(url).then(({realURL, doc}) => {
       const nextAutoPager = new AutoPager(info, realURL, doc, Object.assign({}, options, {
         pageNo: pageNo,
       }));

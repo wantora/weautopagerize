@@ -1,10 +1,9 @@
-
 import {checkOrigin, sleep, parseHTMLDocument} from "../util";
 
 const REQUEST_INTERVAL = 1000;
 let lastRequestTime = 0;
 
-const Request = {
+const HTTPRequest = {
   getDocument(url) {
     if (!checkOrigin(url)) {
       return Promise.reject(new Error("Same-Origin Error"));
@@ -13,7 +12,7 @@ const Request = {
     const now = Date.now();
     if (now < lastRequestTime + REQUEST_INTERVAL) {
       return sleep((lastRequestTime + REQUEST_INTERVAL) - now + 10)
-        .then(() => Request.getDocument(url));
+        .then(() => HTTPRequest.getDocument(url));
     }
     lastRequestTime = now;
     
@@ -42,4 +41,4 @@ const Request = {
   },
 };
 
-export default Request;
+export default HTTPRequest;
