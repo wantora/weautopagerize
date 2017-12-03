@@ -70,3 +70,7 @@ document.dispatchEvent(new Event("AutoPagerizeToggleRequest", {bubbles: true}));
 #### AutoPagerizeEnableRequest
 
 #### AutoPagerizeDisableRequest
+
+## Contributors
+
+* @yfdyh000
