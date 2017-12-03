@@ -5,6 +5,9 @@
   "browserAction_label": {
     "message": "weAutoPagerize"
   },
+  "options_options_legend": {
+    "message": "Options"
+  },
   "options_openLinkInNewTab_label": {
     "message": "Open the inserted link in a new tab"
   },
@@ -16,6 +19,9 @@
   },
   "options_userSiteinfo_label": {
     "message": "User SITEINFO"
+  },
+  "options_siteinfo_legend": {
+    "message": "SITEINFO"
   },
   "options_lastUpdatedTime_label": {
     "message": "Last updated time"

@@ -5,6 +5,9 @@
   "browserAction_label": {
     "message": "weAutoPagerize"
   },
+  "options_options_legend": {
+    "message": "オプション"
+  },
   "options_openLinkInNewTab_label": {
     "message": "挿入されたリンクを新しいタブで開く"
   },
@@ -16,6 +19,9 @@
   },
   "options_userSiteinfo_label": {
     "message": "ユーザー SITEINFO"
+  },
+  "options_siteinfo_legend": {
+    "message": "SITEINFO"
   },
   "options_lastUpdatedTime_label": {
     "message": "最終更新日時"
