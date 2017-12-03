@@ -39,51 +39,7 @@ function getBorderLine(element) {
   return top - BASE_REMAIN_HEIGHT;
 }
 
-function getContinueAutoPager(info, options) {
-  try {
-    const links = Array.from(document.querySelectorAll("a.autopagerize_link[href]"));
-    if (links.length === 0) {
-      return Promise.resolve(null);
-    }
-    const lastLink = links[links.length - 1];
-    const url = new URL(lastLink.href);
-    const pageNo = parseInt(lastLink.textContent, 10);
-    if (Number.isNaN(pageNo)) {
-      return Promise.resolve(null);
-    }
-    
-    return Request.getDocument(url).then(({realURL, doc}) => {
-      const nextAutoPager = new AutoPager(info, realURL, doc, Object.assign({}, options, {
-        pageNo: pageNo,
-      }));
-      
-      if (nextAutoPager.test()) {
-        return nextAutoPager;
-      } else {
-        return null;
-      }
-    }).catch(() => null);
-  } catch (error) {
-    return Promise.resolve(null);
-  }
-}
-
 export default class AutoPager {
-  static create(siteinfo, options) {
-    const url = new URL(location.href);
-    
-    for (const info of siteinfo) {
-      const autoPager = new AutoPager(info, url, document, options);
-      PageInfo.log({type: "test", siteinfo: info});
-      
-      if (autoPager.test()) {
-        return getContinueAutoPager(info, options).then((cont) => {
-          return cont || autoPager;
-        });
-      }
-    }
-    return Promise.resolve(null);
-  }
   constructor(info, url, doc, {prefs, pageNo = 1, loadedURLs = [], insertPoint = null}) {
     this._info = info;
     this._url = url;
