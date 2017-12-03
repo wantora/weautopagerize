@@ -6,7 +6,7 @@
     "message": "weAutoPagerize"
   },
   "options_openLinkInNewTab_label": {
-    "message": "Open link in new tab"
+    "message": "Open the inserted link in a new tab"
   },
   "options_excludeList_label": {
     "message": "Exclude URL"

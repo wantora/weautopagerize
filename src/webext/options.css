@@ -7,7 +7,7 @@ fieldset {
 
 .deflist {
   display: grid;
-  grid-template-columns: 15em 1fr;
+  grid-template-columns: 20em 1fr;
   margin: 0;
 }
 
@@ -23,6 +23,7 @@ fieldset {
 
 .deflist > dt {
   grid-column: 1;
+  padding-right: 1em;
 }
 .deflist > dt .description {
   color: #666;

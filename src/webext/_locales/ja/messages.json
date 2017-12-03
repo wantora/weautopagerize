@@ -6,7 +6,7 @@
     "message": "weAutoPagerize"
   },
   "options_openLinkInNewTab_label": {
-    "message": "リンクを新しいタブで開く"
+    "message": "挿入されたリンクを新しいタブで開く"
   },
   "options_excludeList_label": {
     "message": "除外URL"
