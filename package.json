@@ -14,12 +14,13 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
-    "copy-webpack-plugin": "^4.2.0",
-    "eslint": "^4.10.0",
+    "copy-webpack-plugin": "^4.2.3",
+    "eslint": "^4.12.1",
+    "eslint-config-wantora": "github:wantora/eslint-config-wantora#v1.0.0",
     "eslint-loader": "^1.9.0",
     "npm-run-all": "^4.1.2",
     "web-ext": "^2.2.2",
-    "webpack": "^3.8.1"
+    "webpack": "^3.9.1"
   },
   "homepage": "https://github.com/wantora/weautopagerize#readme",
   "license": "GPL-3.0+",

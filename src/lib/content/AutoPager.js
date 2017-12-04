@@ -15,28 +15,28 @@ function getElementRect(element) {
 }
 
 function getBorderLine(element) {
-  let top = null;
+  let pos = null;
   
   if (element.nodeType === Node.ELEMENT_NODE) {
     const rect = getElementRect(element);
     if (rect) {
-      top = rect.top + document.scrollingElement.scrollTop;
+      pos = rect.top + document.scrollingElement.scrollTop;
     }
   }
-  if (top === null) {
+  if (pos === null) {
     const prev = element.previousSibling;
     if (prev && prev.nodeType === Node.ELEMENT_NODE) {
       const rect = getElementRect(prev);
       if (rect) {
-        top = rect.bottom + document.scrollingElement.scrollTop;
+        pos = rect.bottom + document.scrollingElement.scrollTop;
       }
     }
   }
-  if (top === null) {
-    top = document.scrollingElement.scrollHeight * 0.8;
+  if (pos === null) {
+    pos = document.scrollingElement.scrollHeight * 0.8;
   }
   
-  return top - BASE_REMAIN_HEIGHT;
+  return pos - BASE_REMAIN_HEIGHT;
 }
 
 export default class AutoPager {
