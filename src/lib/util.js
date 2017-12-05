@@ -76,3 +76,16 @@ export function parseGlob(pattern) {
     return new RegExp(src, "i");
   }
 }
+
+export function onVisible() {
+  return new Promise((resolve, reject) => {
+    const listener = () => {
+      if (!document.hidden) {
+        document.removeEventListener("visibilitychange", listener);
+        resolve(null);
+      }
+    };
+    document.addEventListener("visibilitychange", listener);
+    listener();
+  });
+}
