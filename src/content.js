@@ -10,22 +10,18 @@ function getContinueAutoPager(info, options) {
       return Promise.resolve(null);
     }
     const lastLink = links[links.length - 1];
-    const url = new URL(lastLink.href);
     const pageNo = parseInt(lastLink.textContent, 10);
     if (Number.isNaN(pageNo)) {
       return Promise.resolve(null);
     }
+    const url = new URL(lastLink.href);
+    const loadedURLs = links.map((link) => new URL(link.href));
     
     return HTTPRequest.getDocument(url).then(({realURL, doc}) => {
-      const nextAutoPager = new AutoPager(info, realURL, doc, Object.assign({}, options, {
+      return new AutoPager(info, realURL, doc, Object.assign({}, options, {
+        loadedURLs: loadedURLs,
         pageNo: pageNo,
       }));
-      
-      if (nextAutoPager.test()) {
-        return nextAutoPager;
-      } else {
-        return null;
-      }
     }).catch(() => null);
   } catch (error) {
     return Promise.resolve(null);
@@ -41,7 +37,15 @@ function createAutoPager(siteinfo, options) {
     
     if (autoPager.test()) {
       return getContinueAutoPager(info, options).then((cont) => {
-        return cont || autoPager;
+        if (cont) {
+          if (cont.test()) {
+            return cont;
+          } else {
+            return null;
+          }
+        } else {
+          return autoPager;
+        }
       });
     }
   }
@@ -55,7 +59,7 @@ function initAutoPager(retryCount) {
     prefs,
   }) => {
     return createAutoPager(siteinfo, {prefs}).then((autoPager) => {
-      if (autoPager) {
+      if (autoPager && !autoPager.nextURLIsLoaded()) {
         document.dispatchEvent(new Event("GM_AutoPagerizeLoaded", {bubbles: true}));
         
         if (!userActive) {

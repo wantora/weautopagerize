@@ -86,11 +86,10 @@ export default class AutoPager {
     return this._pageNo;
   }
   test() {
-    if (this._nextURL && xpathAt(this._info.pageElement, this._doc)) {
-      return !this._loadedURLs.has(this._nextURL.href);
-    } else {
-      return false;
-    }
+    return Boolean(this._nextURL && xpathAt(this._info.pageElement, this._doc));
+  }
+  nextURLIsLoaded() {
+    return this._loadedURLs.has(this._nextURL.href);
   }
   start() {
     if (!this._updateInsertPoint()) {
