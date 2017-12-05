@@ -12,17 +12,17 @@ export default class ScrollListener {
         this._callback.call(null);
       }, 200);
     };
-    this._intervalId = null;
   }
   enable() {
     window.addEventListener("scroll", this._listener, {passive: true});
     window.addEventListener("resize", this._listener, {passive: true});
-    clearInterval(this._intervalId);
-    this._intervalId = setInterval(this._listener, 1000);
+    if (document.readyState !== "complete") {
+      window.addEventListener("load", this._listener, {passive: true, once: true});
+    }
   }
   disable() {
     window.removeEventListener("scroll", this._listener, {passive: true});
     window.removeEventListener("resize", this._listener, {passive: true});
-    clearInterval(this._intervalId);
+    window.removeEventListener("load", this._listener, {passive: true, once: true});
   }
 }
