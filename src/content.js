@@ -37,15 +37,7 @@ function createAutoPager(siteinfo, options) {
     
     if (autoPager.test()) {
       return getContinueAutoPager(info, options).then((cont) => {
-        if (cont) {
-          if (cont.test()) {
-            return cont;
-          } else {
-            return null;
-          }
-        } else {
-          return autoPager;
-        }
+        return cont || autoPager;
       });
     }
   }
@@ -59,7 +51,7 @@ function initAutoPager(retryCount) {
     prefs,
   }) => {
     return createAutoPager(siteinfo, {prefs}).then((autoPager) => {
-      if (autoPager && !autoPager.nextURLIsLoaded()) {
+      if (autoPager) {
         document.dispatchEvent(new Event("GM_AutoPagerizeLoaded", {bubbles: true}));
         
         if (!userActive) {
@@ -78,11 +70,14 @@ function initAutoPager(retryCount) {
         
         PageInfo.log({type: "start"});
         PageInfo.update({siteinfo: autoPager.info});
-        autoPager.start();
-      } else {
-        PageInfo.log({type: "end"});
-        PageInfo.update({state: "default"});
+        
+        if (!autoPager.nextURLIsLoaded() && autoPager.test()) {
+          autoPager.start();
+          return;
+        }
       }
+      PageInfo.log({type: "end"});
+      PageInfo.update({state: "default"});
     });
   }).catch((error) => {
     if (retryCount < 5 && error && error.message === "Could not establish connection. Receiving end does not exist.") {
