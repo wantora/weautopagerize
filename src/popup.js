@@ -12,6 +12,7 @@ class PageInfoPanel {
     this._siteinfoElement = document.getElementById("siteinfo");
     this._siteinfoElements = new Map();
     this._logListElement = document.getElementById("logList");
+    this._logListKey = null;
     this._logListLength = 0;
     
     this._userActiveButton.addEventListener("click", () => {
@@ -41,9 +42,7 @@ class PageInfoPanel {
       if (data.siteinfo) {
         this._updateSiteinfo(data.siteinfo);
       }
-      if (data.logList) {
-        this._updateLogList(data.logList);
-      }
+      this._updateLogList(data.logList, data.logListKey);
     });
   }
   _onUserActiveButtonClick() {
@@ -66,6 +65,12 @@ class PageInfoPanel {
     SITEINFO_KEYS.forEach((key) => {
       const value = siteinfo[key];
       if (value === null) {
+        if (this._siteinfoElements.has(key)) {
+          const {dt, dd} = this._siteinfoElements.get(key);
+          this._siteinfoElements.delete(key);
+          dt.parentNode.removeChild(dt);
+          dd.parentNode.removeChild(dd);
+        }
         return;
       }
       
@@ -77,22 +82,27 @@ class PageInfoPanel {
         const dd = document.createElement("dd");
         this._siteinfoElement.appendChild(dd);
         
-        this._siteinfoElements.set(key, dd);
+        this._siteinfoElements.set(key, {dt, dd});
       }
-      const element = this._siteinfoElements.get(key);
+      const {dd} = this._siteinfoElements.get(key);
       
       if (key === "resource_url" && validateURL(value)) {
         const anchor = document.createElement("a");
         anchor.href = value;
         anchor.textContent = value;
-        element.textContent = "";
-        element.appendChild(anchor);
+        dd.textContent = "";
+        dd.appendChild(anchor);
       } else {
-        element.textContent = value;
+        dd.textContent = value;
       }
     });
   }
-  _updateLogList(logList) {
+  _updateLogList(logList, logListKey) {
+    if (logListKey !== this._logListKey) {
+      this._logListElement.textContent = "";
+      this._logListKey = logListKey;
+    }
+    
     logList.forEach((data, index) => {
       if (index < this._logListLength) {
         return;
@@ -154,8 +164,9 @@ class PageInfoPanel {
       }
       
       this._logListElement.appendChild(line);
-      this._logListElement.scrollTo(0, this._logListElement.scrollHeight);
     });
+    
+    this._logListElement.scrollTo(0, this._logListElement.scrollHeight);
     this._logListLength = logList.length;
   }
 }

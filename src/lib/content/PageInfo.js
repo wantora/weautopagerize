@@ -6,6 +6,7 @@ class PageInfo {
       state: null,
       siteinfo: null,
       logList: [],
+      logListKey: Date.now(),
       userActive: true,
     };
     this._listenerInitialized = false;
@@ -70,7 +71,7 @@ class PageInfo {
       }
       
       this._ports.add(port);
-      port.postMessage(this._data);
+      this._postPort();
       
       port.onMessage.addListener((data) => {
         this.update(data);
