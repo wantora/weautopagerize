@@ -101,6 +101,7 @@ class PageInfoPanel {
     if (logListKey !== this._logListKey) {
       this._logListElement.textContent = "";
       this._logListKey = logListKey;
+      this._logListLength = 0;
     }
     
     logList.forEach((data, index) => {
