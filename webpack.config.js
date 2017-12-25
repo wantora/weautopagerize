@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
-module.exports = function(options) {
+module.exports = (options) => {
   const production = options && options.production === "true";
   const plugins = [
     new webpack.LoaderOptionsPlugin({
