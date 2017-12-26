@@ -77,7 +77,7 @@ export function parseGlob(pattern) {
   }
 }
 
-export function onVisible() {
+export function sleepVisible() {
   return new Promise((resolve, reject) => {
     const listener = () => {
       if (!document.hidden) {

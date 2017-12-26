@@ -148,11 +148,13 @@ export default class AutoPager {
       this._loadNext();
     }
   }
-  _loadNext() {
+  async _loadNext() {
     PageInfo.log({type: "loading", url: this._nextURL.href});
     PageInfo.update({state: "loading"});
     
-    fetchHTMLText(this._nextURL).then(({realURL, text}) => {
+    try {
+      const {realURL, text} = await fetchHTMLText(this._nextURL);
+      
       if (!this._loadedURLs.has(realURL.href)) {
         const newLoadedURLs = [...this._loadedURLs, this._nextURL.href];
         const doc = parseHTMLDocument(text);
@@ -174,10 +176,10 @@ export default class AutoPager {
       
       PageInfo.log({type: "end"});
       PageInfo.update({state: "default"});
-    }).catch((error) => {
+    } catch (error) {
       PageInfo.logError(error);
       PageInfo.update({state: "error"});
-    });
+    }
   }
   _getBaseURL() {
     const base = this._doc.querySelector("base[href]");
