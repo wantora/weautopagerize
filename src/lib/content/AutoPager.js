@@ -88,7 +88,7 @@ export default class AutoPager {
     return Boolean(this._nextURL && xpathAt(this._info.pageElement, this._doc));
   }
   nextURLIsLoaded() {
-    return this._loadedURLs.has(this._nextURL.href);
+    return Boolean(this._nextURL && this._loadedURLs.has(this._nextURL.href));
   }
   start() {
     if (!this._updateInsertPoint()) {
