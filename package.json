@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "events": "^1.1.1",
-    "json5": "^0.5.1"
+    "json5": "^0.5.1",
+    "whatwg-mimetype": "^2.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

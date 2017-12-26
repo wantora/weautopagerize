@@ -1,7 +1,7 @@
 import PageInfo from "./PageInfo";
 import ScrollListener from "./ScrollListener";
-import HTTPRequest from "./HTTPRequest";
-import {xpath, xpathAt, getDir} from "../util";
+import fetchHTMLText from "./fetchHTMLText";
+import {xpath, xpathAt, getDir, parseHTMLDocument} from "../util";
 
 const BASE_REMAIN_HEIGHT = 400;
 
@@ -153,11 +153,12 @@ export default class AutoPager {
     PageInfo.log({type: "loading", url: this._nextURL.href});
     PageInfo.update({state: "loading"});
     
-    HTTPRequest.getDocument(this._nextURL).then(({realURL, doc}) => {
+    fetchHTMLText(this._nextURL).then(({realURL, text}) => {
       if (!this._loadedURLs.has(realURL.href)) {
         this._loadedURLs.add(this._nextURL.href);
         this._loadedURLs.add(realURL.href);
         
+        const doc = parseHTMLDocument(text);
         const nextAutoPager = new AutoPager(this._info, realURL, doc, {
           prefs: this._prefs,
           pageNo: this._pageNo + 1,

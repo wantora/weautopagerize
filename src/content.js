@@ -1,7 +1,7 @@
 import PageInfo from "./lib/content/PageInfo";
 import AutoPager from "./lib/content/AutoPager";
-import HTTPRequest from "./lib/content/HTTPRequest";
-import {sleep, onVisible} from "./lib/util";
+import fetchHTMLText from "./lib/content/fetchHTMLText";
+import {sleep, onVisible, parseHTMLDocument} from "./lib/util";
 
 function getContinueAutoPager(info, options) {
   try {
@@ -17,7 +17,9 @@ function getContinueAutoPager(info, options) {
     const url = new URL(lastLink.href);
     const loadedURLs = links.map((link) => new URL(link.href));
     
-    return onVisible().then(() => HTTPRequest.getDocument(url)).then(({realURL, doc}) => {
+    return onVisible().then(() => fetchHTMLText(url)).then(({realURL, text}) => {
+      const doc = parseHTMLDocument(text);
+      
       return new AutoPager(info, realURL, doc, Object.assign({}, options, {
         loadedURLs: loadedURLs,
         pageNo: pageNo,
