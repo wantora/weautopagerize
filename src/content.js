@@ -15,7 +15,8 @@ function getContinueAutoPager(info, options) {
       return Promise.resolve(null);
     }
     const url = new URL(lastLink.href);
-    const loadedURLs = links.map((link) => new URL(link.href));
+    const loadedURLs = links.map((link) => link.href);
+    loadedURLs.push(location.href);
     
     return onVisible().then(() => fetchHTMLText(url)).then(({realURL, text}) => {
       const doc = parseHTMLDocument(text);
