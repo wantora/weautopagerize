@@ -12,7 +12,7 @@
     "message": "挿入されたリンクを新しいタブで開く"
   },
   "options_excludeList_label": {
-    "message": "除外URL"
+    "message": "除外 URL"
   },
   "options_excludeList_pattern": {
     "message": "ワイルドカードと正規表現"
