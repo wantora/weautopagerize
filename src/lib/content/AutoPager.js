@@ -46,8 +46,7 @@ export default class AutoPager {
     this._doc = doc;
     this._prefs = prefs;
     this._pageNo = pageNo;
-    this._loadedURLs = new Set(loadedURLs);
-    this._loadedURLs.add(this._url.href);
+    this._loadedURLs = new Set([...loadedURLs, this._url.href]);
     this._insertPoint = insertPoint;
     
     this._baseURL = this._getBaseURL();
@@ -155,14 +154,12 @@ export default class AutoPager {
     
     fetchHTMLText(this._nextURL).then(({realURL, text}) => {
       if (!this._loadedURLs.has(realURL.href)) {
-        this._loadedURLs.add(this._nextURL.href);
-        this._loadedURLs.add(realURL.href);
-        
+        const newLoadedURLs = [...this._loadedURLs, this._nextURL.href];
         const doc = parseHTMLDocument(text);
         const nextAutoPager = new AutoPager(this._info, realURL, doc, {
           prefs: this._prefs,
           pageNo: this._pageNo + 1,
-          loadedURLs: this._loadedURLs,
+          loadedURLs: newLoadedURLs,
           insertPoint: this._insertPoint,
         });
         
