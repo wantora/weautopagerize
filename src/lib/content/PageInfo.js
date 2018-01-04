@@ -53,11 +53,11 @@ class PageInfo {
     
     window.addEventListener("pagehide", () => {
       this._setButtonState("default");
-    }, true);
+    });
     
     window.addEventListener("pageshow", () => {
       this.update(this._data);
-    }, true);
+    });
   }
   _initPort() {
     if (this._portInitialized) {

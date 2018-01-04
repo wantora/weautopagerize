@@ -64,7 +64,7 @@ document.addEventListener("AutoPagerize_DOMNodeInserted", function(event) {
 #### AutoPagerizeToggleRequest
 
 ```js
-document.dispatchEvent(new Event("AutoPagerizeToggleRequest", {bubbles: true}));
+document.dispatchEvent(new Event("AutoPagerizeToggleRequest"));
 ```
 
 #### AutoPagerizeEnableRequest
