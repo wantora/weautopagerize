@@ -6,7 +6,7 @@ let lastRequestTime = 0;
 
 export default async function fetchHTMLText(url) {
   if (!checkOrigin(url)) {
-    throw new Error("Same-Origin Error");
+    throw new Error(`Same-Origin Error: ${url.href}`);
   }
   
   const now = Date.now();
