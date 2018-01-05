@@ -1,7 +1,8 @@
 import PageInfo from "./lib/content/PageInfo";
 import AutoPager from "./lib/content/AutoPager";
 import fetchHTMLText from "./lib/content/fetchHTMLText";
-import {sleep, sleepVisible, parseHTMLDocument} from "./lib/util";
+import buildSiteinfo from "./lib/siteinfo/buildSiteinfo";
+import {sleep, sleepDOMContentLoaded, sleepVisible, parseHTMLDocument} from "./lib/util";
 
 async function getContinueAutoPager(info, options) {
   try {
@@ -45,32 +46,62 @@ async function createAutoPager(siteinfo, options) {
   return null;
 }
 
-async function initAutoPager(retryCount) {
+let currentData = null;
+let eventSiteinfo = null;
+
+function initEventListener() {
+  document.addEventListener("AutoPagerizeToggleRequest", () => {
+    PageInfo.update({userActive: !PageInfo.data.userActive});
+  });
+  document.addEventListener("AutoPagerizeEnableRequest", () => {
+    PageInfo.update({userActive: true});
+  });
+  document.addEventListener("AutoPagerizeDisableRequest", () => {
+    PageInfo.update({userActive: false});
+  });
+  
+  document.addEventListener("AutoPagerize_launchAutoPager", async (ev) => {
+    const siteinfo = ev.detail && ev.detail.siteinfo;
+    
+    try {
+      eventSiteinfo = buildSiteinfo(siteinfo).filter((info) => info.urlRegExp.test(location.href));
+      
+      if (currentData) {
+        const {prefs} = currentData;
+        const autoPager = await createAutoPager(eventSiteinfo, {prefs});
+        if (autoPager) {
+          if (!autoPager.nextURLIsLoaded() && autoPager.test()) {
+            AutoPager.terminateAll();
+            PageInfo.log({type: "start"});
+            PageInfo.update({siteinfo: autoPager.info});
+            
+            autoPager.start();
+          }
+        }
+      }
+    } catch (error) {
+      PageInfo.logError(error);
+      PageInfo.update({state: "error"});
+    }
+  });
+}
+
+async function initAutoPager(retryCount = 0) {
   try {
     const {
       userActive,
       siteinfo,
       prefs,
     } = await browser.runtime.sendMessage({type: "getData", value: location.href});
+    currentData = {prefs};
     
-    const autoPager = await createAutoPager(siteinfo, {prefs});
+    if (!userActive) {
+      PageInfo.update({userActive: userActive});
+    }
+    
+    const si = eventSiteinfo ? eventSiteinfo.concat(siteinfo) : siteinfo;
+    const autoPager = await createAutoPager(si, {prefs});
     if (autoPager) {
-      document.dispatchEvent(new Event("GM_AutoPagerizeLoaded", {bubbles: true}));
-      
-      if (!userActive) {
-        PageInfo.update({userActive: userActive});
-      }
-      
-      document.addEventListener("AutoPagerizeToggleRequest", () => {
-        PageInfo.update({userActive: !PageInfo.data.userActive});
-      });
-      document.addEventListener("AutoPagerizeEnableRequest", () => {
-        PageInfo.update({userActive: true});
-      });
-      document.addEventListener("AutoPagerizeDisableRequest", () => {
-        PageInfo.update({userActive: false});
-      });
-      
       PageInfo.log({type: "start"});
       PageInfo.update({siteinfo: autoPager.info});
       
@@ -92,4 +123,9 @@ async function initAutoPager(retryCount) {
   }
 }
 
-initAutoPager(0);
+initEventListener();
+
+sleepDOMContentLoaded().then(() => {
+  document.dispatchEvent(new Event("GM_AutoPagerizeLoaded", {bubbles: true}));
+  initAutoPager();
+});

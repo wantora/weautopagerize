@@ -17,7 +17,7 @@
     "babel-preset-env": "^1.6.1",
     "copy-webpack-plugin": "^4.2.3",
     "eslint": "^4.12.1",
-    "eslint-config-wantora": "github:wantora/eslint-config-wantora#v1.0.0",
+    "eslint-config-wantora": "github:wantora/eslint-config-wantora#v1.1.0",
     "eslint-loader": "^1.9.0",
     "npm-run-all": "^4.1.2",
     "web-ext": "^2.2.2",

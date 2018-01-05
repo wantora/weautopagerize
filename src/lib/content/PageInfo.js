@@ -28,7 +28,15 @@ class PageInfo {
     }
     
     if ("state" in data || "userActive" in data) {
-      const state = this._data.userActive ? this._data.state : "disable";
+      let state;
+      if (this._data.state === "default") {
+        state = "default";
+      } else if (this._data.userActive) {
+        state = this._data.state;
+      } else {
+        state = "disable";
+      }
+      
       this._setButtonState(state);
       if (state !== "default") {
         this._initListener();

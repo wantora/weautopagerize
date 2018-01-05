@@ -39,7 +39,14 @@ function getBorderLine(element) {
   return pos - BASE_REMAIN_HEIGHT;
 }
 
+const activeAutoPagerList = new Set();
+
 export default class AutoPager {
+  static terminateAll() {
+    for (const autoPager of Array.from(activeAutoPagerList)) {
+      autoPager.terminate();
+    }
+  }
   constructor(info, url, doc, {prefs, pageNo = 1, loadedURLs = [], insertPoint = null}) {
     this._info = info;
     this._url = url;
@@ -98,6 +105,7 @@ export default class AutoPager {
       return;
     }
     
+    activeAutoPagerList.add(this);
     PageInfo.update({state: "enable"});
     PageInfo.emitter.on("userActive", this._userActiveListener);
     
@@ -105,6 +113,10 @@ export default class AutoPager {
       this._scrollListener.enable();
       this._onScroll();
     }
+  }
+  terminate() {
+    this._terminateInternal();
+    PageInfo.update({state: "default"});
   }
   insertPageElements() {
     if (!this._updateInsertPoint()) {
@@ -137,14 +149,18 @@ export default class AutoPager {
     
     return true;
   }
+  _terminateInternal() {
+    PageInfo.emitter.removeListener("userActive", this._userActiveListener);
+    this._scrollListener.disable();
+    activeAutoPagerList.delete(this);
+  }
   _onScroll() {
     const scrollingElement = document.scrollingElement;
     const scrollBottom = scrollingElement.scrollTop + scrollingElement.clientHeight;
     const borderLine = getBorderLine(this._insertPoint);
     
     if (scrollBottom > borderLine) {
-      PageInfo.emitter.removeListener("userActive", this._userActiveListener);
-      this._scrollListener.disable();
+      this._terminateInternal();
       this._loadNext();
     }
   }

@@ -2,7 +2,8 @@ import I18n from "./lib/I18n";
 import OptionManager from "./lib/background/OptionManager";
 import Prefs from "./lib/background/Prefs";
 import {parseGlob} from "./lib/util";
-import {parseUserSiteinfo, buildSiteinfo} from "./lib/background/SiteinfoManager";
+import buildSiteinfo from "./lib/siteinfo/buildSiteinfo";
+import parseUserSiteinfo from "./lib/siteinfo/parseUserSiteinfo";
 
 const BooleanCheckbox = {
   load(element, value) {

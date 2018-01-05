@@ -71,6 +71,21 @@ document.dispatchEvent(new Event("AutoPagerizeToggleRequest"));
 
 #### AutoPagerizeDisableRequest
 
+#### AutoPagerize_launchAutoPager
+
+```js
+document.dispatchEvent(new CustomEvent("AutoPagerize_launchAutoPager", {detail: {
+  siteinfo: [
+    {
+      url: '^https://blog\\.mozilla\\.org/futurereleases/(page/\\d+/)?$',
+      nextLink: '//li[@class="prev"]//a',
+      pageElement: '//article',
+      insertBefore: '//nav[@class="nav-paging"]',
+    },
+  ],
+}}));
+```
+
 ## Contributors
 
 * @yfdyh000
