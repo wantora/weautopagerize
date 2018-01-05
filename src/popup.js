@@ -26,7 +26,22 @@ class PageInfoPanel {
   }
   init(tabId) {
     this._tabId = tabId;
+    this._setSiteinfoWidth();
     this._initPort();
+  }
+  _setSiteinfoWidth() {
+    let timeoutId = null;
+    const listener = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        const rect = this._siteinfoElement.parentNode.getBoundingClientRect();
+        if (rect.width > 0) {
+          window.removeEventListener("resize", listener);
+          this._siteinfoElement.style.setProperty("--panelWidth", `${rect.width}px`);
+        }
+      }, 100);
+    };
+    window.addEventListener("resize", listener);
   }
   _initPort() {
     this._port = browser.tabs.connect(this._tabId, {name: "pageInfoPort"});
@@ -66,34 +81,36 @@ class PageInfoPanel {
       const value = siteinfo[key];
       if (value === null) {
         if (this._siteinfoElements.has(key)) {
-          const {dt, dd} = this._siteinfoElements.get(key);
+          const {roots} = this._siteinfoElements.get(key);
           this._siteinfoElements.delete(key);
-          dt.parentNode.removeChild(dt);
-          dd.parentNode.removeChild(dd);
+          for (const root of roots) {
+            root.parentNode.removeChild(root);
+          }
         }
         return;
       }
       
       if (!this._siteinfoElements.has(key)) {
-        const dt = document.createElement("dt");
-        dt.textContent = key;
-        this._siteinfoElement.appendChild(dt);
+        const keyElement = document.createElement("dt");
+        keyElement.textContent = key;
+        this._siteinfoElement.appendChild(keyElement);
         
-        const dd = document.createElement("dd");
-        this._siteinfoElement.appendChild(dd);
+        const valueElement = document.createElement("dd");
+        this._siteinfoElement.appendChild(valueElement);
         
-        this._siteinfoElements.set(key, {dt, dd});
+        this._siteinfoElements.set(key, {roots: [keyElement, valueElement], valueElement});
       }
-      const {dd} = this._siteinfoElements.get(key);
+      const {valueElement} = this._siteinfoElements.get(key);
       
       if (key === "resource_url" && validateURL(value)) {
         const anchor = document.createElement("a");
         anchor.href = value;
         anchor.textContent = value;
-        dd.textContent = "";
-        dd.appendChild(anchor);
+        
+        valueElement.textContent = "";
+        valueElement.appendChild(anchor);
       } else {
-        dd.textContent = value;
+        valueElement.textContent = value;
       }
     });
   }
