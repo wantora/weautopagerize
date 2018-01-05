@@ -1,5 +1,6 @@
 import MIMEType from "whatwg-mimetype";
-import {checkOrigin, sleep} from "../util";
+import checkOrigin from "../checkOrigin";
+import sleep from "../sleep";
 
 const REQUEST_INTERVAL = 1000;
 let lastRequestTime = 0;

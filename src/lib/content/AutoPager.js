@@ -1,7 +1,10 @@
 import PageInfo from "./PageInfo";
 import ScrollListener from "./ScrollListener";
 import fetchHTMLText from "./fetchHTMLText";
-import {xpath, xpathAt, getDir, parseHTMLDocument} from "../util";
+import xpath from "./xpath";
+import xpathAt from "./xpathAt";
+import getDir from "../getDir";
+import parseHTMLDocument from "./parseHTMLDocument";
 
 const BASE_REMAIN_HEIGHT = 400;
 

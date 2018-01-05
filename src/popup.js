@@ -1,5 +1,6 @@
 import I18n from "./lib/I18n";
-import {sleep, validateURL} from "./lib/util";
+import sleep from "./lib/sleep";
+import validateURL from "./lib/validateURL";
 
 const SITEINFO_KEYS = ["url", "nextLink", "pageElement", "insertBefore", "resource_url"];
 

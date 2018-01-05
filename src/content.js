@@ -2,7 +2,10 @@ import PageInfo from "./lib/content/PageInfo";
 import AutoPager from "./lib/content/AutoPager";
 import fetchHTMLText from "./lib/content/fetchHTMLText";
 import buildSiteinfo from "./lib/siteinfo/buildSiteinfo";
-import {sleep, sleepDOMContentLoaded, sleepVisible, parseHTMLDocument} from "./lib/util";
+import sleep from "./lib/sleep";
+import sleepDOMContentLoaded from "./lib/content/sleepDOMContentLoaded";
+import sleepVisible from "./lib/content/sleepVisible";
+import parseHTMLDocument from "./lib/content/parseHTMLDocument";
 
 async function getContinueAutoPager(info, options) {
   try {

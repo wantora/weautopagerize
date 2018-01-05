@@ -1,5 +1,5 @@
 import Prefs from "./Prefs";
-import {parseGlob} from "../util";
+import parseGlob from "../parseGlob";
 
 export default class ExcludeList {
   constructor() {
