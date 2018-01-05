@@ -172,12 +172,13 @@ export default class AutoPager {
     PageInfo.update({state: "loading"});
     
     try {
-      const {realURL, text} = await fetchHTMLText(this._nextURL);
+      const useUserFetch = this._info.options && this._info.options.useUserFetch;
+      const {responseURL, responseText} = await fetchHTMLText(this._nextURL, useUserFetch);
       
-      if (!this._loadedURLs.has(realURL.href)) {
+      if (!this._loadedURLs.has(responseURL.href)) {
         const newLoadedURLs = [...this._loadedURLs, this._nextURL.href];
-        const doc = parseHTMLDocument(text);
-        const nextAutoPager = new AutoPager(this._info, realURL, doc, {
+        const doc = parseHTMLDocument(responseText);
+        const nextAutoPager = new AutoPager(this._info, responseURL, doc, {
           prefs: this._prefs,
           pageNo: this._pageNo + 1,
           loadedURLs: newLoadedURLs,

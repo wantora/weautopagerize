@@ -2,7 +2,7 @@ import I18n from "./lib/I18n";
 import sleep from "./lib/sleep";
 import validateURL from "./lib/validateURL";
 
-const SITEINFO_KEYS = ["url", "nextLink", "pageElement", "insertBefore", "resource_url"];
+const SITEINFO_KEYS = ["url", "nextLink", "pageElement", "insertBefore", "options", "resource_url"];
 
 class PageInfoPanel {
   constructor() {
@@ -103,7 +103,11 @@ class PageInfoPanel {
       }
       const {valueElement} = this._siteinfoElements.get(key);
       
-      if (key === "resource_url" && validateURL(value)) {
+      if (key === "options") {
+        valueElement.textContent = Object.keys(value)
+          .map((optionKey) => `${optionKey}: ${JSON.stringify(value[optionKey])}`)
+          .join("\n");
+      } else if (key === "resource_url" && validateURL(value)) {
         const anchor = document.createElement("a");
         anchor.href = value;
         anchor.textContent = value;

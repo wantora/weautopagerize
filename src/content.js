@@ -24,9 +24,10 @@ async function getContinueAutoPager(info, options) {
     
     await sleepVisible();
     
-    const {realURL, text} = await fetchHTMLText(url);
-    const doc = parseHTMLDocument(text);
-    return new AutoPager(info, realURL, doc, Object.assign({}, options, {
+    const useUserFetch = info.options && info.options.useUserFetch;
+    const {responseURL, responseText} = await fetchHTMLText(url, useUserFetch);
+    const doc = parseHTMLDocument(responseText);
+    return new AutoPager(info, responseURL, doc, Object.assign({}, options, {
       loadedURLs: loadedURLs,
       pageNo: pageNo,
     }));

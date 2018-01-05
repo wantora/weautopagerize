@@ -36,6 +36,14 @@
       "matches": ["*://*/*"],
       "js": ["content.js"],
       "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.pixiv.net/bookmark_new_illust.php*",
+        "*://www.pixiv.net/search.php*"
+      ],
+      "js": ["userscript/pixiv.js"],
+      "run_at": "document_end"
     }
   ],
   "options_ui": {

@@ -1,10 +1,13 @@
 function checkInfo(info) {
+  if (!info) {
+    return false;
+  }
+  const insertBefore = info.insertBefore;
   return (
-    info &&
     typeof info.url === "string" &&
     typeof info.nextLink === "string" &&
     typeof info.pageElement === "string" &&
-    (info.insertBefore === undefined || info.insertBefore === null || typeof info.insertBefore === "string")
+    (insertBefore === undefined || insertBefore === null || typeof insertBefore === "string")
   );
 }
 
@@ -48,6 +51,7 @@ export default function buildSiteinfo(siteinfo, options = {}) {
         "nextLink": info.nextLink,
         "pageElement": info.pageElement,
         "insertBefore": info.insertBefore === undefined ? null : info.insertBefore,
+        "options": info.options === undefined ? null : info.options,
         "resource_url": resourceURL,
       });
     } catch (error) {
