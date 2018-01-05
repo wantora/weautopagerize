@@ -3,8 +3,7 @@ import AutoPager from "./lib/content/AutoPager";
 import fetchHTMLText from "./lib/content/fetchHTMLText";
 import buildSiteinfo from "./lib/siteinfo/buildSiteinfo";
 import sleep from "./lib/sleep";
-import sleepDOMContentLoaded from "./lib/content/sleepDOMContentLoaded";
-import sleepVisible from "./lib/content/sleepVisible";
+import waitForEvent from "./lib/content/waitForEvent";
 import parseHTMLDocument from "./lib/content/parseHTMLDocument";
 
 async function getContinueAutoPager(info, options) {
@@ -22,7 +21,9 @@ async function getContinueAutoPager(info, options) {
     const loadedURLs = links.map((link) => link.href);
     loadedURLs.push(location.href);
     
-    await sleepVisible();
+    if (document.hidden) {
+      await waitForEvent(document, "visibilitychange", () => !document.hidden);
+    }
     
     const useUserFetch = info.options && info.options.useUserFetch;
     const {responseURL, responseText} = await fetchHTMLText(url, useUserFetch);
@@ -129,7 +130,10 @@ async function initAutoPager(retryCount = 0) {
 
 initEventListener();
 
-sleepDOMContentLoaded().then(() => {
+(async () => {
+  if (document.readyState === "loading") {
+    await waitForEvent(window, "DOMContentLoaded");
+  }
   document.dispatchEvent(new Event("GM_AutoPagerizeLoaded", {bubbles: true}));
-  initAutoPager();
-});
+  await initAutoPager();
+})();

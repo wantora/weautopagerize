@@ -1,6 +1,7 @@
 import MIMEType from "whatwg-mimetype";
 import checkOrigin from "../checkOrigin";
 import sleep from "../sleep";
+import waitForEvent from "./waitForEvent";
 
 async function nativeFetch(url) {
   const response = await fetch(url, {credentials: "include", redirect: "follow"});
@@ -23,21 +24,17 @@ async function nativeFetch(url) {
   return {responseURL, responseText};
 }
 
-function userFetch(url) {
-  return new Promise((resolve, reject) => {
-    document.dispatchEvent(new CustomEvent("AutoPagerizeUserFetchRequest", {
-      bubbles: true,
-      detail: {
-        url: url.href,
-      },
-    }));
-    
-    document.addEventListener("AutoPagerizeUserFetchResponse", (ev) => {
-      const {responseURL, responseText} = ev.detail;
-      
-      resolve({responseURL: new URL(responseURL), responseText});
-    }, {once: true});
-  });
+async function userFetch(url) {
+  document.dispatchEvent(new CustomEvent("AutoPagerizeUserFetchRequest", {
+    bubbles: true,
+    detail: {
+      url: url.href,
+    },
+  }));
+  
+  const ev = await waitForEvent(document, "AutoPagerizeUserFetchResponse");
+  const {responseURL, responseText} = ev.detail;
+  return {responseURL: new URL(responseURL), responseText};
 }
 
 const REQUEST_INTERVAL = 1000;
