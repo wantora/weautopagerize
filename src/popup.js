@@ -80,7 +80,8 @@ class PageInfoPanel {
   _updateSiteinfo(siteinfo) {
     SITEINFO_KEYS.forEach((key) => {
       const value = siteinfo[key];
-      if (value === null) {
+      
+      if (value === undefined) {
         if (this._siteinfoElements.has(key)) {
           const {roots} = this._siteinfoElements.get(key);
           this._siteinfoElements.delete(key);
@@ -154,7 +155,7 @@ class PageInfoPanel {
         const newSiteinfo = {};
         SITEINFO_KEYS.forEach((key) => {
           const value = data.siteinfo[key];
-          if (value !== null) {
+          if (value !== undefined) {
             newSiteinfo[key] = value;
           }
         });

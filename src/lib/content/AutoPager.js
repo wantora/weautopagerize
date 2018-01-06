@@ -240,7 +240,7 @@ export default class AutoPager {
       this._insertPoint.compareDocumentPosition(document) & Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC // eslint-disable-line max-len
     ) {
       let newInsertPoint = null;
-      if (this._info.insertBefore) {
+      if (this._info.insertBefore !== undefined && this._info.insertBefore !== "") {
         newInsertPoint = xpathAt(this._info.insertBefore, document);
       }
       if (!newInsertPoint) {

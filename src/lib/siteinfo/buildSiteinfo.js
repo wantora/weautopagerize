@@ -45,15 +45,26 @@ export default function buildSiteinfo(siteinfo, options = {}) {
     }
     
     try {
-      newSiteinfo.push({
+      const newInfo = {
         "url": info.url,
         "urlRegExp": new RegExp(info.url),
         "nextLink": info.nextLink,
         "pageElement": info.pageElement,
-        "insertBefore": info.insertBefore === undefined ? null : info.insertBefore,
-        "options": info.options === undefined ? null : info.options,
-        "resource_url": resourceURL,
-      });
+      };
+      
+      const insertBefore = info.insertBefore;
+      if (insertBefore !== undefined && insertBefore !== null) {
+        newInfo["insertBefore"] = insertBefore;
+      }
+      const infoOptions = info.options;
+      if (infoOptions !== undefined && infoOptions !== null) {
+        newInfo["options"] = infoOptions;
+      }
+      if (resourceURL !== null) {
+        newInfo["resource_url"] = resourceURL;
+      }
+      
+      newSiteinfo.push(newInfo);
     } catch (error) {
       errorCallback(error);
     }
