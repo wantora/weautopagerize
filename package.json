@@ -19,7 +19,9 @@
     "eslint": "^4.12.1",
     "eslint-config-wantora": "github:wantora/eslint-config-wantora#v1.1.0",
     "eslint-loader": "^1.9.0",
+    "glob": "^7.1.2",
     "npm-run-all": "^4.1.2",
+    "rimraf": "^2.6.2",
     "web-ext": "^2.2.2",
     "webpack": "^3.9.1"
   },
@@ -30,7 +32,8 @@
     "url": "git+https://github.com/wantora/weautopagerize.git"
   },
   "scripts": {
-    "build": "npm-run-all -s build:js build:ext",
+    "clean": "rimraf dist",
+    "build": "npm-run-all -s clean build:js build:ext",
     "build:ext": "web-ext build --source-dir dist",
     "build:js": "webpack --env.production true",
     "lint": "eslint .",

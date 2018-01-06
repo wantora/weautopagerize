@@ -2,6 +2,7 @@
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
+const glob = require("glob");
 
 module.exports = (options) => {
   const production = options && options.production === "true";
@@ -30,13 +31,13 @@ module.exports = (options) => {
     ]);
   }
   
+  const entry = {};
+  for (const file of glob.sync("./src/{userscript/,}*.js")) {
+    entry[file.replace("./src/", "").replace(/\.js$/, "")] = file;
+  }
+  
   return {
-    entry: {
-      "background": "./src/background.js",
-      "content": "./src/content.js",
-      "options": "./src/options.js",
-      "popup": "./src/popup.js",
-    },
+    entry: entry,
     output: {
       path: path.join(__dirname, "dist"),
       filename: "[name].js",
