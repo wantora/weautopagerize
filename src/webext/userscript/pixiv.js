@@ -5,12 +5,23 @@ function iframeFetch(url) {
     iframe.src = url;
     
     document.body.appendChild(iframe);
-    iframe.contentWindow.addEventListener("load", () => {
-      resolve({
-        responseURL: iframe.contentWindow.location.href,
-        responseText: iframe.contentDocument.documentElement.outerHTML,
-      });
-      iframe.parentElement.removeChild(iframe);
+    
+    iframe.contentWindow.addEventListener("DOMContentLoaded", () => {
+      const root =
+        iframe.contentDocument.getElementById("js-mount-point-latest-following") ||
+        iframe.contentDocument.getElementById("js-react-search-mid");
+      const callback = () => {
+        if (root.children.length > 0) {
+          resolve({
+            responseURL: iframe.contentWindow.location.href,
+            responseText: iframe.contentDocument.documentElement.outerHTML,
+          });
+          iframe.parentElement.removeChild(iframe);
+        } else {
+          setTimeout(callback, 100);
+        }
+      };
+      callback();
     }, {once: true});
   });
 }
