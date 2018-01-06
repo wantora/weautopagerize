@@ -24,7 +24,7 @@ document.addEventListener("AutoPagerizeUserFetchRequest", (ev) => {
 document.dispatchEvent(new CustomEvent("AutoPagerize_launchAutoPager", {detail: {
   siteinfo: [
     {
-      url: "^https?://www\\.pixiv\\.net/bookmark_new_illust\\.php",
+      url: "^https?://www\\.pixiv\\.net/bookmark_new_illust(_r18)?\\.php",
       nextLink: '//a[@rel="next"]',
       pageElement: '//*[@id="js-mount-point-latest-following"]',
       options: {
