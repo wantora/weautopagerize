@@ -25,6 +25,7 @@ async function nativeFetch(url) {
 }
 
 async function userFetch(url) {
+  const eventPromise = waitForEvent(document, "AutoPagerizeUserFetchResponse");
   document.dispatchEvent(new CustomEvent("AutoPagerizeUserFetchRequest", {
     bubbles: true,
     detail: {
@@ -32,9 +33,27 @@ async function userFetch(url) {
     },
   }));
   
-  const ev = await waitForEvent(document, "AutoPagerizeUserFetchResponse");
+  const ev = await eventPromise;
   const {responseURL, responseText} = ev.detail;
   return {responseURL: new URL(responseURL), responseText};
+}
+
+async function responseFilter(response) {
+  const eventPromise = waitForEvent(document, "AutoPagerizeResponseFilterResponse");
+  document.dispatchEvent(new CustomEvent("AutoPagerizeResponseFilterRequest", {
+    bubbles: true,
+    detail: {
+      responseURL: response.responseURL.href,
+      responseText: response.responseText,
+    },
+  }));
+  
+  const ev = await eventPromise;
+  const {responseText} = ev.detail;
+  return {
+    responseURL: response.responseURL,
+    responseText,
+  };
 }
 
 const REQUEST_INTERVAL = 1000;
@@ -52,11 +71,18 @@ export default async function fetchHTMLText(url, options) {
   }
   lastRequestTime = now;
   
-  const {useUserFetch} = Object.assign({useUserFetch: false}, options || {});
+  const {useUserFetch, useResponseFilter} = Object.assign({
+    useUserFetch: false,
+    useResponseFilter: false,
+  }, options || {});
   
-  const response = await (useUserFetch ? userFetch(url) : nativeFetch(url));
+  let response = await (useUserFetch ? userFetch(url) : nativeFetch(url));
   if (!checkOrigin(response.responseURL)) {
     throw new Error(`Same-Origin Error: ${response.responseURL.href}`);
+  }
+  
+  if (useResponseFilter) {
+    response = await responseFilter(response);
   }
   
   return response;
