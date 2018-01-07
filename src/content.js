@@ -25,8 +25,7 @@ async function getContinueAutoPager(info, options) {
       await waitForEvent(document, "visibilitychange", () => !document.hidden);
     }
     
-    const useUserFetch = info.options && info.options.useUserFetch;
-    const {responseURL, responseText} = await fetchHTMLText(url, useUserFetch);
+    const {responseURL, responseText} = await fetchHTMLText(url, info.options);
     const doc = parseHTMLDocument(responseText);
     return new AutoPager(info, responseURL, doc, Object.assign({}, options, {
       loadedURLs: loadedURLs,

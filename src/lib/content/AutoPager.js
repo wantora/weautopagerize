@@ -172,8 +172,7 @@ export default class AutoPager {
     PageInfo.update({state: "loading"});
     
     try {
-      const useUserFetch = this._info.options && this._info.options.useUserFetch;
-      const {responseURL, responseText} = await fetchHTMLText(this._nextURL, useUserFetch);
+      const {responseURL, responseText} = await fetchHTMLText(this._nextURL, this._info.options);
       
       if (!this._loadedURLs.has(responseURL.href)) {
         const newLoadedURLs = [...this._loadedURLs, this._nextURL.href];

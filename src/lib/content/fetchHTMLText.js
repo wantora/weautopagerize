@@ -40,7 +40,7 @@ async function userFetch(url) {
 const REQUEST_INTERVAL = 1000;
 let lastRequestTime = 0;
 
-export default async function fetchHTMLText(url, useUserFetch = false) {
+export default async function fetchHTMLText(url, options) {
   if (!checkOrigin(url)) {
     throw new Error(`Same-Origin Error: ${url.href}`);
   }
@@ -48,9 +48,11 @@ export default async function fetchHTMLText(url, useUserFetch = false) {
   const now = Date.now();
   if (now < lastRequestTime + REQUEST_INTERVAL) {
     await sleep((lastRequestTime + REQUEST_INTERVAL) - now + 10);
-    return fetchHTMLText(url);
+    return fetchHTMLText(url, options);
   }
   lastRequestTime = now;
+  
+  const {useUserFetch} = Object.assign({useUserFetch: false}, options || {});
   
   const response = await (useUserFetch ? userFetch(url) : nativeFetch(url));
   if (!checkOrigin(response.responseURL)) {
