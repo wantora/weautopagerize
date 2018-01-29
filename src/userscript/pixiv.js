@@ -28,12 +28,21 @@ function getParentLink(element) {
 }
 
 function fixLazyload(root, items) {
-  const itemMap = new Map(items.map((item) => [item.illustId, item]));
+  const illustImageMap = new Map(items.map((item) => [item.illustId, item.url]));
+  const userImageMap = new Map(items.map((item) => [item.userId, item.userImage]));
+  
   for (const element of root.querySelectorAll(".js-lazyload")) {
-    const illustId = new URLSearchParams(getParentLink(element).search).get("illust_id");
-    if (illustId) {
-      element.style.backgroundImage = `url("${itemMap.get(illustId).url}")`;
-      element.classList.remove("js-lazyload");
+    const link = getParentLink(element);
+    if (link) {
+      const params = new URLSearchParams(link.search);
+      const imageURL =
+        illustImageMap.get(params.get("illust_id")) ||
+        userImageMap.get(params.get("id"));
+      
+      if (imageURL) {
+        element.style.backgroundImage = `url("${imageURL}")`;
+        element.classList.remove("js-lazyload");
+      }
     }
   }
 }
@@ -45,14 +54,20 @@ async function iframeFetch(url) {
   document.body.appendChild(iframe);
   
   await waitForEvent(iframe.contentWindow, "DOMContentLoaded");
-  const {root, items} = getRoot(iframe);
   
-  const testFn = () => root.children.length > 0;
-  if (!testFn()) {
-    await waitForMutation(root, {childList: true, subtree: true}, testFn);
+  try {
+    const {root, items} = getRoot(iframe);
+    
+    const testFn = () => root.children.length > 0;
+    if (!testFn()) {
+      await waitForMutation(root, {childList: true, subtree: true}, testFn);
+    }
+    
+    fixLazyload(root, items);
+  } catch (error) {
+    console.error(error); // eslint-disable-line no-console
   }
   
-  fixLazyload(root, items);
   const result = {
     responseURL: iframe.contentWindow.location.href,
     responseText: iframe.contentDocument.documentElement.outerHTML,
