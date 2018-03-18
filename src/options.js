@@ -1,6 +1,6 @@
 import I18n from "./lib/I18n";
 import OptionManager from "./lib/background/OptionManager";
-import Prefs from "./lib/background/Prefs";
+import SiteinfoCache from "./lib/background/SiteinfoCache";
 import parseGlob from "./lib/parseGlob";
 import buildSiteinfo from "./lib/siteinfo/buildSiteinfo";
 import parseUserSiteinfo from "./lib/siteinfo/parseUserSiteinfo";
@@ -60,6 +60,7 @@ const UserSiteinfoValidator = (value) => {
 
 I18n.initHTML();
 
+const siteinfoCache = new SiteinfoCache();
 const optionManager = new OptionManager([
   {name: "openLinkInNewTab", updater: BooleanCheckbox},
   {name: "excludeList", updater: ArrayTextarea, validator: ExcludeListValidator},
@@ -70,23 +71,22 @@ optionManager.init();
 const lastUpdatedTimeElement = document.getElementById("lastUpdatedTime");
 const updateSiteinfoButton = document.getElementById("updateSiteinfoButton");
 
-function updateLastUpdatedTime() {
-  Prefs.get(["siteinfoCache"]).then(({siteinfoCache}) => {
-    lastUpdatedTimeElement.textContent = "";
+async function updateLastUpdatedTime() {
+  const infos = await siteinfoCache.getInfo();
+  lastUpdatedTimeElement.textContent = "";
+  
+  for (const {url, time} of infos) {
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.textContent = anchor;
     
-    Object.entries(siteinfoCache).forEach(([url, {time}]) => {
-      const anchor = document.createElement("a");
-      anchor.href = url;
-      anchor.textContent = anchor;
-      
-      const element = document.createElement("div");
-      const timeStr = new Date(time).toLocaleString([], {hour12: false});
-      element.appendChild(document.createTextNode(`${timeStr} (`));
-      element.appendChild(anchor);
-      element.appendChild(document.createTextNode(")"));
-      lastUpdatedTimeElement.appendChild(element);
-    });
-  });
+    const element = document.createElement("div");
+    const timeStr = new Date(time).toLocaleString([], {hour12: false});
+    element.appendChild(document.createTextNode(`${timeStr} (`));
+    element.appendChild(anchor);
+    element.appendChild(document.createTextNode(")"));
+    lastUpdatedTimeElement.appendChild(element);
+  }
 }
 
 updateSiteinfoButton.addEventListener("click", () => {

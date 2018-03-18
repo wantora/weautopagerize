@@ -3,37 +3,51 @@ import Prefs from "./Prefs";
 const CACHE_MAX_AGE = 24 * 60 * 60 * 1000;
 
 export default class SiteinfoCache {
-  constructor(siteinfoCache) {
-    this._siteinfoCache = siteinfoCache;
-  }
-  get(url, ignoreExpires = false) {
-    const cache = this._siteinfoCache[url];
-    if (cache && (ignoreExpires || Date.now() < cache.time + CACHE_MAX_AGE)) {
-      return cache.data;
-    } else {
-      return null;
-    }
-  }
-  set(url, data) {
-    this._siteinfoCache[url] = {
-      data: data,
-      time: Date.now(),
-    };
-    
-    return Prefs.set({siteinfoCache: this._siteinfoCache});
-  }
-  clean(urls) {
+  async update({urls, updateFn, forceUpdate = false}) {
     let updateFlag = false;
+    const {siteinfoCache} = await Prefs.get(["siteinfoCache"]);
     
-    Object.keys(this._siteinfoCache).forEach((key) => {
-      if (!urls.includes(key)) {
-        delete this._siteinfoCache[key];
+    for (const url of Object.keys(siteinfoCache)) {
+      if (!urls.includes(url)) {
+        delete siteinfoCache[url];
         updateFlag = true;
       }
-    });
+    }
+    
+    for (const url of urls) {
+      if (
+        forceUpdate ||
+        !Object.prototype.hasOwnProperty.call(siteinfoCache, url) ||
+        Date.now() >= siteinfoCache[url].time + CACHE_MAX_AGE
+      ) {
+        try {
+          const newData = await updateFn(url);
+          siteinfoCache[url] = {
+            data: newData,
+            time: Date.now(),
+          };
+          updateFlag = true;
+        } catch (error) {
+          console.error(error); // eslint-disable-line no-console
+        }
+      }
+    }
     
     if (updateFlag) {
-      Prefs.set({siteinfoCache: this._siteinfoCache});
+      await Prefs.set({siteinfoCache});
     }
+    
+    return urls.map((url) => {
+      if (Object.prototype.hasOwnProperty.call(siteinfoCache, url)) {
+        return siteinfoCache[url].data;
+      } else {
+        return [];
+      }
+    });
+  }
+  async getInfo() {
+    const {siteinfoCache} = await Prefs.get(["siteinfoCache"]);
+    
+    return Object.entries(siteinfoCache).map(([url, {time}]) => ({url, time}));
   }
 }
