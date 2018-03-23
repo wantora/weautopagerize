@@ -14,8 +14,8 @@ export default class ExcludeList {
       this._update(excludeList);
     });
   }
-  check(url) {
-    return this._list.some((reg) => reg.test(url));
+  check(urlStr) {
+    return this._list.some((reg) => reg.test(urlStr));
   }
   _update(excludeList) {
     const newList = [];

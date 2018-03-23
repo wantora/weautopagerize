@@ -20,10 +20,10 @@ Promise.all([
       }
       
       if (message.type === "getData") {
-        const url = message.value;
+        const urlStr = message.value;
         const data = {
-          userActive: !excludeList.check(url),
-          siteinfo: siteinfoManager.getSiteinfo(url),
+          userActive: !excludeList.check(urlStr),
+          siteinfo: siteinfoManager.getSiteinfo(urlStr),
           prefs: {
             openLinkInNewTab: syncPrefs.get("openLinkInNewTab"),
           },

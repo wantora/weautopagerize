@@ -41,22 +41,12 @@ export default class SiteinfoManager {
       this._updateUserSiteinfo(userSiteinfo);
     });
   }
-  getSiteinfo(url) {
-    const siteinfo = [];
-    
-    [
-      this._userSiteinfo,
-      this._siteinfo,
-      MICROFORMAT,
-    ].forEach((si) => {
-      si.forEach((info) => {
-        if (info.urlRegExp.test(url)) {
-          siteinfo.push(info);
-        }
-      });
-    });
-    
-    return siteinfo;
+  getSiteinfo(urlStr) {
+    return [].concat(
+      this._userSiteinfo.filter((info) => info.urlRegExp.test(urlStr)),
+      this._siteinfo.filter((info) => info.urlRegExp.test(urlStr)),
+      MICROFORMAT
+    );
   }
   forceUpdateSiteinfo() {
     return Prefs.get(["siteinfoList"]).then(({siteinfoList}) => {
