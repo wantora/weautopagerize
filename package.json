@@ -1,7 +1,7 @@
 {
   "name": "weautopagerize",
   "description": "Automatically inserts the next page.",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "author": "wantora <wantora@gmail.com>",
   "bugs": {
     "url": "https://github.com/wantora/weautopagerize/issues"
