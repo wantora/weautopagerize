@@ -59,10 +59,6 @@ class PageInfo {
     }
     this._listenerInitialized = true;
     
-    window.addEventListener("pagehide", () => {
-      this._setButtonState("default");
-    });
-    
     window.addEventListener("pageshow", () => {
       this.update(this._data);
     });
