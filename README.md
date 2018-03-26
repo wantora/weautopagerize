@@ -2,7 +2,7 @@
 
 Automatically inserts the next page.
 
-## Reference
+## AutoPagerize API Reference
 
 ### SITEINFO
 
@@ -26,17 +26,13 @@ Automatically inserts the next page.
 ]
 ```
 
-### Classes
+### HTML Classes
 
 #### autopagerize_page_element
 
 #### autopagerize_insert_before
 
-#### autopagerize_page_separator
-
-#### autopagerize_page_info
-
-#### autopagerize_link
+#### autopagerize_page_separator, autopagerize_page_info, autopagerize_link
 
 ```html
 <hr class="autopagerize_page_separator">
@@ -61,15 +57,11 @@ document.addEventListener("AutoPagerize_DOMNodeInserted", function(event) {
 }, false);
 ```
 
-#### AutoPagerizeToggleRequest
+#### AutoPagerizeToggleRequest, AutoPagerizeEnableRequest, AutoPagerizeDisableRequest
 
 ```js
 document.dispatchEvent(new Event("AutoPagerizeToggleRequest"));
 ```
-
-#### AutoPagerizeEnableRequest
-
-#### AutoPagerizeDisableRequest
 
 #### AutoPagerize_launchAutoPager
 
@@ -86,6 +78,52 @@ document.dispatchEvent(new CustomEvent("AutoPagerize_launchAutoPager", {detail: 
 }}));
 ```
 
+#### AutoPagerizeResponseFilterRequest, AutoPagerizeResponseFilterResponse
+
+See [src/userscript/naver-matome.js](src/userscript/naver-matome.js).
+
+#### AutoPagerizeUserFetchRequest, AutoPagerizeUserFetchResponse
+
+See [src/userscript/pixiv.js](src/userscript/pixiv.js).
+
+### Compatibility table
+
+| Name                               | weAutoPagerize | [AutoPagerize (userscript)](https://github.com/swdyh/autopagerize) | [AutoPagerize (webextension port)](https://addons.mozilla.org/firefox/addon/autopagerize-for-quantum/) | [uAutoPagerize](https://addons.mozilla.org/firefox/addon/uautopagerize/) |
+| ---------------------------------- |:---:|:---:|:---:|:---:|
+| HTML Classes                       | ✔  | ✔  | ✔  | ✔  |
+| SITEINFO                           | ✔  | ✔  | ✔  | ✔  |
+| SITEINFO options.useUserFetch      | ✔  |     |     |     |
+| SITEINFO options.useResponseFilter | ✔  |     |     |     |
+| GM_AutoPagerizeLoaded              | ✔  | ✔  | ✔  | ✔  |
+| GM_AutoPagerizeNextPageLoaded      | ✔  | ✔  | ✔  | ✔  |
+| AutoPagerize_DOMNodeInserted       | ✔  | ✔  | ✔  | ✔  |
+| AutoPagerizeToggleRequest          | ✔  | ✔  | ✔  | ✔  |
+| AutoPagerizeEnableRequest          | ✔  |     | ✔  | ✔  |
+| AutoPagerizeDisableRequest         | ✔  |     | ✔  | ✔  |
+| AutoPagerize_launchAutoPager       | ✔  |     |     | ✔  |
+| AutoPagerizeResponseFilterRequest  | ✔  |     |     |     |
+| AutoPagerizeResponseFilterResponse | ✔  |     |     |     |
+| AutoPagerizeUserFetchRequest       | ✔  |     |     |     |
+| AutoPagerizeUserFetchResponse      | ✔  |     |     |     |
+| AutoPagerizeUpdateIconRequest      |     | ✔  |     |     |
+| AutoPagerizeUpdateSettingsRequest  |     |     | ✔  |     |
+| uAutoPagerize_Launched             |     |     |     |     |
+| uAutoPagerize_StateChange          |     |     |     | ✔  |
+| uAutoPagerize_Destroy              |     |     |     | ✔  |
+| uAutoPagerize_RequestLoad          |     |     |     | ✔  |
+| uAutoPagerize_RequestError         |     |     |     | ✔  |
+| uAutoPagerize_Request              |     |     |     | ✔  |
+| uAutoPagerize_Restart              |     |     |     | ✔  |
+
+## Build instructions
+
+```
+git clone https://github.com/wantora/weautopagerize.git
+cd weautopagerize
+npm install
+npm run build
+```
+
 ## Contributors
 
-* @yfdyh000
+* [@yfdyh000](https://github.com/yfdyh000)
