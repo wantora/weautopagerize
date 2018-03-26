@@ -42,11 +42,21 @@ export default class SiteinfoManager {
     });
   }
   getSiteinfo(urlStr) {
-    return [].concat(
-      this._userSiteinfo.filter((info) => info.urlRegExp.test(urlStr)),
-      this._siteinfo.filter((info) => info.urlRegExp.test(urlStr)),
-      MICROFORMAT
-    );
+    const newSiteinfo = [];
+    
+    for (const info of this._userSiteinfo) {
+      if (info.urlRegExp.test(urlStr)) {
+        newSiteinfo.push(info);
+      }
+    }
+    for (const info of this._siteinfo) {
+      if (info.urlRegExp.test(urlStr)) {
+        newSiteinfo.push(info);
+      }
+    }
+    newSiteinfo.push(...MICROFORMAT);
+    
+    return newSiteinfo;
   }
   forceUpdateSiteinfo() {
     return Prefs.get(["siteinfoList"]).then(({siteinfoList}) => {
