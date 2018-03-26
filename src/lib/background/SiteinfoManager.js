@@ -56,7 +56,12 @@ export default class SiteinfoManager {
   async _updateSiteinfo(siteinfoList, forceUpdate = false) {
     const jsons = await this._siteinfoCache.update({
       urls: siteinfoList,
-      updateFn: (url) => fetch(url, {redirect: "follow"}).then((res) => res.json()),
+      updateFn: (url) => {
+        return fetch(url, {
+          redirect: "follow",
+          cache: forceUpdate ? "no-store" : "no-cache",
+        }).then((res) => res.json());
+      },
       forceUpdate: forceUpdate,
     });
     const ary = buildSiteinfo([].concat(...jsons))
