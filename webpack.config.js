@@ -1,36 +1,9 @@
 /* eslint-env node */
-const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 const glob = require("glob");
 
-module.exports = (options) => {
-  const production = options && options.production === "true";
-  const plugins = [
-    new webpack.LoaderOptionsPlugin({
-      debug: true,
-    }),
-    new CopyWebpackPlugin([
-      {from: "./src/webext"},
-      {from: "./README.md"},
-      {from: "./LICENSE.md"},
-      {from: "./gpl-3.0.txt"},
-    ]),
-  ];
-  
-  if (production) {
-    plugins.push(...[
-      new webpack.optimize.ModuleConcatenationPlugin(),
-      new webpack.LoaderOptionsPlugin({
-        debug: false,
-      }),
-      new webpack.DefinePlugin({
-        "process.env.NODE_ENV": JSON.stringify("production"),
-      }),
-      new webpack.NoEmitOnErrorsPlugin(),
-    ]);
-  }
-  
+module.exports = (env, argv) => {
   const entry = {};
   for (const file of glob.sync("./src/{userscript/,}*.js")) {
     entry[file.replace("./src/", "").replace(/\.js$/, "")] = file;
@@ -43,8 +16,15 @@ module.exports = (options) => {
       filename: "[name].js",
       pathinfo: true,
     },
-    devtool: production ? false : "inline-source-map",
-    plugins: plugins,
+    devtool: argv.mode === "development" ? "inline-source-map" : false,
+    plugins: [
+      new CopyWebpackPlugin([
+        {from: "./src/webext"},
+        {from: "./README.md"},
+        {from: "./LICENSE.md"},
+        {from: "./gpl-3.0.txt"},
+      ]),
+    ],
     module: {
       rules: [
         {
@@ -59,6 +39,9 @@ module.exports = (options) => {
           use: "babel-loader",
         },
       ],
+    },
+    optimization: {
+      minimize: false,
     },
   };
 };
