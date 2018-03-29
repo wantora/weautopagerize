@@ -46,12 +46,10 @@ class PageInfoPanel {
   }
   _initPort() {
     this._port = browser.tabs.connect(this._tabId, {name: "pageInfoPort"});
-    this._port.onDisconnect.addListener(() => {
+    this._port.onDisconnect.addListener(async () => {
       this._onDisconnect();
-
-      sleep(500).then(() => {
-        this._initPort();
-      });
+      await sleep(500);
+      this._initPort();
     });
     this._port.onMessage.addListener((data) => {
       this._updateUserActive(data);
@@ -198,16 +196,17 @@ class PageInfoPanel {
   }
 }
 
-function getActiveTab() {
-  return browser.tabs.query({currentWindow: true, active: true}).then((tabs) => tabs[0]);
+async function getActiveTab() {
+  const tabs = await browser.tabs.query({currentWindow: true, active: true});
+  return tabs[0];
 }
 
-I18n.initHTML();
+(async () => {
+  I18n.initHTML();
 
-const pageInfoPanel = new PageInfoPanel();
-
-getActiveTab().then((tab) => {
+  const pageInfoPanel = new PageInfoPanel();
+  const tab = await getActiveTab();
   if (tab) {
     pageInfoPanel.init(tab.id);
   }
-});
+})();

@@ -5,14 +5,13 @@ export default class ExcludeList {
   constructor() {
     this._list = [];
   }
-  init() {
+  async init() {
     Prefs.on("excludeList", (newValue) => {
       this._update(newValue);
     });
 
-    return Prefs.get(["excludeList"]).then(({excludeList}) => {
-      this._update(excludeList);
-    });
+    const {excludeList} = await Prefs.get(["excludeList"]);
+    this._update(excludeList);
   }
   check(urlStr) {
     return this._list.some((reg) => reg.test(urlStr));

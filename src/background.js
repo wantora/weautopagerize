@@ -3,19 +3,17 @@ import ExcludeList from "./lib/background/ExcludeList";
 import SyncPrefs from "./lib/background/SyncPrefs";
 import ButtonManager from "./lib/background/ButtonManager";
 
-const siteinfoManager = new SiteinfoManager();
-const excludeList = new ExcludeList();
-const syncPrefs = new SyncPrefs(["openLinkInNewTab"]);
-const buttonManager = new ButtonManager();
+(async () => {
+  try {
+    const siteinfoManager = new SiteinfoManager();
+    const excludeList = new ExcludeList();
+    const syncPrefs = new SyncPrefs(["openLinkInNewTab"]);
+    const buttonManager = new ButtonManager();
 
-Promise.all([siteinfoManager.init(), excludeList.init(), syncPrefs.init()])
-  .then(() => {
-    browser.runtime.onMessage.addListener((message, sender) => {
-      try {
-        if (!message) {
-          return null;
-        }
+    await Promise.all([siteinfoManager.init(), excludeList.init(), syncPrefs.init()]);
 
+    browser.runtime.onMessage.addListener(async (message, sender) => {
+      if (message) {
         if (message.type === "getData") {
           const urlStr = message.value;
           const data = {
@@ -25,7 +23,7 @@ Promise.all([siteinfoManager.init(), excludeList.init(), syncPrefs.init()])
               openLinkInNewTab: syncPrefs.get("openLinkInNewTab"),
             },
           };
-          return Promise.resolve(data);
+          return data;
         } else if (message.type === "setButtonState") {
           if (sender.tab) {
             return buttonManager.setState(sender.tab.id, message.value);
@@ -33,13 +31,10 @@ Promise.all([siteinfoManager.init(), excludeList.init(), syncPrefs.init()])
         } else if (message.type === "forceUpdateSiteinfo") {
           return siteinfoManager.forceUpdateSiteinfo();
         }
-
-        return null;
-      } catch (error) {
-        return Promise.reject(error);
       }
+      return null;
     });
-  })
-  .catch((error) => {
+  } catch (error) {
     console.error(error); // eslint-disable-line no-console
-  });
+  }
+})();

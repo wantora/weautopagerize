@@ -97,10 +97,9 @@ async function updateLastUpdatedTime() {
   }
 }
 
-updateSiteinfoButton.addEventListener("click", () => {
-  browser.runtime.sendMessage({type: "forceUpdateSiteinfo"}).then(() => {
-    updateLastUpdatedTime();
-  });
+updateSiteinfoButton.addEventListener("click", async () => {
+  await browser.runtime.sendMessage({type: "forceUpdateSiteinfo"});
+  updateLastUpdatedTime();
 });
 
 updateLastUpdatedTime();

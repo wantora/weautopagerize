@@ -26,3 +26,4 @@ rules:
       bracketSpacing: false
       printWidth: 100
       trailingComma: es5
+  require-await: off

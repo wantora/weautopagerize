@@ -20,8 +20,8 @@ class Prefs {
     });
     return browser.storage.local.get(keysObject);
   }
-  set(keysObject) {
-    return browser.storage.local.set(keysObject).then(() => null);
+  async set(keysObject) {
+    await browser.storage.local.set(keysObject);
   }
   on(keyName, listener) {
     this._emitter.on(keyName, listener);

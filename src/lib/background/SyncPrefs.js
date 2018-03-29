@@ -5,18 +5,17 @@ export default class SyncPrefs {
     this._values = new Map();
     this._keys = keys;
   }
-  init() {
+  async init() {
     this._keys.forEach((key) => {
       Prefs.on(key, (newValue) => {
         this._values.set(key, newValue);
       });
     });
 
-    return Prefs.get(this._keys).then((obj) => {
-      for (const [key, value] of Object.entries(obj)) {
-        this._values.set(key, value);
-      }
-    });
+    const obj = await Prefs.get(this._keys);
+    for (const [key, value] of Object.entries(obj)) {
+      this._values.set(key, value);
+    }
   }
   get(key) {
     return this._values.get(key);

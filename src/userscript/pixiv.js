@@ -80,10 +80,9 @@ async function iframeFetch(url) {
   return result;
 }
 
-document.addEventListener("AutoPagerizeUserFetchRequest", (ev) => {
-  iframeFetch(ev.detail.url).then((response) => {
-    document.dispatchEvent(new CustomEvent("AutoPagerizeUserFetchResponse", {detail: response}));
-  });
+document.addEventListener("AutoPagerizeUserFetchRequest", async (ev) => {
+  const response = await iframeFetch(ev.detail.url);
+  document.dispatchEvent(new CustomEvent("AutoPagerizeUserFetchResponse", {detail: response}));
 });
 
 document.dispatchEvent(

@@ -18,7 +18,7 @@ export default class SiteinfoManager {
     this._userSiteinfo = [];
     this._siteinfoCache = new SiteinfoCache();
   }
-  init() {
+  async init() {
     Prefs.on("siteinfoList", (newValue) => {
       this._updateSiteinfo(newValue);
     });
@@ -27,16 +27,14 @@ export default class SiteinfoManager {
       this._updateUserSiteinfo(newValue);
     });
 
-    setInterval(() => {
-      Prefs.get(["siteinfoList"]).then(({siteinfoList}) => {
-        this._updateSiteinfo(siteinfoList);
-      });
+    setInterval(async () => {
+      const {siteinfoList} = await Prefs.get(["siteinfoList"]);
+      this._updateSiteinfo(siteinfoList);
     }, 60 * 60 * 1000);
 
-    return Prefs.get(["siteinfoList", "userSiteinfo"]).then(({siteinfoList, userSiteinfo}) => {
-      this._updateSiteinfo(siteinfoList);
-      this._updateUserSiteinfo(userSiteinfo);
-    });
+    const {siteinfoList, userSiteinfo} = await Prefs.get(["siteinfoList", "userSiteinfo"]);
+    this._updateSiteinfo(siteinfoList);
+    this._updateUserSiteinfo(userSiteinfo);
   }
   getSiteinfo(urlStr) {
     const newSiteinfo = [];
@@ -55,19 +53,19 @@ export default class SiteinfoManager {
 
     return newSiteinfo;
   }
-  forceUpdateSiteinfo() {
-    return Prefs.get(["siteinfoList"]).then(({siteinfoList}) => {
-      return this._updateSiteinfo(siteinfoList, true);
-    });
+  async forceUpdateSiteinfo() {
+    const {siteinfoList} = await Prefs.get(["siteinfoList"]);
+    return this._updateSiteinfo(siteinfoList, true);
   }
   async _updateSiteinfo(siteinfoList, forceUpdate = false) {
     const jsons = await this._siteinfoCache.update({
       urls: siteinfoList,
-      updateFn: (url) => {
-        return fetch(url, {
+      updateFn: async (url) => {
+        const res = await fetch(url, {
           redirect: "follow",
           cache: forceUpdate ? "no-store" : "no-cache",
-        }).then((res) => res.json());
+        });
+        return res.json();
       },
       forceUpdate: forceUpdate,
     });
