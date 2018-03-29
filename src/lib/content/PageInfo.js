@@ -1,4 +1,4 @@
-import {EventEmitter} from "events";
+import events from "events";
 
 class PageInfo {
   constructor() {
@@ -12,7 +12,7 @@ class PageInfo {
     this._listenerInitialized = false;
     this._portInitialized = false;
     this._ports = new Set();
-    this._emitter = new EventEmitter();
+    this._emitter = new events.EventEmitter();
   }
   get data() {
     return this._data;

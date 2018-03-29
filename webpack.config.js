@@ -30,6 +30,11 @@ module.exports = (env, argv) => {
         {
           test: /\.js$/,
           exclude: /node_modules/,
+          type: "javascript/esm",
+        },
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
           enforce: "pre",
           use: "eslint-loader",
         },
