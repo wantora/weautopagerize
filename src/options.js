@@ -63,8 +63,16 @@ I18n.initHTML();
 const siteinfoCache = new SiteinfoCache();
 const optionManager = new OptionManager([
   {name: "openLinkInNewTab", updater: BooleanCheckbox},
-  {name: "excludeList", updater: ArrayTextarea, validator: ExcludeListValidator},
-  {name: "userSiteinfo", updater: StringTextarea, validator: UserSiteinfoValidator},
+  {
+    name: "excludeList",
+    updater: ArrayTextarea,
+    validator: ExcludeListValidator,
+  },
+  {
+    name: "userSiteinfo",
+    updater: StringTextarea,
+    validator: UserSiteinfoValidator,
+  },
 ]);
 optionManager.init();
 
@@ -74,12 +82,12 @@ const updateSiteinfoButton = document.getElementById("updateSiteinfoButton");
 async function updateLastUpdatedTime() {
   const infos = await siteinfoCache.getInfo();
   lastUpdatedTimeElement.textContent = "";
-  
+
   for (const {url, time} of infos) {
     const anchor = document.createElement("a");
     anchor.href = url;
     anchor.textContent = anchor;
-    
+
     const element = document.createElement("div");
     const timeStr = new Date(time).toLocaleString([], {hour12: false});
     element.appendChild(document.createTextNode(`${timeStr} (`));

@@ -8,7 +8,7 @@ module.exports = (env, argv) => {
   for (const file of glob.sync("./src/{userscript/,}*.js")) {
     entry[file.replace("./src/", "").replace(/\.js$/, "")] = file;
   }
-  
+
   return {
     entry: entry,
     output: {

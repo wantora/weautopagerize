@@ -26,7 +26,7 @@ class PageInfo {
       this._data[key] = value;
       this._emitter.emit(key, value, oldValue);
     }
-    
+
     if ("state" in data || "userActive" in data) {
       let state;
       if (this._data.state === "default") {
@@ -36,13 +36,13 @@ class PageInfo {
       } else {
         state = "disable";
       }
-      
+
       this._setButtonState(state);
       if (state !== "default") {
         this._initListener();
       }
     }
-    
+
     this._postPort();
   }
   log(data) {
@@ -58,7 +58,7 @@ class PageInfo {
       return;
     }
     this._listenerInitialized = true;
-    
+
     window.addEventListener("pageshow", () => {
       this.update(this._data);
     });
@@ -68,15 +68,15 @@ class PageInfo {
       return;
     }
     this._portInitialized = true;
-    
+
     browser.runtime.onConnect.addListener((port) => {
       if (port.name !== "pageInfoPort") {
         return;
       }
-      
+
       this._ports.add(port);
       this._postPort();
-      
+
       port.onMessage.addListener((data) => {
         this.update(data);
       });
@@ -87,7 +87,7 @@ class PageInfo {
   }
   _postPort() {
     this._initPort();
-    
+
     for (const port of this._ports) {
       port.postMessage(this._data);
     }

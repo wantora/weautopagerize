@@ -11,7 +11,7 @@ export default class SyncPrefs {
         this._values.set(key, newValue);
       });
     });
-    
+
     return Prefs.get(this._keys).then((obj) => {
       for (const [key, value] of Object.entries(obj)) {
         this._values.set(key, value);

@@ -12,12 +12,15 @@ function checkInfo(info) {
 }
 
 export default function buildSiteinfo(siteinfo, options = {}) {
-  const {errorCallback} = Object.assign({
-    errorCallback(error) {
-      console.error(error); // eslint-disable-line no-console
+  const {errorCallback} = Object.assign(
+    {
+      errorCallback(error) {
+        console.error(error); // eslint-disable-line no-console
+      },
     },
-  }, options);
-  
+    options
+  );
+
   if (siteinfo === null) {
     return [];
   }
@@ -25,13 +28,13 @@ export default function buildSiteinfo(siteinfo, options = {}) {
     errorCallback(new Error(`invalid SITEINFO: ${JSON.stringify(siteinfo)}`));
     return [];
   }
-  
+
   const newSiteinfo = [];
-  
+
   siteinfo.forEach((entry) => {
     let info = null;
     let resourceURL = null;
-    
+
     if (checkInfo(entry)) {
       info = entry;
     } else if (entry && checkInfo(entry.data)) {
@@ -43,15 +46,15 @@ export default function buildSiteinfo(siteinfo, options = {}) {
       errorCallback(new Error(`invalid SITEINFO item: ${JSON.stringify(entry)}`));
       return;
     }
-    
+
     try {
       const newInfo = {
-        "url": info.url,
-        "urlRegExp": new RegExp(info.url),
-        "nextLink": info.nextLink,
-        "pageElement": info.pageElement,
+        url: info.url,
+        urlRegExp: new RegExp(info.url),
+        nextLink: info.nextLink,
+        pageElement: info.pageElement,
       };
-      
+
       const insertBefore = info.insertBefore;
       if (insertBefore !== undefined && insertBefore !== null) {
         newInfo["insertBefore"] = insertBefore;
@@ -63,12 +66,12 @@ export default function buildSiteinfo(siteinfo, options = {}) {
       if (resourceURL !== null) {
         newInfo["resource_url"] = resourceURL;
       }
-      
+
       newSiteinfo.push(newInfo);
     } catch (error) {
       errorCallback(error);
     }
   });
-  
+
   return newSiteinfo;
 }

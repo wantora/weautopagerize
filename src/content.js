@@ -20,17 +20,22 @@ async function getContinueAutoPager(info, options) {
     const url = new URL(lastLink.href);
     const loadedURLs = links.map((link) => link.href);
     loadedURLs.push(location.href);
-    
+
     if (document.hidden) {
       await waitForEvent(document, "visibilitychange", () => !document.hidden);
     }
-    
+
     const {responseURL, responseText} = await fetchHTMLText(url, info.options);
     const doc = parseHTMLDocument(responseText);
-    return new AutoPager(info, responseURL, doc, Object.assign({}, options, {
-      loadedURLs: loadedURLs,
-      pageNo: pageNo,
-    }));
+    return new AutoPager(
+      info,
+      responseURL,
+      doc,
+      Object.assign({}, options, {
+        loadedURLs: loadedURLs,
+        pageNo: pageNo,
+      })
+    );
   } catch (error) {
     return null;
   }
@@ -38,11 +43,11 @@ async function getContinueAutoPager(info, options) {
 
 async function createAutoPager(siteinfo, options) {
   const url = new URL(location.href);
-  
+
   for (const info of siteinfo) {
     const autoPager = new AutoPager(info, url, document, options);
     PageInfo.log({type: "test", siteinfo: info});
-    
+
     if (autoPager.test()) {
       return (await getContinueAutoPager(info, options)) || autoPager;
     }
@@ -63,13 +68,13 @@ function initEventListener() {
   document.addEventListener("AutoPagerizeDisableRequest", () => {
     PageInfo.update({userActive: false});
   });
-  
+
   document.addEventListener("AutoPagerize_launchAutoPager", async (ev) => {
     const siteinfo = ev.detail && ev.detail.siteinfo;
-    
+
     try {
       eventSiteinfo = buildSiteinfo(siteinfo).filter((info) => info.urlRegExp.test(location.href));
-      
+
       if (currentData) {
         const {prefs} = currentData;
         const autoPager = await createAutoPager(eventSiteinfo, {prefs});
@@ -78,7 +83,7 @@ function initEventListener() {
             AutoPager.terminateAll();
             PageInfo.log({type: "start"});
             PageInfo.update({siteinfo: autoPager.info});
-            
+
             autoPager.start();
           }
         }
@@ -92,23 +97,22 @@ function initEventListener() {
 
 async function initAutoPager(retryCount = 0) {
   try {
-    const {
-      userActive,
-      siteinfo,
-      prefs,
-    } = await browser.runtime.sendMessage({type: "getData", value: location.href});
+    const {userActive, siteinfo, prefs} = await browser.runtime.sendMessage({
+      type: "getData",
+      value: location.href,
+    });
     currentData = {prefs};
-    
+
     if (!userActive) {
       PageInfo.update({userActive: userActive});
     }
-    
+
     const si = eventSiteinfo ? eventSiteinfo.concat(siteinfo) : siteinfo;
     const autoPager = await createAutoPager(si, {prefs});
     if (autoPager) {
       PageInfo.log({type: "start"});
       PageInfo.update({siteinfo: autoPager.info});
-      
+
       if (!autoPager.nextURLIsLoaded() && autoPager.test()) {
         autoPager.start();
         return;
@@ -117,7 +121,11 @@ async function initAutoPager(retryCount = 0) {
     PageInfo.log({type: "end"});
     PageInfo.update({state: "default"});
   } catch (error) {
-    if (retryCount < 5 && error && error.message === "Could not establish connection. Receiving end does not exist.") {
+    if (
+      retryCount < 5 &&
+      error &&
+      error.message === "Could not establish connection. Receiving end does not exist."
+    ) {
       await sleep(500);
       await initAutoPager(retryCount + 1);
     } else {

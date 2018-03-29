@@ -8,18 +8,18 @@ class PageInfoPanel {
   constructor() {
     this._tabId = null;
     this._port = null;
-    
+
     this._userActiveButton = document.getElementById("userActive");
     this._siteinfoElement = document.getElementById("siteinfo");
     this._siteinfoElements = new Map();
     this._logListElement = document.getElementById("logList");
     this._logListKey = null;
     this._logListLength = 0;
-    
+
     this._userActiveButton.addEventListener("click", () => {
       this._onUserActiveButtonClick();
     });
-    
+
     document.getElementById("openOptionsButton").addEventListener("click", () => {
       browser.runtime.openOptionsPage();
       window.close();
@@ -48,7 +48,7 @@ class PageInfoPanel {
     this._port = browser.tabs.connect(this._tabId, {name: "pageInfoPort"});
     this._port.onDisconnect.addListener(() => {
       this._onDisconnect();
-      
+
       sleep(500).then(() => {
         this._initPort();
       });
@@ -80,7 +80,7 @@ class PageInfoPanel {
   _updateSiteinfo(siteinfo) {
     SITEINFO_KEYS.forEach((key) => {
       const value = siteinfo[key];
-      
+
       if (value === undefined) {
         if (this._siteinfoElements.has(key)) {
           const {roots} = this._siteinfoElements.get(key);
@@ -91,19 +91,22 @@ class PageInfoPanel {
         }
         return;
       }
-      
+
       if (!this._siteinfoElements.has(key)) {
         const keyElement = document.createElement("dt");
         keyElement.textContent = key;
         this._siteinfoElement.appendChild(keyElement);
-        
+
         const valueElement = document.createElement("dd");
         this._siteinfoElement.appendChild(valueElement);
-        
-        this._siteinfoElements.set(key, {roots: [keyElement, valueElement], valueElement});
+
+        this._siteinfoElements.set(key, {
+          roots: [keyElement, valueElement],
+          valueElement,
+        });
       }
       const {valueElement} = this._siteinfoElements.get(key);
-      
+
       if (key === "options") {
         valueElement.textContent = Object.keys(value)
           .map((optionKey) => `${optionKey}: ${JSON.stringify(value[optionKey])}`)
@@ -112,7 +115,7 @@ class PageInfoPanel {
         const anchor = document.createElement("a");
         anchor.href = value;
         anchor.textContent = value;
-        
+
         valueElement.textContent = "";
         valueElement.appendChild(anchor);
       } else {
@@ -126,29 +129,29 @@ class PageInfoPanel {
       this._logListKey = logListKey;
       this._logListLength = 0;
     }
-    
+
     logList.forEach((data, index) => {
       if (index < this._logListLength) {
         return;
       }
-      
+
       const line = document.createElement("div");
       line.classList.add("line");
-      
+
       const time = document.createElement("span");
       time.classList.add("time");
       time.textContent = new Date(data.time).toLocaleTimeString("en-US", {hour12: false}) + " ";
       line.appendChild(time);
-      
+
       const type = document.createElement("span");
       type.classList.add("type");
       type.textContent = data.type;
       line.appendChild(type);
-      
+
       if (data.type === "test") {
         const siteinfo = document.createElement("a");
         siteinfo.classList.add("siteinfo");
-        
+
         if (data.siteinfo.resource_url) {
           siteinfo.href = data.siteinfo.resource_url;
         }
@@ -161,7 +164,7 @@ class PageInfoPanel {
         });
         siteinfo.textContent = JSON.stringify(newSiteinfo);
         siteinfo.title = JSON.stringify(newSiteinfo, null, 2);
-        
+
         line.appendChild(document.createTextNode(": "));
         line.appendChild(siteinfo);
       } else if (data.type === "loading") {
@@ -186,10 +189,10 @@ class PageInfoPanel {
         line.appendChild(document.createTextNode(": "));
         line.appendChild(error);
       }
-      
+
       this._logListElement.appendChild(line);
     });
-    
+
     this._logListElement.scrollTo(0, this._logListElement.scrollHeight);
     this._logListLength = logList.length;
   }

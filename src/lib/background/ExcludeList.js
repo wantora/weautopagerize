@@ -9,7 +9,7 @@ export default class ExcludeList {
     Prefs.on("excludeList", (newValue) => {
       this._update(newValue);
     });
-    
+
     return Prefs.get(["excludeList"]).then(({excludeList}) => {
       this._update(excludeList);
     });
@@ -19,7 +19,7 @@ export default class ExcludeList {
   }
   _update(excludeList) {
     const newList = [];
-    
+
     excludeList.forEach((str) => {
       try {
         newList.push(parseGlob(str));
@@ -27,7 +27,7 @@ export default class ExcludeList {
         console.error(error); // eslint-disable-line no-console
       }
     });
-    
+
     this._list = newList;
   }
 }

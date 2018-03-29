@@ -6,14 +6,14 @@ export default class SiteinfoCache {
   async update({urls, updateFn, forceUpdate = false}) {
     let updateFlag = false;
     const {siteinfoCache} = await Prefs.get(["siteinfoCache"]);
-    
+
     for (const url of Object.keys(siteinfoCache)) {
       if (!urls.includes(url)) {
         delete siteinfoCache[url];
         updateFlag = true;
       }
     }
-    
+
     for (const url of urls) {
       if (
         forceUpdate ||
@@ -32,11 +32,11 @@ export default class SiteinfoCache {
         }
       }
     }
-    
+
     if (updateFlag) {
       await Prefs.set({siteinfoCache});
     }
-    
+
     return urls.map((url) => {
       if (Object.prototype.hasOwnProperty.call(siteinfoCache, url)) {
         return siteinfoCache[url].data;
@@ -47,7 +47,7 @@ export default class SiteinfoCache {
   }
   async getInfo() {
     const {siteinfoCache} = await Prefs.get(["siteinfoCache"]);
-    
+
     return Object.entries(siteinfoCache).map(([url, {time}]) => ({url, time}));
   }
 }

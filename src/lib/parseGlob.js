@@ -1,4 +1,19 @@
-const REGEXP_SPECIAL_CHARACTERS = [".", "\\", "[", "]", "|", "^", "$", "(", ")", "*", "+", "?", "{", "}"];
+const REGEXP_SPECIAL_CHARACTERS = [
+  ".",
+  "\\",
+  "[",
+  "]",
+  "|",
+  "^",
+  "$",
+  "(",
+  ")",
+  "*",
+  "+",
+  "?",
+  "{",
+  "}",
+];
 
 export default function parseGlob(pattern) {
   if (pattern.startsWith("/") && pattern.endsWith("/")) {
@@ -16,7 +31,7 @@ export default function parseGlob(pattern) {
       }
     }
     src += "$";
-    
+
     return new RegExp(src, "i");
   }
 }
