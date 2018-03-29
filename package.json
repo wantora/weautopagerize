@@ -1,10 +1,26 @@
 {
   "name": "weautopagerize",
-  "description": "Automatically inserts the next page.",
   "version": "1.4.3",
-  "author": "wantora <wantora@gmail.com>",
+  "description": "Automatically inserts the next page.",
+  "homepage": "https://github.com/wantora/weautopagerize#readme",
   "bugs": {
     "url": "https://github.com/wantora/weautopagerize/issues"
+  },
+  "license": "GPL-3.0+",
+  "author": "wantora <wantora@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wantora/weautopagerize.git"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run build:js && npm run build:ext",
+    "build:ext": "web-ext build --source-dir dist",
+    "build:js": "webpack --mode production",
+    "clean": "rimraf dist",
+    "format": "sort-package-json && eslint --fix .",
+    "lint": "eslint .",
+    "start": "web-ext run --source-dir dist",
+    "watch": "webpack --mode development --watch"
   },
   "dependencies": {
     "events": "^2.0.0",
@@ -19,27 +35,11 @@
     "eslint-loader": "^2.0.0",
     "eslint-plugin-prettier": "^2.6.0",
     "glob": "^7.1.2",
-    "npm-run-all": "^4.1.2",
     "prettier": "^1.11.1",
     "rimraf": "^2.6.2",
+    "sort-package-json": "^1.11.0",
     "web-ext": "^2.6.0",
     "webpack": "^4.3.0",
     "webpack-cli": "^2.0.13"
-  },
-  "homepage": "https://github.com/wantora/weautopagerize#readme",
-  "license": "GPL-3.0+",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wantora/weautopagerize.git"
-  },
-  "scripts": {
-    "clean": "rimraf dist",
-    "build": "npm-run-all -s clean build:js build:ext",
-    "build:ext": "web-ext build --source-dir dist",
-    "build:js": "webpack --mode production",
-    "format": "eslint --fix .",
-    "lint": "eslint .",
-    "start": "web-ext run --source-dir dist",
-    "watch": "webpack --mode development --watch"
   }
 }
