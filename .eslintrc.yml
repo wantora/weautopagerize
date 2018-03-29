@@ -2,12 +2,8 @@ parserOptions:
   ecmaVersion: 2017
   sourceType: module
 
-plugins:
-  - prettier
-
 extends:
-  - eslint-config-wantora
-  - eslint-config-prettier
+  - wantora
 
 env:
   es6: true
@@ -18,12 +14,3 @@ env:
 globals:
   process: false
   content: false
-
-rules:
-  prettier/prettier:
-    - warn
-    - arrowParens: always
-      bracketSpacing: false
-      printWidth: 100
-      trailingComma: es5
-  require-await: off
