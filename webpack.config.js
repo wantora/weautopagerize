@@ -33,11 +33,6 @@ module.exports = (env, argv) => {
           enforce: "pre",
           use: "eslint-loader",
         },
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          use: "babel-loader",
-        },
       ],
     },
     optimization: {

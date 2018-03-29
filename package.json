@@ -12,9 +12,6 @@
     "whatwg-mimetype": "^2.1.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1",
     "copy-webpack-plugin": "^4.5.1",
     "eslint": "^4.19.1",
     "eslint-config-wantora": "github:wantora/eslint-config-wantora#v1.1.0",
