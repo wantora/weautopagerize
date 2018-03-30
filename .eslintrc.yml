@@ -14,3 +14,12 @@ env:
 globals:
   process: false
   content: false
+
+overrides:
+  - files:
+      - webpack.config.js
+    parserOptions:
+      sourceType: script
+    env:
+      browser: false
+      node: true

@@ -1,4 +1,5 @@
-/* eslint-env node */
+"use strict";
+
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 const glob = require("glob");
