@@ -18,7 +18,7 @@
     "build:js": "webpack --mode production",
     "clean": "rimraf dist",
     "format": "sort-package-json && eslint --fix .",
-    "lint": "eslint .",
+    "lint": "web-ext lint --source-dir dist && eslint .",
     "start": "web-ext run --source-dir dist",
     "watch": "webpack --mode development --watch"
   },
