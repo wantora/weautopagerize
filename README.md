@@ -115,6 +115,10 @@ See [src/userscript/pixiv.js](src/userscript/pixiv.js).
 | uAutoPagerize_Request              |     |     |     | ✔  |
 | uAutoPagerize_Restart              |     |     |     | ✔  |
 
+* [AutoPagerize (userscript)](https://github.com/swdyh/autopagerize) 0.0.66
+* [AutoPagerize (webextension port)](https://addons.mozilla.org/firefox/addon/autopagerize-for-quantum/) 0.4.2
+* [uAutoPagerize](https://addons.mozilla.org/firefox/addon/uautopagerize/) 0.1.4.1
+
 ## Build instructions
 
 ```
