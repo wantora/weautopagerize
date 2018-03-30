@@ -9,14 +9,13 @@ module.exports = (env, argv) => {
     entry[file.replace("./src/", "").replace(/\.js$/, "")] = file;
   }
 
-  return {
+  const config = {
     entry: entry,
     output: {
       path: path.join(__dirname, "dist"),
       filename: "[name].js",
       pathinfo: true,
     },
-    devtool: argv.mode === "development" ? "inline-source-map" : false,
     plugins: [
       new CopyWebpackPlugin([
         {from: "./src/webext"},
@@ -40,8 +39,16 @@ module.exports = (env, argv) => {
         },
       ],
     },
-    optimization: {
-      minimize: false,
-    },
+    optimization: {},
   };
+
+  if (argv.mode === "production") {
+    config.optimization.minimize = false;
+  }
+
+  if (argv.mode === "development") {
+    config.devtool = "inline-source-map";
+  }
+
+  return config;
 };
