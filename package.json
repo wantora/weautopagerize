@@ -30,7 +30,7 @@
   "devDependencies": {
     "copy-webpack-plugin": "^4.5.1",
     "eslint": "^4.19.1",
-    "eslint-config-wantora": "github:wantora/eslint-config-wantora#v1.2.0",
+    "eslint-config-wantora": "github:wantora/eslint-config-wantora#v1.2.1",
     "eslint-loader": "^2.0.0",
     "glob": "^7.1.2",
     "rimraf": "^2.6.2",
