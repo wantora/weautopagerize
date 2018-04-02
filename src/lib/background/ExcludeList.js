@@ -1,9 +1,9 @@
 import Prefs from "./Prefs";
-import parseGlob from "../parseGlob";
+import parseGlobList from "../parseGlobList";
 
 export default class ExcludeList {
   constructor() {
-    this._list = [];
+    this._regExp = [];
   }
   async init() {
     Prefs.on("excludeList", (newValue) => {
@@ -14,19 +14,13 @@ export default class ExcludeList {
     this._update(excludeList);
   }
   check(urlStr) {
-    return this._list.some((reg) => reg.test(urlStr));
+    return this._regExp.test(urlStr);
   }
   _update(excludeList) {
-    const newList = [];
-
-    excludeList.forEach((str) => {
-      try {
-        newList.push(parseGlob(str));
-      } catch (error) {
-        console.error(error); // eslint-disable-line no-console
-      }
-    });
-
-    this._list = newList;
+    try {
+      this._regExp = parseGlobList(excludeList);
+    } catch (error) {
+      console.error(error); // eslint-disable-line no-console
+    }
   }
 }

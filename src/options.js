@@ -1,7 +1,7 @@
 import I18n from "./lib/I18n";
 import OptionManager from "./lib/background/OptionManager";
 import SiteinfoCache from "./lib/background/SiteinfoCache";
-import parseGlob from "./lib/parseGlob";
+import parseGlobList from "./lib/parseGlobList";
 import buildSiteinfo from "./lib/siteinfo/buildSiteinfo";
 import parseUserSiteinfo from "./lib/siteinfo/parseUserSiteinfo";
 
@@ -33,15 +33,12 @@ const StringTextarea = {
 };
 
 const ExcludeListValidator = (value) => {
-  let message = "";
-  value.forEach((str) => {
-    try {
-      parseGlob(str);
-    } catch (error) {
-      message += `${error.name}: ${error.message}\n`;
-    }
-  });
-  return message;
+  try {
+    parseGlobList(value);
+  } catch (error) {
+    return `${error.name}: ${error.message}\n`;
+  }
+  return "";
 };
 
 const UserSiteinfoValidator = (value) => {
