@@ -1,13 +1,12 @@
 import SiteinfoManager from "./lib/background/SiteinfoManager";
 import ExcludeList from "./lib/background/ExcludeList";
 import Prefs from "./lib/background/Prefs";
-import ButtonManager from "./lib/background/ButtonManager";
+import updateButtonState from "./lib/background/updateButtonState";
 
 (async () => {
   try {
     const siteinfoManager = new SiteinfoManager();
     const excludeList = new ExcludeList();
-    const buttonManager = new ButtonManager();
 
     await Promise.all([siteinfoManager.init(), excludeList.init()]);
 
@@ -27,7 +26,7 @@ import ButtonManager from "./lib/background/ButtonManager";
           return data;
         } else if (message.type === "setButtonState") {
           if (sender.tab) {
-            return buttonManager.setState(sender.tab.id, message.value);
+            return updateButtonState(sender.tab.id, message.value);
           }
         } else if (message.type === "forceUpdateSiteinfo") {
           return siteinfoManager.forceUpdateSiteinfo();
