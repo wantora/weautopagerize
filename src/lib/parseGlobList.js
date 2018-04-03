@@ -44,6 +44,14 @@ export default function parseGlobList(patterns) {
     }
   }
 
-  regexps.unshift(`^(${globs.join("|")})$`);
-  return new RegExp(regexps.join("|"), REGEXP_FLAGS);
+  if (globs.length > 0) {
+    regexps.unshift(`^(?:${globs.join("|")})$`);
+  }
+  let source;
+  if (regexps.length > 0) {
+    source = regexps.join("|");
+  } else {
+    source = "(?!)";
+  }
+  return new RegExp(source, REGEXP_FLAGS);
 }
