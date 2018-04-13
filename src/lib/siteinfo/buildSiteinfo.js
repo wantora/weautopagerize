@@ -7,7 +7,9 @@ function checkInfo(info) {
     typeof info.url === "string" &&
     typeof info.nextLink === "string" &&
     typeof info.pageElement === "string" &&
-    (insertBefore === undefined || insertBefore === null || typeof insertBefore === "string")
+    (insertBefore === undefined ||
+      insertBefore === null ||
+      typeof insertBefore === "string")
   );
 }
 
@@ -43,7 +45,9 @@ export default function buildSiteinfo(siteinfo, options = {}) {
         resourceURL = entry["resource_url"];
       }
     } else {
-      errorCallback(new Error(`invalid SITEINFO item: ${JSON.stringify(entry)}`));
+      errorCallback(
+        new Error(`invalid SITEINFO item: ${JSON.stringify(entry)}`)
+      );
       return;
     }
 

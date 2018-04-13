@@ -8,7 +8,9 @@ import parseHTMLDocument from "./lib/content/parseHTMLDocument";
 
 async function getContinueAutoPager(info, options) {
   try {
-    const links = Array.from(document.querySelectorAll("a.autopagerize_link[href]"));
+    const links = Array.from(
+      document.querySelectorAll("a.autopagerize_link[href]")
+    );
     if (links.length === 0) {
       return null;
     }
@@ -73,7 +75,9 @@ function initEventListener() {
     const siteinfo = ev.detail && ev.detail.siteinfo;
 
     try {
-      eventSiteinfo = buildSiteinfo(siteinfo).filter((info) => info.urlRegExp.test(location.href));
+      eventSiteinfo = buildSiteinfo(siteinfo).filter((info) =>
+        info.urlRegExp.test(location.href)
+      );
 
       if (currentData) {
         const {prefs} = currentData;
@@ -124,7 +128,8 @@ async function initAutoPager(retryCount = 0) {
     if (
       retryCount < 5 &&
       error &&
-      error.message === "Could not establish connection. Receiving end does not exist."
+      error.message ===
+        "Could not establish connection. Receiving end does not exist."
     ) {
       await sleep(500);
       await initAutoPager(retryCount + 1);

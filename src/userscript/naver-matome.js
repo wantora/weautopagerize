@@ -1,5 +1,7 @@
 function domFilter(url, doc) {
-  const currentElement = doc.querySelector(".MdPagination03 strong, .MdPagination04 strong");
+  const currentElement = doc.querySelector(
+    ".MdPagination03 strong, .MdPagination04 strong"
+  );
   if (!currentElement) {
     return;
   }
@@ -16,7 +18,10 @@ function domFilter(url, doc) {
 domFilter(location.href, document);
 
 document.addEventListener("AutoPagerizeResponseFilterRequest", (ev) => {
-  const doc = new DOMParser().parseFromString(ev.detail.responseText, "text/html");
+  const doc = new DOMParser().parseFromString(
+    ev.detail.responseText,
+    "text/html"
+  );
   domFilter(ev.detail.responseURL, doc);
 
   document.dispatchEvent(

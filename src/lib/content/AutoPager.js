@@ -10,7 +10,12 @@ const BASE_REMAIN_HEIGHT = 400;
 
 function getElementRect(element) {
   const rect = element.getBoundingClientRect();
-  if (rect.top === 0 && rect.right === 0 && rect.bottom === 0 && rect.left === 0) {
+  if (
+    rect.top === 0 &&
+    rect.right === 0 &&
+    rect.bottom === 0 &&
+    rect.left === 0
+  ) {
     return null;
   } else {
     return rect;
@@ -50,7 +55,12 @@ export default class AutoPager {
       autoPager.terminate();
     }
   }
-  constructor(info, url, doc, {prefs, pageNo = 1, loadedURLs = [], insertPoint = null}) {
+  constructor(
+    info,
+    url,
+    doc,
+    {prefs, pageNo = 1, loadedURLs = [], insertPoint = null}
+  ) {
     this._info = info;
     this._url = url;
     this._doc = doc;
@@ -149,7 +159,9 @@ export default class AutoPager {
     pageElements.forEach((pageElement) => {
       this._dispatchInsertedEvent(pageElement);
     });
-    document.dispatchEvent(new Event("GM_AutoPagerizeNextPageLoaded", {bubbles: true}));
+    document.dispatchEvent(
+      new Event("GM_AutoPagerizeNextPageLoaded", {bubbles: true})
+    );
 
     return true;
   }
@@ -160,7 +172,8 @@ export default class AutoPager {
   }
   _onScroll() {
     const scrollingElement = document.scrollingElement;
-    const scrollBottom = scrollingElement.scrollTop + scrollingElement.clientHeight;
+    const scrollBottom =
+      scrollingElement.scrollTop + scrollingElement.clientHeight;
     const borderLine = getBorderLine(this._insertPoint);
 
     if (scrollBottom > borderLine) {
@@ -173,7 +186,10 @@ export default class AutoPager {
     PageInfo.update({state: "loading"});
 
     try {
-      const {responseURL, responseText} = await fetchHTMLText(this._nextURL, this._info.options);
+      const {responseURL, responseText} = await fetchHTMLText(
+        this._nextURL,
+        this._info.options
+      );
 
       if (!this._loadedURLs.has(responseURL.href)) {
         const newLoadedURLs = [...this._loadedURLs, this._nextURL.href];
@@ -251,7 +267,10 @@ export default class AutoPager {
         Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC // eslint-disable-line max-len
     ) {
       let newInsertPoint = null;
-      if (this._info.insertBefore !== undefined && this._info.insertBefore !== "") {
+      if (
+        this._info.insertBefore !== undefined &&
+        this._info.insertBefore !== ""
+      ) {
         newInsertPoint = xpathAt(this._info.insertBefore, document);
       }
       if (!newInsertPoint) {
@@ -259,7 +278,8 @@ export default class AutoPager {
         if (pageElements.length !== 0) {
           const element = pageElements[pageElements.length - 1];
           newInsertPoint =
-            element.nextSibling || element.parentNode.appendChild(document.createTextNode(" "));
+            element.nextSibling ||
+            element.parentNode.appendChild(document.createTextNode(" "));
         }
       }
       this._insertPoint = newInsertPoint;
@@ -271,18 +291,19 @@ export default class AutoPager {
     return true;
   }
   _openInNewTabElementLink(element) {
-    xpath("descendant-or-self::a[@href] | descendant-or-self::area[@href]", element).forEach(
-      (anchor) => {
-        if (
-          (anchor.protocol === "http:" || anchor.protocol === "https:") &&
-          !anchor.getAttribute("href").startsWith("#") &&
-          !anchor.hasAttribute("target")
-        ) {
-          anchor.target = "_blank";
-          anchor.relList.add("noopener");
-        }
+    xpath(
+      "descendant-or-self::a[@href] | descendant-or-self::area[@href]",
+      element
+    ).forEach((anchor) => {
+      if (
+        (anchor.protocol === "http:" || anchor.protocol === "https:") &&
+        !anchor.getAttribute("href").startsWith("#") &&
+        !anchor.hasAttribute("target")
+      ) {
+        anchor.target = "_blank";
+        anchor.relList.add("noopener");
       }
-    );
+    });
   }
   _expandElementURL(element) {
     if (getDir(this._baseURL).href === getDir(new URL(location.href)).href) {

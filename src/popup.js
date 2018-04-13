@@ -2,7 +2,14 @@ import I18n from "./lib/I18n";
 import sleep from "./lib/sleep";
 import validateURL from "./lib/validateURL";
 
-const SITEINFO_KEYS = ["url", "nextLink", "pageElement", "insertBefore", "options", "resource_url"];
+const SITEINFO_KEYS = [
+  "url",
+  "nextLink",
+  "pageElement",
+  "insertBefore",
+  "options",
+  "resource_url",
+];
 
 class PageInfoPanel {
   constructor() {
@@ -20,10 +27,12 @@ class PageInfoPanel {
       this._onUserActiveButtonClick();
     });
 
-    document.getElementById("openOptionsButton").addEventListener("click", () => {
-      browser.runtime.openOptionsPage();
-      window.close();
-    });
+    document
+      .getElementById("openOptionsButton")
+      .addEventListener("click", () => {
+        browser.runtime.openOptionsPage();
+        window.close();
+      });
   }
   init(tabId) {
     this._tabId = tabId;
@@ -38,7 +47,10 @@ class PageInfoPanel {
         const rect = this._siteinfoElement.parentNode.getBoundingClientRect();
         if (rect.width > 0) {
           window.removeEventListener("resize", listener);
-          this._siteinfoElement.style.setProperty("--panelWidth", `${rect.width}px`);
+          this._siteinfoElement.style.setProperty(
+            "--panelWidth",
+            `${rect.width}px`
+          );
         }
       }, 100);
     };
@@ -60,7 +72,9 @@ class PageInfoPanel {
     });
   }
   _onUserActiveButtonClick() {
-    const newValue = !(this._userActiveButton.getAttribute("data-checked") === "true");
+    const newValue = !(
+      this._userActiveButton.getAttribute("data-checked") === "true"
+    );
     this._userActiveButton.setAttribute("data-checked", String(newValue));
     this._port.postMessage({userActive: newValue});
   }
@@ -70,7 +84,10 @@ class PageInfoPanel {
   _updateUserActive(data) {
     if (data.state === "enable" || data.state === "loading") {
       this._userActiveButton.disabled = false;
-      this._userActiveButton.setAttribute("data-checked", String(data.userActive));
+      this._userActiveButton.setAttribute(
+        "data-checked",
+        String(data.userActive)
+      );
     } else {
       this._userActiveButton.disabled = true;
     }
@@ -107,7 +124,9 @@ class PageInfoPanel {
 
       if (key === "options") {
         valueElement.textContent = Object.keys(value)
-          .map((optionKey) => `${optionKey}: ${JSON.stringify(value[optionKey])}`)
+          .map(
+            (optionKey) => `${optionKey}: ${JSON.stringify(value[optionKey])}`
+          )
           .join("\n");
       } else if (key === "resource_url" && validateURL(value)) {
         const anchor = document.createElement("a");
@@ -138,7 +157,8 @@ class PageInfoPanel {
 
       const time = document.createElement("span");
       time.classList.add("time");
-      time.textContent = new Date(data.time).toLocaleTimeString("en-US", {hour12: false}) + " ";
+      time.textContent =
+        new Date(data.time).toLocaleTimeString("en-US", {hour12: false}) + " ";
       line.appendChild(time);
 
       const type = document.createElement("span");

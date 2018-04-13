@@ -33,15 +33,20 @@ function getParentLink(element) {
 }
 
 function fixLazyload(root, items) {
-  const illustImageMap = new Map(items.map((item) => [item.illustId, item.url]));
-  const userImageMap = new Map(items.map((item) => [item.userId, item.userImage]));
+  const illustImageMap = new Map(
+    items.map((item) => [item.illustId, item.url])
+  );
+  const userImageMap = new Map(
+    items.map((item) => [item.userId, item.userImage])
+  );
 
   for (const element of root.querySelectorAll(".js-lazyload")) {
     const link = getParentLink(element);
     if (link) {
       const params = new URLSearchParams(link.search);
       const imageURL =
-        illustImageMap.get(params.get("illust_id")) || userImageMap.get(params.get("id"));
+        illustImageMap.get(params.get("illust_id")) ||
+        userImageMap.get(params.get("id"));
 
       if (imageURL) {
         element.style.backgroundImage = `url("${imageURL}")`;
@@ -82,7 +87,9 @@ async function iframeFetch(url) {
 
 document.addEventListener("AutoPagerizeUserFetchRequest", async (ev) => {
   const response = await iframeFetch(ev.detail.url);
-  document.dispatchEvent(new CustomEvent("AutoPagerizeUserFetchResponse", {detail: response}));
+  document.dispatchEvent(
+    new CustomEvent("AutoPagerizeUserFetchResponse", {detail: response})
+  );
 });
 
 document.dispatchEvent(

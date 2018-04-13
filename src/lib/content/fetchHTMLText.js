@@ -44,7 +44,10 @@ async function userFetch(url) {
 }
 
 async function responseFilter(response) {
-  const eventPromise = waitForEvent(document, "AutoPagerizeResponseFilterResponse");
+  const eventPromise = waitForEvent(
+    document,
+    "AutoPagerizeResponseFilterResponse"
+  );
   document.dispatchEvent(
     new CustomEvent("AutoPagerizeResponseFilterRequest", {
       bubbles: true,

@@ -32,7 +32,10 @@ export default class SiteinfoManager {
       this._updateSiteinfo(siteinfoList);
     }, 60 * 60 * 1000);
 
-    const {siteinfoList, userSiteinfo} = await Prefs.get(["siteinfoList", "userSiteinfo"]);
+    const {siteinfoList, userSiteinfo} = await Prefs.get([
+      "siteinfoList",
+      "userSiteinfo",
+    ]);
     this._updateSiteinfo(siteinfoList);
     this._updateUserSiteinfo(userSiteinfo);
   }
