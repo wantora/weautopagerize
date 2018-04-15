@@ -88,7 +88,7 @@ See [src/userscript/pixiv.js](src/userscript/pixiv.js).
 
 ### Compatibility table
 
-| Name                               | weAutoPagerize | [AutoPagerize (userscript)](https://github.com/swdyh/autopagerize) | [AutoPagerize (webextension port)](https://addons.mozilla.org/firefox/addon/autopagerize-for-quantum/) | [uAutoPagerize](https://addons.mozilla.org/firefox/addon/uautopagerize/) |
+| Name                               | weAutoPagerize | [AutoPagerize (userscript)](https://github.com/swdyh/autopagerize) | [AutoPagerize](https://github.com/swdyh/autopagerize_for_chrome) | [uAutoPagerize](https://addons.mozilla.org/firefox/addon/uautopagerize/) |
 | ---------------------------------- |:---:|:---:|:---:|:---:|
 | HTML Classes                       | ✔  | ✔  | ✔  | ✔  |
 | SITEINFO                           | ✔  | ✔  | ✔  | ✔  |
@@ -116,7 +116,7 @@ See [src/userscript/pixiv.js](src/userscript/pixiv.js).
 | uAutoPagerize_Restart              |     |     |     | ✔  |
 
 * [AutoPagerize (userscript)](https://github.com/swdyh/autopagerize) 0.0.66
-* [AutoPagerize (webextension port)](https://addons.mozilla.org/firefox/addon/autopagerize-for-quantum/) 0.4.2
+* [AutoPagerize](https://github.com/swdyh/autopagerize_for_chrome) 0.3.9
 * [uAutoPagerize](https://addons.mozilla.org/firefox/addon/uautopagerize/) 0.1.4.1
 
 ## Build instructions
