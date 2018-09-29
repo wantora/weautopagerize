@@ -1,17 +1,17 @@
 {
   "name": "weautopagerize",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Automatically inserts the next page.",
   "homepage": "https://github.com/wantora/weautopagerize#readme",
   "bugs": {
     "url": "https://github.com/wantora/weautopagerize/issues"
   },
-  "license": "GPL-3.0+",
-  "author": "wantora <wantora@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wantora/weautopagerize.git"
   },
+  "license": "GPL-3.0+",
+  "author": "wantora <wantora@gmail.com>",
   "scripts": {
     "build": "npm run clean && npm run build:js && npm run build:ext",
     "build:ext": "web-ext build --source-dir dist",
