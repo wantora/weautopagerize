@@ -1,0 +1,8 @@
+{
+  "ignore": {
+    "json5": {
+      "versions": ">0.5.1",
+      "reason": ""
+    }
+  }
+}
