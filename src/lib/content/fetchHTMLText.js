@@ -7,6 +7,9 @@ async function nativeFetch(url) {
   const response = await fetch(url, {
     credentials: "include",
     redirect: "follow",
+    headers: {
+      "User-Agent": navigator.userAgent, // https://github.com/wantora/weautopagerize/issues/6
+    },
   });
   const responseURL = new URL(response.url);
 
