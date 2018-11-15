@@ -28,11 +28,17 @@ function getParentLink(element) {
     if (link.tagName.toLowerCase() === "a") {
       return link;
     }
-  } while ((link = link.parentNode));
+  } while ((link = link.parentNode) && link.nodeType === Node.ELEMENT_NODE);
   return null;
 }
 
 function fixLazyload(root, items) {
+  for (const element of root.querySelectorAll('div[style*="display"]')) {
+    if (element.style.display === "none") {
+      element.style.display = "";
+    }
+  }
+
   const illustImageMap = new Map(
     items.map((item) => [item.illustId, item.url])
   );
