@@ -74,6 +74,14 @@ let lastRequestTime = 0;
 
 export default async function fetchHTMLText(url, options) {
   if (!checkOrigin(url)) {
+    if (url.protocol === "http:") {
+      const newUrl = new URL(url.href);
+      newUrl.protocol = "https:";
+
+      if (checkOrigin(newUrl)) {
+        return fetchHTMLText(newUrl, options);
+      }
+    }
     throw new Error(`Same-Origin Error: ${url.href}`);
   }
 
