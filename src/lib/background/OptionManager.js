@@ -15,10 +15,22 @@ export default class OptionManager {
       opt.updater.load(element, value);
       this._validate(opt, messageElement, value);
 
-      const onChange = () => {
+      const onChange = async () => {
         const newValue = opt.updater.save(element);
-        Prefs.set({[opt.name]: newValue});
+        if (opt.permitter) {
+          try {
+            element.disabled = true;
+            if (!(await opt.permitter(newValue))) {
+              const prevValue = (await Prefs.get([opt.name]))[opt.name];
+              opt.updater.load(element, prevValue);
+              return;
+            }
+          } finally {
+            element.disabled = false;
+          }
+        }
         this._validate(opt, messageElement, newValue);
+        await Prefs.set({[opt.name]: newValue});
       };
 
       let timeoutId;

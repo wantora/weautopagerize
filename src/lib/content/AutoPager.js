@@ -163,6 +163,23 @@ export default class AutoPager {
       new Event("GM_AutoPagerizeNextPageLoaded", {bubbles: true})
     );
 
+    if (this._prefs.addHistory) {
+      const title = this._doc.querySelector("title");
+      browser.runtime.sendMessage({
+        type: "addBrowserHistory",
+        value: {
+          url: this._url.href,
+          title: title && title.textContent,
+        },
+      });
+    }
+
+    PageInfo.log({
+      type: "insert",
+      url: this._url.href,
+      pageNo: this._pageNo,
+    });
+
     return true;
   }
   _terminateInternal() {
@@ -202,11 +219,6 @@ export default class AutoPager {
         });
 
         if (nextAutoPager.insertPageElements()) {
-          PageInfo.log({
-            type: "insert",
-            url: nextAutoPager.url.href,
-            pageNo: nextAutoPager.pageNo,
-          });
           if (nextAutoPager.test()) {
             nextAutoPager.start();
             return;

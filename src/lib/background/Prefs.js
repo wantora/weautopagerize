@@ -37,4 +37,5 @@ export default new Prefs({
   userSiteinfo: "",
   excludeList: [],
   openLinkInNewTab: true,
+  addHistory: false,
 });

@@ -11,6 +11,9 @@
   "options_openLinkInNewTab_label": {
     "message": "挿入されたリンクを新しいタブで開く"
   },
+  "options_addHistory_label": {
+    "message": "継ぎ足されたページをブラウザの履歴に追加"
+  },
   "options_excludeList_label": {
     "message": "除外 URL"
   },

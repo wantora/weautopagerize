@@ -11,6 +11,9 @@
   "options_openLinkInNewTab_label": {
     "message": "Open the inserted link in a new tab"
   },
+  "options_addHistory_label": {
+    "message": "Add an inserted page to the browser history"
+  },
   "options_excludeList_label": {
     "message": "Exclude URL"
   },

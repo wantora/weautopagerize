@@ -57,5 +57,8 @@
   ],
   "options_ui": {
     "page": "options.html"
-  }
+  },
+  "optional_permissions": [
+    "history"
+  ]
 }

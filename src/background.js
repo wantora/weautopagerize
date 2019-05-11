@@ -13,15 +13,13 @@ import updateButtonState from "./lib/background/updateButtonState";
     browser.runtime.onMessage.addListener(async (message, sender) => {
       if (message) {
         if (message.type === "getData") {
-          const {openLinkInNewTab} = await Prefs.get(["openLinkInNewTab"]);
+          const prefs = await Prefs.get(["openLinkInNewTab", "addHistory"]);
 
           const urlStr = message.value;
           const data = {
             userActive: !excludeList.check(urlStr),
             siteinfo: siteinfoManager.getSiteinfo(urlStr),
-            prefs: {
-              openLinkInNewTab,
-            },
+            prefs: prefs,
           };
           return data;
         } else if (message.type === "setButtonState") {
@@ -30,6 +28,8 @@ import updateButtonState from "./lib/background/updateButtonState";
           }
         } else if (message.type === "forceUpdateSiteinfo") {
           return siteinfoManager.forceUpdateSiteinfo();
+        } else if (message.type === "addBrowserHistory") {
+          return browser.history.addUrl(message.value);
         }
       }
       return null;

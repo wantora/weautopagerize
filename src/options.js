@@ -55,11 +55,24 @@ const UserSiteinfoValidator = (value) => {
   return message;
 };
 
+const AddHistoryPermitter = async (value) => {
+  if (value) {
+    return browser.permissions.request({permissions: ["history"]});
+  } else {
+    return true;
+  }
+};
+
 I18n.initHTML();
 
 const siteinfoCache = new SiteinfoCache();
 const optionManager = new OptionManager([
   {name: "openLinkInNewTab", updater: BooleanCheckbox},
+  {
+    name: "addHistory",
+    updater: BooleanCheckbox,
+    permitter: AddHistoryPermitter,
+  },
   {
     name: "excludeList",
     updater: ArrayTextarea,
