@@ -29,7 +29,9 @@ import updateButtonState from "./lib/background/updateButtonState";
         } else if (message.type === "forceUpdateSiteinfo") {
           return siteinfoManager.forceUpdateSiteinfo();
         } else if (message.type === "addBrowserHistory") {
-          return browser.history.addUrl(message.value);
+          if (!sender.tab.incognito) {
+            return browser.history.addUrl(message.value);
+          }
         }
       }
       return null;
