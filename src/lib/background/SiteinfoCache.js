@@ -1,4 +1,4 @@
-import Prefs from "./Prefs";
+import Prefs, {WEDATA_URL} from "./Prefs";
 
 const CACHE_MAX_AGE = 24 * 60 * 60 * 1000;
 
@@ -32,6 +32,25 @@ export default class SiteinfoCache {
             updateFlag = true;
           } catch (error) {
             console.error(error); // eslint-disable-line no-console
+
+            if (
+              url === WEDATA_URL &&
+              !Object.prototype.hasOwnProperty.call(siteinfoCache, url)
+            ) {
+              try {
+                const localData = await (await fetch(
+                  browser.runtime.getURL("wedata-items.json")
+                )).json();
+
+                siteinfoCache[url] = {
+                  data: localData,
+                  time: new Date(0),
+                };
+                updateFlag = true;
+              } catch (err2) {
+                console.error(err2); // eslint-disable-line no-console
+              }
+            }
           }
         })
     );
