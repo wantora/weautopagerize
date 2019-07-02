@@ -84,7 +84,6 @@ export default class AutoPager {
         if (newValue !== oldValue) {
           if (newValue) {
             this._scrollListener.enable();
-            this._onScroll();
           } else {
             this._scrollListener.disable();
           }
@@ -124,7 +123,6 @@ export default class AutoPager {
 
     if (PageInfo.data.userActive) {
       this._scrollListener.enable();
-      this._onScroll();
     }
   }
   terminate() {

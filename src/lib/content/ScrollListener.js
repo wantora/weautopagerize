@@ -1,9 +1,19 @@
+let globalScrolled = false;
+
 export default class ScrollListener {
   constructor(callback) {
     this._callback = callback;
 
     let timeoutId = null;
-    this._listener = () => {
+    this._listener = (ev) => {
+      if (!globalScrolled) {
+        if (ev.type === "scroll") {
+          globalScrolled = true;
+        } else {
+          return;
+        }
+      }
+
       if (timeoutId) {
         clearTimeout(timeoutId);
       }
@@ -21,6 +31,9 @@ export default class ScrollListener {
         passive: true,
         once: true,
       });
+    }
+    if (globalScrolled) {
+      this._callback.call(null);
     }
   }
   disable() {
