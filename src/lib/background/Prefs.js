@@ -41,4 +41,5 @@ export default new Prefs({
   excludeList: [],
   openLinkInNewTab: true,
   addHistory: false,
+  globalDisable: false,
 });

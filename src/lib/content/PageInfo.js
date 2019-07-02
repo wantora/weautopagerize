@@ -8,6 +8,7 @@ class PageInfo {
       logList: [],
       logListKey: Date.now(),
       userActive: true,
+      url: location.href,
     };
     this._listenerInitialized = false;
     this._portInitialized = false;

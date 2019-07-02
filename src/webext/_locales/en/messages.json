@@ -5,6 +5,12 @@
   "browserAction_label": {
     "message": "weAutoPagerize"
   },
+  "browserAction_menu_globalDisable": {
+    "message": "Disable all pages"
+  },
+  "browserAction_menu_tabDisable": {
+    "message": "Disable the current tab"
+  },
   "options_options_legend": {
     "message": "Options"
   },

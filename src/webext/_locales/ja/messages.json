@@ -5,6 +5,12 @@
   "browserAction_label": {
     "message": "weAutoPagerize"
   },
+  "browserAction_menu_globalDisable": {
+    "message": "全てのページで無効化"
+  },
+  "browserAction_menu_tabDisable": {
+    "message": "このタブで無効化"
+  },
   "options_options_legend": {
     "message": "オプション"
   },

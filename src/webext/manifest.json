@@ -10,7 +10,7 @@
   "applications": {
     "gecko": {
       "id": "weautopagerize@wantora.github.io",
-      "strict_min_version": "58.0"
+      "strict_min_version": "60.0"
     }
   },
   "default_locale": "en",
@@ -20,7 +20,9 @@
   "permissions": [
     "*://*/*",
     "storage",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "menus",
+    "sessions"
   ],
   "background": {
     "scripts": ["background.js"]
