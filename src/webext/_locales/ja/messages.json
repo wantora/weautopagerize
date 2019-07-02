@@ -23,6 +23,9 @@
   "options_userSiteinfo_label": {
     "message": "ユーザー SITEINFO"
   },
+  "options_userSiteinfo_open": {
+    "message": "開く"
+  },
   "options_siteinfo_legend": {
     "message": "SITEINFO"
   },

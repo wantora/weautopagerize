@@ -1,0 +1,28 @@
+@import "base.css";
+
+html, body {
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+textarea {
+  font-size: inherit;
+  flex-grow: 1;
+}
+
+.messageBox {
+  background-color: #ffdfdf;
+  color: #333;
+  font-style: italic;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  font-family: monospace;
+  -moz-user-select: text;
+  user-select: text;
+}

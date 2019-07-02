@@ -2,8 +2,6 @@ import I18n from "./lib/I18n";
 import OptionManager from "./lib/background/OptionManager";
 import SiteinfoCache from "./lib/background/SiteinfoCache";
 import parseGlobList from "./lib/parseGlobList";
-import buildSiteinfo from "./lib/siteinfo/buildSiteinfo";
-import parseUserSiteinfo from "./lib/siteinfo/parseUserSiteinfo";
 
 const BooleanCheckbox = {
   load(element, value) {
@@ -23,15 +21,6 @@ const ArrayTextarea = {
   },
 };
 
-const StringTextarea = {
-  load(element, value) {
-    element.value = value;
-  },
-  save(element) {
-    return element.value;
-  },
-};
-
 const ExcludeListValidator = (value) => {
   try {
     parseGlobList(value);
@@ -39,20 +28,6 @@ const ExcludeListValidator = (value) => {
     return `${error.name}: ${error.message}\n`;
   }
   return "";
-};
-
-const UserSiteinfoValidator = (value) => {
-  let message = "";
-  try {
-    buildSiteinfo(parseUserSiteinfo(value), {
-      errorCallback(error) {
-        message += `${error.name}: ${error.message}\n`;
-      },
-    });
-  } catch (error) {
-    message += `${error.name}: ${error.message}\n`;
-  }
-  return message;
 };
 
 const AddHistoryPermitter = async (value) => {
@@ -78,16 +53,14 @@ const optionManager = new OptionManager([
     updater: ArrayTextarea,
     validator: ExcludeListValidator,
   },
-  {
-    name: "userSiteinfo",
-    updater: StringTextarea,
-    validator: UserSiteinfoValidator,
-  },
 ]);
 optionManager.init();
 
 const lastUpdatedTimeElement = document.getElementById("lastUpdatedTime");
 const updateSiteinfoButton = document.getElementById("updateSiteinfoButton");
+const openUserSiteinfoButton = document.getElementById(
+  "openUserSiteinfoButton"
+);
 
 async function updateLastUpdatedTime() {
   const infos = await siteinfoCache.getInfo();
@@ -116,6 +89,10 @@ async function updateLastUpdatedTime() {
 updateSiteinfoButton.addEventListener("click", async () => {
   await browser.runtime.sendMessage({type: "forceUpdateSiteinfo"});
   updateLastUpdatedTime();
+});
+
+openUserSiteinfoButton.addEventListener("click", () => {
+  open(browser.runtime.getURL("user-siteinfo-editor.html"));
 });
 
 updateLastUpdatedTime();
