@@ -93,16 +93,22 @@ async function updateLastUpdatedTime() {
   const infos = await siteinfoCache.getInfo();
   lastUpdatedTimeElement.textContent = "";
 
-  for (const {url, time} of infos) {
+  for (const {url, count, time} of infos) {
     const anchor = document.createElement("a");
     anchor.href = url;
     anchor.textContent = anchor;
 
     const element = document.createElement("div");
     const timeStr = new Date(time).toLocaleString([], {hour12: false});
-    element.appendChild(document.createTextNode(`${timeStr} (`));
     element.appendChild(anchor);
-    element.appendChild(document.createTextNode(")"));
+    element.appendChild(
+      document.createTextNode(
+        `: ${timeStr} (${browser.i18n.getMessage(
+          "options_siteinfoCount",
+          count
+        )})`
+      )
+    );
     lastUpdatedTimeElement.appendChild(element);
   }
 }

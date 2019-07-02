@@ -14,24 +14,27 @@ export default class SiteinfoCache {
       }
     }
 
-    for (const url of urls) {
-      if (
-        forceUpdate ||
-        !Object.prototype.hasOwnProperty.call(siteinfoCache, url) ||
-        Date.now() >= siteinfoCache[url].time + CACHE_MAX_AGE
-      ) {
-        try {
-          const newData = await updateFn(url);
-          siteinfoCache[url] = {
-            data: newData,
-            time: Date.now(),
-          };
-          updateFlag = true;
-        } catch (error) {
-          console.error(error); // eslint-disable-line no-console
-        }
-      }
-    }
+    await Promise.all(
+      urls
+        .filter(
+          (url) =>
+            forceUpdate ||
+            !Object.prototype.hasOwnProperty.call(siteinfoCache, url) ||
+            Date.now() >= siteinfoCache[url].time + CACHE_MAX_AGE
+        )
+        .map(async (url) => {
+          try {
+            const newData = await updateFn(url);
+            siteinfoCache[url] = {
+              data: newData,
+              time: Date.now(),
+            };
+            updateFlag = true;
+          } catch (error) {
+            console.error(error); // eslint-disable-line no-console
+          }
+        })
+    );
 
     if (updateFlag) {
       await Prefs.set({siteinfoCache});
@@ -48,6 +51,10 @@ export default class SiteinfoCache {
   async getInfo() {
     const {siteinfoCache} = await Prefs.get(["siteinfoCache"]);
 
-    return Object.entries(siteinfoCache).map(([url, {time}]) => ({url, time}));
+    return Object.entries(siteinfoCache).map(([url, {data, time}]) => ({
+      url,
+      count: parseInt(data && data.length, 10),
+      time,
+    }));
   }
 }

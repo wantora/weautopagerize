@@ -29,6 +29,15 @@
   "options_lastUpdatedTime_label": {
     "message": "最終更新日時"
   },
+  "options_siteinfoCount": {
+    "message": "$COUNT$ アイテム",
+    "placeholders": {
+      "count" : {
+        "content" : "$1",
+        "example" : "1000"
+      }
+    }
+  },
   "options_updateSiteinfoButton_label": {
     "message": "SITEINFO を更新"
   },

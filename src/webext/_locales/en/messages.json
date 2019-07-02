@@ -29,6 +29,15 @@
   "options_lastUpdatedTime_label": {
     "message": "Last updated time"
   },
+  "options_siteinfoCount": {
+    "message": "$COUNT$ items",
+    "placeholders": {
+      "count" : {
+        "content" : "$1",
+        "example" : "1000"
+      }
+    }
+  },
   "options_updateSiteinfoButton_label": {
     "message": "Update SITEINFO"
   },
