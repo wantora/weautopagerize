@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "weAutoPagerize",
   "description": "__MSG_extension_description__",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "developer": {
     "name": "wantora",
     "url": "https://github.com/wantora/weautopagerize"
