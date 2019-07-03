@@ -18,6 +18,7 @@ globals:
 overrides:
   - files:
       - webpack.config.js
+      - scripts/*.js
     parserOptions:
       sourceType: script
     env:

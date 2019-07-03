@@ -20,6 +20,7 @@
     "format": "sort-package-json && eslint --fix .",
     "lint": "web-ext lint --source-dir dist && eslint .",
     "start": "web-ext run --source-dir dist",
+    "version": "node ./scripts/version.js",
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {

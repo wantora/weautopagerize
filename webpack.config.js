@@ -1,13 +1,9 @@
 "use strict";
-
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 const glob = require("glob");
-const fetch = require("node-fetch");
-const fs = require("fs");
 
 const DIST_PATH = path.join(__dirname, "dist");
-const WEDATA_URL = "http://wedata.net/databases/AutoPagerize/items_all.json";
 
 module.exports = async (env, argv) => {
   const entry = {};
@@ -54,15 +50,6 @@ module.exports = async (env, argv) => {
 
   if (argv.mode === "development") {
     config.devtool = "inline-source-map";
-  }
-
-  try {
-    const wedataData = await (await fetch(WEDATA_URL)).text();
-    fs.mkdirSync(DIST_PATH, {recursive: true});
-    fs.writeFileSync(path.join(DIST_PATH, "wedata-items.json"), wedataData);
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
   }
 
   return config;
