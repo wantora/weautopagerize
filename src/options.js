@@ -92,7 +92,10 @@ updateSiteinfoButton.addEventListener("click", async () => {
 });
 
 openUserSiteinfoButton.addEventListener("click", () => {
-  open(browser.runtime.getURL("user-siteinfo-editor.html"));
+  open(
+    browser.runtime.getURL("user-siteinfo-editor.html"),
+    "weautopagerize-user-siteinfo-editor"
+  );
 });
 
 updateLastUpdatedTime();
