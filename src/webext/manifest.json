@@ -45,7 +45,7 @@
         "*://matome.naver.jp/topic/*"
       ],
       "js": ["userscript/naver-matome.js"],
-      "run_at": "document_end"
+      "run_at": "document_idle"
     },
     {
       "matches": [
