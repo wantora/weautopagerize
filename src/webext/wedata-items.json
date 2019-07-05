@@ -1,5 +1,34 @@
 [
 {
+  "resource_url": "http://wedata.net/items/82205",
+  "created_by": "t_f_m",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "JR東日本 研究開発ストーリー Suica誕生までの軌跡",
+  "data": {
+    "exampleUrl": "https://www.jreast.co.jp/development/story/p3.html",
+    "nextLink": "//a[contains(img/@src, \"btn_next\")]",
+    "url": "^https://www\\.jreast\\.co\\.jp/development/story/",
+    "pageElement": "//img[@src=\"img/img_suica.jpg\"]/ancestor::tr[1]/following-sibling::tr[1]/following-sibling::tr[./following-sibling::tr/following-sibling::tr]"
+  },
+  "created_at": "2019-07-05T16:16:04+09:00",
+  "updated_at": "2019-07-05T16:36:14+09:00"
+},
+{
+  "created_by": "t_f_m",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "ドン・キホーテ",
+  "data": {
+    "exampleUrl": "http://www.donki.com/j-kakaku/product/list.php?cid=26",
+    "insertBefore": "",
+    "nextLink": "//a[contains(concat(\" \",@class,\" \"),\" pager__btn--next \")]",
+    "pageElement": "//div[contains(concat(\" \",@class,\" \"),\" grid \")]/a",
+    "url": "^https?://www\\.donki\\.com/j-kakaku/product/list\\.php"
+  },
+  "created_at": "2019-07-05T15:31:26+09:00",
+  "resource_url": "http://wedata.net/items/82204",
+  "updated_at": "2019-07-05T15:31:26+09:00"
+},
+{
   "resource_url": "http://wedata.net/items/82200",
   "created_by": "brib",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
