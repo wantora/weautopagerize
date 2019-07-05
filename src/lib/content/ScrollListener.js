@@ -1,5 +1,23 @@
 let globalScrolled = false;
 
+function checkScrollable() {
+  if (
+    document.scrollingElement.scrollHeight ===
+    document.scrollingElement.clientHeight
+  ) {
+    return false;
+  }
+
+  let ele = document.body;
+  while (ele.nodeType === Node.ELEMENT_NODE) {
+    if (window.getComputedStyle(ele)["overflow-y"] === "hidden") {
+      return false;
+    }
+    ele = ele.parentNode;
+  }
+  return true;
+}
+
 export default class ScrollListener {
   constructor(callback) {
     this._callback = callback;
@@ -7,7 +25,10 @@ export default class ScrollListener {
     let timeoutId = null;
     this._listener = (ev) => {
       if (!globalScrolled) {
-        if (ev.type === "scroll") {
+        if (
+          ev.type === "scroll" ||
+          (ev.type === "resize" && !checkScrollable())
+        ) {
           globalScrolled = true;
         } else {
           return;
@@ -22,24 +43,30 @@ export default class ScrollListener {
         this._callback.call(null);
       }, 200);
     };
+    this._initialCall = () => {
+      if (!globalScrolled && !checkScrollable()) {
+        globalScrolled = true;
+      }
+      if (globalScrolled) {
+        this._callback.call(null);
+      }
+    };
   }
   enable() {
     window.addEventListener("scroll", this._listener, {passive: true});
     window.addEventListener("resize", this._listener, {passive: true});
     if (document.readyState !== "complete") {
-      window.addEventListener("load", this._listener, {
+      window.addEventListener("load", this._initialCall, {
         passive: true,
         once: true,
       });
     }
-    if (globalScrolled) {
-      this._callback.call(null);
-    }
+    this._initialCall();
   }
   disable() {
     window.removeEventListener("scroll", this._listener, {passive: true});
     window.removeEventListener("resize", this._listener, {passive: true});
-    window.removeEventListener("load", this._listener, {
+    window.removeEventListener("load", this._initialCall, {
       passive: true,
       once: true,
     });
