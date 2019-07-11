@@ -11,6 +11,24 @@ const SITEINFO_KEYS = [
   "resource_url",
 ];
 
+function createLogLineElement(time, type) {
+  const lineEle = document.createElement("div");
+  lineEle.classList.add("line");
+
+  const timeEle = document.createElement("span");
+  timeEle.classList.add("time");
+  timeEle.textContent =
+    new Date(time).toLocaleTimeString("en-US", {hour12: false}) + " ";
+  lineEle.appendChild(timeEle);
+
+  const typeEle = document.createElement("span");
+  typeEle.classList.add("type");
+  typeEle.textContent = type;
+  lineEle.appendChild(typeEle);
+
+  return lineEle;
+}
+
 class PageInfoPanel {
   constructor() {
     this._tabId = null;
@@ -71,7 +89,7 @@ class PageInfoPanel {
       if (data.siteinfo) {
         this._updateSiteinfo(data.siteinfo);
       }
-      this._updateLogList(data.logList, data.logListKey);
+      this._updateLogList(data);
     });
   }
   _onUserActiveButtonClick() {
@@ -143,9 +161,23 @@ class PageInfoPanel {
       }
     });
   }
-  _updateLogList(logList, logListKey) {
+  _updateLogList({logList, logListKey, url}) {
     if (logListKey !== this._logListKey) {
       this._logListElement.textContent = "";
+
+      {
+        const line = createLogLineElement(logListKey, "info");
+        const infoEle = document.createElement("span");
+        infoEle.classList.add("info");
+        const data = {url: url, version: browser.runtime.getManifest().version};
+        infoEle.textContent = JSON.stringify(data);
+        infoEle.title = JSON.stringify(data, null, 2);
+
+        line.appendChild(document.createTextNode(": "));
+        line.appendChild(infoEle);
+        this._logListElement.appendChild(line);
+      }
+
       this._logListKey = logListKey;
       this._logListLength = 0;
     }
@@ -155,19 +187,7 @@ class PageInfoPanel {
         return;
       }
 
-      const line = document.createElement("div");
-      line.classList.add("line");
-
-      const time = document.createElement("span");
-      time.classList.add("time");
-      time.textContent =
-        new Date(data.time).toLocaleTimeString("en-US", {hour12: false}) + " ";
-      line.appendChild(time);
-
-      const type = document.createElement("span");
-      type.classList.add("type");
-      type.textContent = data.type;
-      line.appendChild(type);
+      const line = createLogLineElement(data.time, data.type);
 
       if (data.type === "test") {
         const siteinfo = document.createElement("a");
@@ -189,13 +209,13 @@ class PageInfoPanel {
         line.appendChild(document.createTextNode(": "));
         line.appendChild(siteinfo);
       } else if (data.type === "loading") {
-        const url = document.createElement("a");
-        url.classList.add("url");
-        url.href = data.url;
-        url.title = data.url;
-        url.textContent = data.url;
+        const urlEle = document.createElement("a");
+        urlEle.classList.add("url");
+        urlEle.href = data.url;
+        urlEle.title = data.url;
+        urlEle.textContent = data.url;
         line.appendChild(document.createTextNode(": "));
-        line.appendChild(url);
+        line.appendChild(urlEle);
       } else if (data.type === "insert") {
         const pageNo = document.createElement("span");
         pageNo.classList.add("pageNo");
