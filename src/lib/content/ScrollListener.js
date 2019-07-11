@@ -21,8 +21,7 @@ function checkScrollable() {
 export default class ScrollListener {
   constructor(callback) {
     this._callback = callback;
-
-    let timeoutId = null;
+    this._timeoutId = null;
     this._listener = (ev) => {
       if (!globalScrolled) {
         if (
@@ -35,11 +34,11 @@ export default class ScrollListener {
         }
       }
 
-      if (timeoutId) {
-        clearTimeout(timeoutId);
+      if (this._timeoutId) {
+        clearTimeout(this._timeoutId);
       }
-      timeoutId = setTimeout(() => {
-        timeoutId = null;
+      this._timeoutId = setTimeout(() => {
+        this._timeoutId = null;
         this._callback.call(null);
       }, 200);
     };
@@ -70,5 +69,8 @@ export default class ScrollListener {
       passive: true,
       once: true,
     });
+    if (this._timeoutId) {
+      clearTimeout(this._timeoutId);
+    }
   }
 }
