@@ -1,5 +1,19 @@
 [
 {
+  "resource_url": "http://wedata.net/items/82206",
+  "created_by": "t_f_m",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "MONEY PLUS",
+  "data": {
+    "exampleUrl": "https://media.moneyforward.com/articles/1326",
+    "nextLink": "//a[contains(concat(\" \",@class,\" \"),\" current \")]/following-sibling::a[not(contains(@class,\"disabled\"))]",
+    "url": "^https://media\\.moneyforward\\.com/articles/",
+    "pageElement": "//div[@class=\"article-box\"]/div[@class=\"mp-article-body\" or @class=\"related-articles\"]"
+  },
+  "created_at": "2019-07-10T17:42:34+09:00",
+  "updated_at": "2019-07-10T17:45:58+09:00"
+},
+{
   "resource_url": "http://wedata.net/items/82205",
   "created_by": "t_f_m",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
@@ -12216,19 +12230,19 @@
 },
 {
   "resource_url": "http://wedata.net/items/77631",
-  "name": "Microsoft Blog",
   "created_by": "wOxxOm=-",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2019-05-29T10:53:06+09:00",
+  "name": "Microsoft Blog",
   "data": {
-    "Stylus": ".autopagerize_page_separator~article [data-lazy-src]{display:block !important;}",
     "exampleUrl": "https://devblogs.microsoft.com/oldnewthing/",
-    "bookmarklet": "Array.prototype.forEach.call(document.querySelectorAll('img'), function(img) { var lazySrc = img.hasAttribute('data-src') ? img.getAttribute('data-src') : img.getAttribute('data-lazy-src'); if (lazySrc) { img.src = lazySrc;} });",
+    "nextLink": "//a[contains(@class,\"next page-link\")]",
+    "Stylus": ".autopagerize_page_separator~article [data-lazy-src]{display:block !important;}",
     "url": "^https://devblogs\\.microsoft\\.com/",
     "pageElement": "id('most-recent')/article",
-    "nextLink": "//link[@rel=\"next\"]"
+    "bookmarklet": "Array.prototype.forEach.call(document.querySelectorAll('img'), function(img) { var lazySrc = img.hasAttribute('data-src') ? img.getAttribute('data-src') : img.getAttribute('data-lazy-src'); if (lazySrc) { img.src = lazySrc;} });"
   },
-  "created_at": "2015-11-06T08:18:44+09:00"
+  "created_at": "2015-11-06T08:18:44+09:00",
+  "updated_at": "2019-07-08T08:37:19+09:00"
 },
 {
   "resource_url": "http://wedata.net/items/77630",
@@ -41601,18 +41615,18 @@
 },
 {
   "resource_url": "http://wedata.net/items/32523",
-  "name": "eMAG.pl",
   "created_by": "toshi",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2017-02-18T14:21:11+09:00",
+  "name": "eMAG.pl",
   "data": {
-    "Stylish": "Array.prototype.forEach.call(document.querySelectorAll('img'), function(img) { var lazySrc = img.hasAttribute('data-src') ? img.getAttribute('data-src') : img.getAttribute('data-lazy-src'); if (lazySrc) { img.src = lazySrc;} });",
-    "exampleUrl": "http://www.emag.pl/telewizory/c",
+    "exampleUrl": "https://www.emag.pl/telewizory/c",
+    "nextLink": "//link[@rel='next']",
     "url": "^https?://(www\\.)?emag\\.pl/",
-    "pageElement": "id('products-holder')/*",
-    "nextLink": "//link[@rel=\"next\"]"
+    "pageElement": "id('card_grid')/*",
+    "bookmarklet": "Array.prototype.forEach.call(document.querySelectorAll('img'), function(img) { var lazySrc = img.hasAttribute('data-src') ? img.getAttribute('data-src') : img.getAttribute('data-lazy-src'); if (lazySrc) { img.src = lazySrc;} });"
   },
-  "created_at": "2010-05-11T00:56:10+09:00"
+  "created_at": "2010-05-11T00:56:10+09:00",
+  "updated_at": "2019-07-08T08:40:37+09:00"
 },
 {
   "resource_url": "http://wedata.net/items/32522",
