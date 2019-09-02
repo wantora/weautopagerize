@@ -1,5 +1,252 @@
 [
 {
+  "resource_url": "http://wedata.net/items/82231",
+  "created_by": "t_f_m",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "macaroni",
+  "data": {
+    "exampleUrl": "https://macaro-ni.jp/4211",
+    "insertBefore": "",
+    "nextLink": "//a[contains(concat(\" \",@class,\" \"),\" ga_next \")]",
+    "pageElement": "//article[@class=\"article-wrapper\"]/div[starts-with(concat(\" \",@class),\" aw-\")]",
+    "url": "^https://macaro-ni\\.jp/"
+  },
+  "created_at": "2019-09-02T21:58:54+09:00",
+  "updated_at": "2019-09-02T21:58:54+09:00"
+},
+{
+  "resource_url": "http://wedata.net/items/82228",
+  "created_by": "solact",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "GSMArena.com",
+  "data": {
+    "exampleUrl": "https://www.gsmarena.com/sony_xperia_1-review-1941.php",
+    "insertBefore": "",
+    "nextLink": "//a[@class=\"pages-next\"]",
+    "pageElement": "//div[@id=\"review-body\"]",
+    "url": "https://www.gsmarena.com/.+\\.php"
+  },
+  "created_at": "2019-09-01T15:40:55+09:00",
+  "updated_at": "2019-09-01T15:40:55+09:00"
+},
+{
+  "resource_url": "http://wedata.net/items/82227",
+  "created_by": "t_f_m",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "ライブドアニュース 特集・インタビュー",
+  "data": {
+    "exampleUrl": "https://news.livedoor.com/article/detail/16954003/",
+    "nextLink": "//li[@class='pager-next']/a",
+    "url": "^https://news\\.livedoor\\.com/article/detail/",
+    "pageElement": "//span[@itemprop='articleBody']/ul[@class='pager-item']/preceding-sibling::*"
+  },
+  "created_at": "2019-08-29T16:54:45+09:00",
+  "updated_at": "2019-09-01T01:29:02+09:00"
+},
+{
+  "resource_url": "http://wedata.net/items/82226",
+  "created_by": "jigendaddy_be",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "Fun Pay! ",
+  "data": {
+    "exampleUrl": "https://card-media.infoseek.co.jp/",
+    "insertBefore": "",
+    "nextLink": "//link[@rel=\"next\"]",
+    "pageElement": "id(\"paginate\")/preceding-sibling::div",
+    "url": "^https://card-media\\.infoseek\\.co\\.jp/"
+  },
+  "created_at": "2019-08-26T14:25:51+09:00",
+  "updated_at": "2019-08-26T14:25:51+09:00"
+},
+{
+  "created_by": "かいらいぺるくん",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "日経 xTECH Active",
+  "data": {
+    "exampleUrl": "https://active.nikkeibp.co.jp/atclact/active/15/070800078/041000098/\r\nhttps://active.nikkeibp.co.jp/atclact/active/18/053100114/060300002/",
+    "nextLink": "//footer/nav[@class='pagenation']//li[@class='next']/a",
+    "url": "^https://active\\.nikkeibp\\.co\\.jp/",
+    "pageElement": "//div[@class='articleBody']"
+  },
+  "created_at": "2019-08-13T14:03:28+09:00",
+  "resource_url": "http://wedata.net/items/82223",
+  "updated_at": "2019-08-14T18:27:23+09:00"
+},
+{
+  "resource_url": "http://wedata.net/items/82221",
+  "created_by": "jigendaddy_be",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "メルカリマガジン",
+  "data": {
+    "exampleUrl": "https://magazine.mercari.com/hobby",
+    "nextLink": "//link[@rel=\"next\"]",
+    "url": "^https://magazine\\.mercari\\.com/",
+    "pageElement": "//ul[@class=\"list\"]/li"
+  },
+  "created_at": "2019-08-10T18:36:58+09:00",
+  "updated_at": "2019-08-10T18:45:48+09:00"
+},
+{
+  "resource_url": "http://wedata.net/items/82220",
+  "created_by": "t_f_m",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "Webオートバイ",
+  "data": {
+    "exampleUrl": "https://www.autoby.jp/_ct/17284485",
+    "insertBefore": "",
+    "nextLink": "//div[@class='content-paging-next']/a",
+    "pageElement": "//div[@class='content-body']/div[contains(concat(' ',@class,' '),' article ')]",
+    "url": "^https://www\\.autoby\\.jp/"
+  },
+  "created_at": "2019-08-09T22:47:59+09:00",
+  "updated_at": "2019-08-09T22:47:59+09:00"
+},
+{
+  "resource_url": "http://wedata.net/items/82219",
+  "created_by": "t_f_m",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "TOPPA!!",
+  "data": {
+    "exampleUrl": "https://toppamedia.com/interview-2019-8-akatsuki-uni/2/",
+    "insertBefore": "",
+    "nextLink": "//p[@class=\"page-links\"]/span/following-sibling::a",
+    "pageElement": "//div[@class=\"entry-content\"]/div[@class=\"entry-the-content\"]",
+    "url": "^https://toppamedia\\.com/"
+  },
+  "created_at": "2019-08-09T22:46:14+09:00",
+  "updated_at": "2019-08-09T22:46:14+09:00"
+},
+{
+  "resource_url": "http://wedata.net/items/82218",
+  "created_by": "hatenaZZZ",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "DailyNK Japan（デイリーNKジャパン）",
+  "data": {
+    "exampleUrl": "https://dailynkjp.com/archives/5294\r\nhttps://dailynk.jp/archives/125421",
+    "nextLink": "//li[@class='active_page']/following-sibling::li/a[@href]",
+    "url": "^https?://dailynk\\.?jp(\\.com)?/",
+    "pageElement": "//div[@class='entry-content']/node()[following-sibling::div/@class='wp_page_numbers'][not(@class='clear mb-30' or @class='wp_social_bookmarking_light')]"
+  },
+  "created_at": "2019-08-08T13:23:23+09:00",
+  "updated_at": "2019-08-09T23:57:58+09:00"
+},
+{
+  "resource_url": "http://wedata.net/items/82217",
+  "created_by": "mygrove",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "Ancestry",
+  "data": {
+    "nextLink": "//*[@id=\"pageSets\"]/ul/li[5]",
+    "url": "(http:\\/\\/|https:\\/\\/)(?:www|search)\\.ancestry(library|libraryedition)?\\.(?:c(?:a|o(?:m|\\.(?:jp|uk)))|de|fr)(\\.au)?",
+    "pageElement": "//div[@class='tablerow record']"
+  },
+  "created_at": "2019-08-05T17:49:40+09:00",
+  "updated_at": "2019-08-05T20:58:01+09:00"
+},
+{
+  "resource_url": "http://wedata.net/items/82215",
+  "created_by": "t_f_m",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "イーストパーク通販",
+  "data": {
+    "exampleUrl": "https://shop-ep.net/trifle_stage/",
+    "insertBefore": "",
+    "nextLink": "//a[contains(img/@src,\"next\")]",
+    "pageElement": "id(\"itemtable\")/li",
+    "url": "^https://shop-ep.net/"
+  },
+  "created_at": "2019-07-26T18:31:23+09:00",
+  "updated_at": "2019-07-26T18:31:23+09:00"
+},
+{
+  "resource_url": "http://wedata.net/items/82214",
+  "created_by": "Tanookirby",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "Prop Archives",
+  "data": {
+    "exampleUrl": "https://www.proparchives.com/listing-category/action/",
+    "insertBefore": "",
+    "nextLink": "//li[@class='active']/following-sibling::li[1]/a",
+    "pageElement": "//div[@class='wlt_search_results list_style']/div[starts-with(@class,'itemdata')]",
+    "url": "^https://(www\\.)?proparchives\\.com/."
+  },
+  "created_at": "2019-07-25T10:17:20+09:00",
+  "updated_at": "2019-07-25T10:17:20+09:00"
+},
+{
+  "resource_url": "http://wedata.net/items/82213",
+  "created_by": "Tanookirby",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "Getty Images",
+  "data": {
+    "exampleUrl": "https://www.gettyimages.ca/photos/food?phrase=food&sort=best#license",
+    "insertBefore": "",
+    "nextLink": "//a[@rel='next']",
+    "pageElement": "//div[@class='search-content__gallery-assets']/*",
+    "url": "^https://(www\\.)?gettyimages\\.ca/."
+  },
+  "created_at": "2019-07-24T10:04:00+09:00",
+  "updated_at": "2019-07-24T10:04:00+09:00"
+},
+{
+  "resource_url": "http://wedata.net/items/82212",
+  "created_by": "t_f_m",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "WoltLab Forum",
+  "data": {
+    "exampleUrl": "https://www.camp-firefox.de/forum/forum/15-firefox-allgemein/",
+    "insertBefore": "",
+    "nextLink": "//li[@class=\"active\"]/following-sibling::li/a",
+    "pageElement": "id(\"content\")/div/ol/li",
+    "url": "^https://www\\.camp-firefox\\.de/forum/"
+  },
+  "created_at": "2019-07-22T16:32:30+09:00",
+  "updated_at": "2019-07-22T16:32:30+09:00"
+},
+{
+  "resource_url": "http://wedata.net/items/82210",
+  "created_by": "t_f_m",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "コロコロオンライン",
+  "data": {
+    "exampleUrl": "https://corocoro.jp/tag/%e3%83%9d%e3%82%b1%e3%83%83%e3%83%88%e3%83%a2%e3%83%b3%e3%82%b9%e3%82%bf%e3%83%bc/",
+    "insertBefore": "",
+    "nextLink": "//a[@rel=\"next\"]",
+    "pageElement": "//ul[contains(concat(\" \",@class,\" \"),\" manga__list \")]/li",
+    "url": "^https://corocoro\\.jp/"
+  },
+  "created_at": "2019-07-16T23:14:31+09:00",
+  "updated_at": "2019-07-16T23:14:31+09:00"
+},
+{
+  "resource_url": "http://wedata.net/items/82209",
+  "created_by": "t_f_m",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "TRAICY",
+  "data": {
+    "exampleUrl": "https://www.traicy.com/20190713-fukabori",
+    "nextLink": "//div[@class='page-numbers']/span/following-sibling::a",
+    "url": "^https://(www\\.)?traicy\\.com/",
+    "pageElement": "//div[@class='page-numbers']/preceding-sibling::*[not(@class='next-title')]"
+  },
+  "created_at": "2019-07-15T21:17:03+09:00",
+  "updated_at": "2019-07-16T07:21:05+09:00"
+},
+{
+  "resource_url": "http://wedata.net/items/82208",
+  "created_by": "brib",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
+  "name": "紀伊國屋書店ウェブストア よくあるご質問",
+  "data": {
+    "exampleUrl": "https://faq.kinokuniya.co.jp/category/show/40?site_domain=default",
+    "nextLink": "//a[@rel='next']",
+    "url": "^https://faq\\.kinokuniya\\.co\\.jp/",
+    "pageElement": "//ul[@class='search_list']/li"
+  },
+  "created_at": "2019-07-13T22:08:56+09:00",
+  "updated_at": "2019-07-14T12:11:40+09:00"
+},
+{
   "resource_url": "http://wedata.net/items/82206",
   "created_by": "t_f_m",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
@@ -467,21 +714,6 @@
     "nextLink": "//a[@class='pagination__next']"
   },
   "created_at": "2019-05-28T12:28:58+09:00"
-},
-{
-  "name": "MMO Culture",
-  "created_by": "Tanookirby",
-  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2019-05-28T12:12:00+09:00",
-  "resource_url": "http://wedata.net/items/82165",
-  "data": {
-    "exampleUrl": "https://mmoculture.com/category/global/",
-    "url": "^https://mmoculture\\.com/.",
-    "pageElement": "//div[@class='td-block-row']",
-    "insertBefore": "",
-    "nextLink": "//span[@class='current']/following-sibling::a[1]"
-  },
-  "created_at": "2019-05-28T12:12:00+09:00"
 },
 {
   "name": "婚活・恋活ブログ Matchmaking",
@@ -967,18 +1199,17 @@
 },
 {
   "resource_url": "http://wedata.net/items/82119",
-  "name": "Yahoo!知恵袋 検索一覧",
   "created_by": "Kkairri",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2019-04-14T09:31:50+09:00",
+  "name": "Yahoo!知恵袋 検索一覧",
   "data": {
     "exampleUrl": "https://chiebukuro.yahoo.co.jp/search/?p=%E3%82%A2%E3%83%A1%E3%83%AA%E3%82%AB%E4%BA%BA&flg=3&class=1&ei=UTF-8&fr=common-navi https://chiebukuro.yahoo.co.jp/search/;_ylt=A2RCL6ZafrJc0UcAjwBOY.B7;_ylu=X3oDMTBwNTFlNXU3BHZ0aWQDY2hpZWJ1a3Vyb19zcmMxMF8wMDI-?sort=4&p=%E6%97%A5%E6%9C%AC%E4%BA%BA&ei=UTF-8",
+    "nextLink": "id(\"pg_low\")//a[contains(@class,\"next\")]",
     "url": "https?://chiebukuro\\.yahoo\\.co\\.jp/search",
-    "pageElement": "//ol[@class=\"cl\"]",
-    "insertBefore": "",
-    "nextLink": "//div[@id=\"Sp1\"]/p/span[@class=\"m\"]/a"
+    "pageElement": "id(\"sr\")/ul/li"
   },
-  "created_at": "2019-04-14T09:31:50+09:00"
+  "created_at": "2019-04-14T09:31:50+09:00",
+  "updated_at": "2019-09-02T21:44:19+09:00"
 },
 {
   "resource_url": "http://wedata.net/items/82118",
@@ -2328,17 +2559,17 @@
 },
 {
   "resource_url": "http://wedata.net/items/81996",
-  "name": "FNN.jpプライムオンライン",
   "created_by": "hatenaZZZ",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2018-10-23T01:51:57+09:00",
+  "name": "FNN.jpプライムオンライン",
   "data": {
     "exampleUrl": "https://www.fnn.jp/posts?news=1\r\nhttps://www.fnn.jp/programs",
+    "nextLink": "//a[contains(@class,\"Pagination__link-current\")]/following-sibling::a[@href]",
     "url": "^https?://www\\.fnn\\.jp/",
-    "pageElement": "//div[@class='PageGrid__mainArea']/div/section",
-    "nextLink": "//a[@href][*[@aria-label='次のページ']]"
+    "pageElement": "//div[@class='PageGrid__mainArea']/div/section"
   },
-  "created_at": "2018-10-22T04:25:07+09:00"
+  "created_at": "2018-10-22T04:25:07+09:00",
+  "updated_at": "2019-07-25T18:06:48+09:00"
 },
 {
   "resource_url": "http://wedata.net/items/81993",
@@ -4761,18 +4992,17 @@
 },
 {
   "resource_url": "http://wedata.net/items/81579",
-  "name": "キンマweb",
   "created_by": "jigendaddy_be",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2019-04-08T16:40:16+09:00",
+  "name": "キンマweb",
   "data": {
-    "exampleUrl": "https://kinmaweb.jp/archives/47322",
-    "comment": "This is a dummy code.",
+    "exampleUrl": "https://kinmaweb.jp/archives/47322 https://kinmaweb.jp/archives/70121\r\nhttps://kinmaweb.jp/archives/70121/2",
+    "nextLink": "//link[@rel=\"next\"]|id(\"logo\")[not(//link[@rel=\"next\"])]//a",
     "url": "^https?://kinmaweb\\.jp/archives/",
-    "pageElement": "//div[@class=\"footer-links cf\"]",
-    "nextLink": "id(\"logo\")//a"
+    "pageElement": "//div[@class=\"page-links cf\"]/preceding-sibling::*|id(\"logo\")[//link[@rel=\"next\"][@href=\"https://kinmaweb.jp/page/2\"]]//img|//div[@class=\"footer-links cf\"][not(//link[@rel=\"next\"])]"
   },
-  "created_at": "2017-09-30T13:23:47+09:00"
+  "created_at": "2017-09-30T13:23:47+09:00",
+  "updated_at": "2019-07-19T08:08:20+09:00"
 },
 {
   "resource_url": "http://wedata.net/items/81578",
@@ -4934,17 +5164,17 @@
 },
 {
   "resource_url": "http://wedata.net/items/81544",
-  "name": "wezz-y.com",
   "created_by": "brib",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2017-09-19T22:04:10+09:00",
+  "name": "wezz-y.com",
   "data": {
     "exampleUrl": "http://wezz-y.com/archives/50178 http://wezz-y.com/archives/date/2017/09",
+    "nextLink": "//link[@rel=\"next\"]",
     "url": "^https?://wezz-y\\.com/archives/",
-    "pageElement": "id(\"postpage\")/preceding-sibling::*|id(\"newArticle\")/div[@class=\"article\"][not(@id)]",
-    "nextLink": "//link[@rel=\"next\"]"
+    "pageElement": "id(\"postpage\")/preceding-sibling::*|id(\"newArticle\")/div[@class=\"article\"][not(@id)]"
   },
-  "created_at": "2017-09-18T18:55:03+09:00"
+  "created_at": "2017-09-18T18:55:03+09:00",
+  "updated_at": "2019-08-17T08:22:13+09:00"
 },
 {
   "resource_url": "http://wedata.net/items/81542",
@@ -6519,18 +6749,18 @@
   "created_at": "2017-03-16T18:08:06+09:00"
 },
 {
-  "resource_url": "http://wedata.net/items/81232",
-  "name": "mess-y | メッシー",
   "created_by": "t_f_m",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2017-03-16T06:53:39+09:00",
+  "name": "mess-y",
   "data": {
-    "exampleUrl": "http://mess-y.com/archives/39105",
+    "exampleUrl": "http://mess-y.com/archives/39105 http://wezz-y.com/archives/50178 http://wezz-y.com/archives/date/2017/09",
+    "nextLink": "//link[@rel='next']",
     "url": "^https?://mess-y\\.com/archives/",
-    "pageElement": "id('postpage')/preceding-sibling::*",
-    "nextLink": "id('postpage')/span/following-sibling::a"
+    "pageElement": "id('postpage')/preceding-sibling::*[not(@id='nextPageTitle')]|id('newArticle')/div[@class='article'][not(@id)]"
   },
-  "created_at": "2017-03-14T19:59:09+09:00"
+  "created_at": "2017-03-14T19:59:09+09:00",
+  "resource_url": "http://wedata.net/items/81232",
+  "updated_at": "2019-08-17T08:25:34+09:00"
 },
 {
   "resource_url": "http://wedata.net/items/81231",
@@ -7444,17 +7674,17 @@
 },
 {
   "resource_url": "http://wedata.net/items/81101",
-  "name": "fc2 contents market",
   "created_by": "Narju",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2019-01-18T02:26:11+09:00",
+  "name": "fc2 contents market",
   "data": {
     "exampleUrl": "https://contents.fc2.com/search/?q=&genre=5&type=1 https://adult.contents.fc2.com/users/sangou/?&page=2 https://adult.contents.fc2.com/mypage.php?mode_=show_history",
+    "nextLink": "//div[@class='c-pager-101']/a[@class='items'][last()]|//ul[@class='pager']/li[@class='next_btn']/a",
     "url": "^https?://(?:adult\\.)?contents\\.fc2\\.com/",
-    "pageElement": "//*[@class='c-cntCard-110']|//ul[@class='list']/li[@class='sell_block' or @class='list_wrapper']",
-    "nextLink": "//div[@class='c-pager-101']/a[@class='items'][last()]|//ul[@class='pager']/li[@class='next_btn']/a"
+    "pageElement": "//*[@class='c-cntCard-110']|//ul[@class='list']/li[contains(@class, 'sell_block') or @class='list_wrapper']"
   },
-  "created_at": "2016-12-22T05:47:24+09:00"
+  "created_at": "2016-12-22T05:47:24+09:00",
+  "updated_at": "2019-08-26T02:46:08+09:00"
 },
 {
   "resource_url": "http://wedata.net/items/81100",
@@ -9961,17 +10191,17 @@
 },
 {
   "resource_url": "http://wedata.net/items/80660",
-  "name": "Category Lists (td-block-row)",
   "created_by": "Tanookirby",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2017-10-29T09:50:36+09:00",
+  "name": "Category Lists (td-block-row)",
   "data": {
-    "exampleUrl": "http://atlantablackstar.com/category/local/ https://www.mobipicker.com/category/news/ https://apkmos.com/category/android-games/ https://www.pojo.com/category/pokemon/card-of-the-day-pokemon/",
-    "url": "^https?://(www\\.)?.+\\.com/category/",
-    "pageElement": "//div[@class='td-block-row']",
-    "nextLink": "//link[@rel='next']"
+    "exampleUrl": "http://atlantablackstar.com/category/local/ https://www.mobipicker.com/category/news/ https://apkmos.com/category/android-games/ https://www.pojo.com/category/pokemon/card-of-the-day-pokemon/ https://automaton-media.com/articles/iotw/page/4/ https://automaton-media.com/articles/interviewsjp/ https://mmoculture.com/category/global/",
+    "nextLink": "//link[@rel='next']|//span[@class='current']/following-sibling::a[1]",
+    "url": "^https?://(www\\.)?.+\\.com/(category|articles)/",
+    "pageElement": "//div[@class='td-block-row']"
   },
-  "created_at": "2016-03-25T13:21:22+09:00"
+  "created_at": "2016-03-25T13:21:22+09:00",
+  "updated_at": "2019-08-14T06:00:53+09:00"
 },
 {
   "resource_url": "http://wedata.net/items/80659",
@@ -15660,17 +15890,17 @@
 },
 {
   "resource_url": "http://wedata.net/items/77075",
-  "name": "沖縄タイムス",
   "created_by": "t_f_m",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2017-08-17T12:17:08+09:00",
+  "name": "沖縄タイムス",
   "data": {
-    "exampleUrl": "http://www.okinawatimes.co.jp/w/column.php?id=236 http://www.okinawatimes.co.jp/category/news-all",
+    "exampleUrl": "http://www.okinawatimes.co.jp/w/column.php?id=236 http://www.okinawatimes.co.jp/category/news-all\r\nhttps://www.okinawatimes.co.jp/articles/-/462429",
+    "nextLink": "//div[@class=\"m-pagination\"]/a[contains(concat(\" \",@class,\" \"),\" m-pagination__item--next \")]",
     "url": "^https?://(www\\.)?okinawatimes\\.co\\.jp/",
-    "pageElement": "//div[@class='article-body']/node()|//div[@class='category-list']//li[div/@class]",
-    "nextLink": "//span[@class='next']/a"
+    "pageElement": "//div[@class='article-body']/node()|//ul[@class=\"m-articles-v\"]/li"
   },
-  "created_at": "2015-04-09T22:08:53+09:00"
+  "created_at": "2015-04-09T22:08:53+09:00",
+  "updated_at": "2019-08-26T20:42:00+09:00"
 },
 {
   "resource_url": "http://wedata.net/items/77074",
@@ -18007,17 +18237,17 @@
 },
 {
   "resource_url": "http://wedata.net/items/76476",
-  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "data": {
-    "pageElement": "id(\"video_list_4column video_list_2column video_list_1column\")|//div[@class=\"member_prof_box clearfix\" or @class=\"ch_movie_list_wrap clearfix\"]",
-    "nextLink": "//div[@class='pager_box']/strong/following-sibling::a[1]",
-    "url": "^http://video\\.fc2\\.com/",
-    "Stylish": "@-moz-document url-prefix(\"http://video.fc2.com/list\") {\r\n.autopagerize_page_info~div div.member_img{\r\nborder-top: 1px solid #DFDFDF !important;\r\npadding: 20px 0 0 0 !important;\r\n}\r\n.autopagerize_page_info~div div.member_prof{\r\nborder-top: 1px solid #DFDFDF !important;\r\npadding: 20px 0 0 6px !important;\r\n    float:left !important;\r\n}\r\n}"
-  },
   "created_by": "hokuto_",
+  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
   "name": "FC2動画",
+  "data": {
+    "exampleUrl": "https://video.fc2.com/search/video/?category_id=5 https://video.fc2.com/account/26474865/content",
+    "nextLink": "//div[@class='c-pager-101']/span[@aria-selected]/following-sibling::a[1]",
+    "url": "^https?://video\\.fc2\\.com/",
+    "pageElement": "//ul[@class='c-boxList-111']/li[@class='c-boxList-111_video']"
+  },
   "created_at": "2014-11-21T01:15:25+09:00",
-  "updated_at": "2014-12-02T13:10:14+09:00"
+  "updated_at": "2019-08-15T13:37:17+09:00"
 },
 {
   "resource_url": "http://wedata.net/items/76475",
@@ -18364,17 +18594,17 @@
 },
 {
   "resource_url": "http://wedata.net/items/76421",
-  "name": "オモコロ あたまゆるゆるインターネット (記事)",
   "created_by": "yuta25",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2019-05-31T21:31:51+09:00",
+  "name": "オモコロ あたまゆるゆるインターネット (記事)",
   "data": {
-    "exampleUrl": "http://omocoro.jp/kiji/33805/",
+    "exampleUrl": "http://omocoro.jp/kiji/33805/ https://omocoro.jp/kiji/183672/",
+    "nextLink": "//div[@class=\"page-navi\"]/span/following-sibling::a",
     "url": "^https?://omocoro\\.jp/kiji/",
-    "pageElement": "//div[@class=\"article-body kiji\"]",
-    "nextLink": "//div[@class=\"page-navi\"]/span/following-sibling::a"
+    "pageElement": "//div[contains(@class,\"article-body\")]"
   },
-  "created_at": "2014-10-10T15:45:40+09:00"
+  "created_at": "2014-10-10T15:45:40+09:00",
+  "updated_at": "2019-08-07T10:03:45+09:00"
 },
 {
   "resource_url": "http://wedata.net/items/76419",
@@ -20656,20 +20886,6 @@
   "created_by": "jigendaddy_be",
   "created_at": "2014-06-10T10:24:57+09:00",
   "updated_at": "2014-06-10T10:24:57+09:00"
-},
-{
-  "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "name": "Bing ニュース",
-  "created_by": "jigendaddy_be",
-  "updated_at": "2016-05-06T14:57:14+09:00",
-  "resource_url": "http://wedata.net/items/74891",
-  "data": {
-    "exampleUrl": "https://www.bing.com/news/search?q=%E6%A2%85%E9%9B%A8&qs=n&form=QBNT&pq=%E6%A2%85%E9%9B%A8&sc=8-2&sp=-1&sk=",
-    "url": "^https?://www\\.bing\\.com/news/search",
-    "pageElement": "//div[@class=\"sn_r\"]",
-    "nextLink": "//a[@class=\"sb_pagN\"]"
-  },
-  "created_at": "2014-06-09T21:27:18+09:00"
 },
 {
   "resource_url": "http://wedata.net/items/74890",
@@ -27479,17 +27695,17 @@
 },
 {
   "resource_url": "http://wedata.net/items/63821",
-  "name": "ソフトバンク ビジネス+IT",
   "created_by": "taizooo",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2018-05-09T07:20:04+09:00",
+  "name": "ソフトバンク ビジネス+IT",
   "data": {
-    "exampleUrl": "http://www.sbbit.jp/article/7481/ http://www.sbbit.jp/article/cont1/21311 http://www.sbbit.jp/article/cont1/21311?page=2 http://www.sbbit.jp/article/cont1/30551",
+    "exampleUrl": "http://www.sbbit.jp/article/7481/ http://www.sbbit.jp/article/cont1/21311 http://www.sbbit.jp/article/cont1/21311?page=2 https://www.sbbit.jp/article/cont1/36675",
+    "nextLink": "//a[contains(text(),'次へ')][contains(@href,'?page=')]",
     "url": "^https://www\\.sbbit\\.jp/article/",
-    "pageElement": "//div[@class=\"ar-title-sentence\"]/descendant::br[1]/ancestor::div[1]/node()|//div[@class=\"ar-title-sentence\"]/descendant::text()[string-length(normalize-space()) > 0][1]/ancestor::div[1][./p]",
-    "nextLink": "//a[contains(text(),'次へ')][contains(@href,'?page=')]"
+    "pageElement": "//div[@class=\"ar-title-sentence\"]/descendant::br[last()]/ancestor::div[1]/node()|//div[@class=\"ar-title-sentence\"]/descendant::text()[string-length(normalize-space()) > 0][1]/ancestor::div[1][./p]"
   },
-  "created_at": "2012-10-05T17:13:23+09:00"
+  "created_at": "2012-10-05T17:13:23+09:00",
+  "updated_at": "2019-07-18T17:50:34+09:00"
 },
 {
   "resource_url": "http://wedata.net/items/63804",
@@ -28516,14 +28732,14 @@
   "created_by": "jigendaddy_be",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
   "name": "CAREER HACK",
-  "created_at": "2012-09-06T20:09:47+09:00",
   "data": {
-    "exampleUrl": "http://careerhack.en-japan.com/report/detail/34 http://careerhack.en-japan.com/report/detail/24 http://careerhack.en-japan.com/report",
-    "pageElement": "id(\"contents-body\")/p[not(./a)]|id(\"contents-body\")/*[not(self::p or @id=\"report-tags\")]|//section/article",
-    "url": "^http://careerhack\\.en-japan\\.com/report",
-    "nextLink": "id(\"contents-body\")/p[last()]/a|//a[@rel=\"next\"]"
+    "exampleUrl": "http://careerhack.en-japan.com/report",
+    "nextLink": "//a[@rel=\"next\"]",
+    "url": "^https?://careerhack\\.en-japan\\.com/report",
+    "pageElement": "id(\"articleSearchList\")/div[@class=\"content\"]/div[1]"
   },
-  "updated_at": "2015-05-05T19:20:18+09:00"
+  "created_at": "2012-09-06T20:09:47+09:00",
+  "updated_at": "2019-08-07T17:30:50+09:00"
 },
 {
   "name": "E=mC^2 NOVEL",
@@ -41939,21 +42155,6 @@
   "created_at": "2010-05-10T15:19:53+09:00"
 },
 {
-  "name": "XVideosLive - Live Sex Chat, Sex Shows and Webcam Sex - Amateur Cams and Pornstars",
-  "updated_at": "2010-05-10T15:10:24+09:00",
-  "resource_url": "http:\/\/wedata.net\/items\/32490",
-  "created_by": "toshi",
-  "database_resource_url": "http:\/\/wedata.net\/databases\/AutoPagerize",
-  "data": {
-    "insertBefore": "",
-    "pageElement": "id(\"cam-container\")\/*",
-    "url": "^http:\/\/(?:www\\.)?xvideoslive\\.com\/",
-    "nextLink": "\/\/li[@class=\"active\"]\/following-sibling::li[1]\/a",
-    "exampleUrl": "http:\/\/xvideoslive.com\/"
-  },
-  "created_at": "2010-05-10T15:10:24+09:00"
-},
-{
   "resource_url": "http://wedata.net/items/32488",
   "name": "GMX Suche",
   "created_by": "toshi",
@@ -45606,17 +45807,17 @@
 },
 {
   "resource_url": "http://wedata.net/items/29655",
-  "name": "livedoor ニュース 写真集",
   "created_by": "xfdata",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2016-01-25T09:55:03+09:00",
+  "name": "livedoor ニュース 写真集",
   "data": {
     "exampleUrl": "http://news.livedoor.com/article/image_detail/4072827/?img_id=628355",
-    "url": "^http://news\\.livedoor\\.com/article/image_detail/",
-    "pageElement": "//figure[@class='imageFigure']",
-    "nextLink": "//li[@class='imagePagerNext']/a"
+    "nextLink": "//li[@class='imagePagerNext']/a",
+    "url": "^https://news\\.livedoor\\.com/article/image_detail/",
+    "pageElement": "//figure[@class='imageFigure']"
   },
-  "created_at": "2009-09-06T11:53:32+09:00"
+  "created_at": "2009-09-06T11:53:32+09:00",
+  "updated_at": "2019-08-29T16:47:47+09:00"
 },
 {
   "resource_url": "http://wedata.net/items/29649",
@@ -46476,19 +46677,18 @@
   "created_at": "2009-07-04T22:16:06+09:00"
 },
 {
-  "resource_url": "http://wedata.net/items/29249",
-  "name": "Mobile01 (all)",
   "created_by": "appleseed",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2017-03-07T22:02:12+09:00",
+  "name": "Mobile01 (all)",
   "data": {
-    "exampleUrl": "http://www.mobile01.com/topiclist.php?f=563\r\nhttp://www.mobile01.com/topicdetail.php?f=563&t=4240169&p=2",
-    "更新": "2011.4.1 - 加入手機版 5i01.com 支援 - tyf",
+    "exampleUrl": "https://www.mobile01.com/topiclist.php?f=290\r\nhttps://www.mobile01.com/topicdetail.php?f=290&t=5824813",
+    "nextLink": "//li[contains(@class,\"is-active\")]/following-sibling::li[1]/a",
     "url": "^https?://(?:m|www)\\.(?:mobile01\\.com|5i01\\.cn)/(?:forumtopic|catlist|mytopics|topiclist|topicdetail|mpsearch)\\.php",
-    "pageElement": "id(\"section\")//div[@class='tablelist forumlist']/table[@summary] | id(\"section\")//div[@class=\"forum-content\"]/main",
-    "nextLink": "//div[@class=\"pagination\"]/a[contains(.,'下一頁 ›')]"
+    "pageElement": "//div[(./div[@class=\"l-articlePage__author\"]) and @class=\"l-articlePage\"]|//div[@class=\"l-tabulate__content\"]/div[1]"
   },
-  "created_at": "2009-07-02T16:17:08+09:00"
+  "created_at": "2009-07-02T16:17:08+09:00",
+  "resource_url": "http://wedata.net/items/29249",
+  "updated_at": "2019-08-16T04:26:20+09:00"
 },
 {
   "resource_url": "http://wedata.net/items/29247",
@@ -50777,17 +50977,17 @@
 },
 {
   "resource_url": "http://wedata.net/items/2759",
-  "name": "Stack Overflow, Super User, Server Fault, Stack Apps",
   "created_by": "satyr",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2016-07-14T09:08:24+09:00",
+  "name": "Stack Overflow, Super User, Server Fault, Stack Apps",
   "data": {
-    "exampleUrl": "http://stackoverflow.com/questions?sort=hot http://stackoverflow.com/search?q=%22apple%22&tab=newest http://stackoverflow.com/questions/tagged/javascript http://stackoverflow.com/questions/62188 http://meta.stackoverflow.com/questions/tagged/discussion http://english.stackexchange.com/questions http://askubuntu.com/questions/tagged/11.10 http://buddhism.stackexchange.com/users http://cs.stackexchange.com/tags",
+    "exampleUrl": "https://stackoverflow.com/questions?sort=hot https://stackoverflow.com/search?q=%22apple%22&tab=newest https://stackoverflow.com/questions/tagged/javascript https://stackoverflow.com/questions/62188 https://meta.stackoverflow.com/questions/tagged/discussion https://english.stackexchange.com/questions https://askubuntu.com/questions/tagged/11.10 https://buddhism.stackexchange.com/users https://cs.stackexchange.com/tags",
+    "nextLink": "//a[@rel='next']",
     "url": "^https?://(?:meta\\.)?(?:s(?:erverfault|tackoverflow|uperuser|tackapps)|\\w+\\.stackexchange|askubuntu)\\.com/",
-    "pageElement": "//div[contains(@class,'search-results') or contains(@id,'questions') or contains(@id,'answers')]/div[contains(@class,'question-') or contains(@id,'question-') or contains(@class,'answer-') or contains(@id,'answer-')]|//*[contains(@id,'-browser')]//tr",
-    "nextLink": "//a[@rel='next']"
+    "pageElement": "//div[contains(@class,'search-results') or contains(@id,'questions') or contains(@id,'answers')]/div[contains(@class,'question-') or contains(@id,'question-') or contains(@class,'answer-') or contains(@id,'answer-')]|//*[contains(@id,'-browser')]//tr|//div[contains(@class,'search-results')]/div/div[contains(@class,'question-')]|//div[@class='grid-layout']/*"
   },
-  "created_at": "2008-10-06T06:00:23+09:00"
+  "created_at": "2008-10-06T06:00:23+09:00",
+  "updated_at": "2019-07-21T04:21:54+09:00"
 },
 {
   "name": "Meister Online",
@@ -56195,17 +56395,17 @@
 },
 {
   "resource_url": "http://wedata.net/items/501",
-  "name": "Bing",
   "created_by": "swdyh",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2018-03-17T20:26:03+09:00",
+  "name": "Bing",
   "data": {
-    "exampleUrl": "http://www.bing.com/search?q=autopagerize\r\nhttp://cnweb.bing.com/results.aspx?q=autopagerize\r\nhttps://www.bing.com/search?q=autopagerize",
-    "url": "^https?://(?:www|cnweb)\\.bing\\.com/(?:[^/]+/)*?(?:results\\.aspx|search)",
-    "pageElement": "id(\"b_results\")/li[@class=\"b_algo\"]|id(\"results\")",
-    "nextLink": "//a[contains(@class,\"sb_pagN\")]"
+    "exampleUrl": "https://www.bing.com/search?q=autopagerize\r\nhttp://cnweb.bing.com/results.aspx?q=autopagerize\r\nhttps://www4.bing.com/search?q=food&qs=n&sp=-1&pq=foo&sc=8-3&sk=&cvid=387D0CF73BAD466697D930524DD38825&first=11&FORM=PERE",
+    "nextLink": "//a[contains(@class,\"sb_pagN\")]",
+    "url": "^https?://(?:www|cnweb)4?\\.bing\\.com/(?:[^/]+/)*?(?:results\\.aspx|search)",
+    "pageElement": "id(\"b_results\")/li[@class=\"b_algo\"]|id(\"results\")"
   },
-  "created_at": "2008-04-16T12:35:44+09:00"
+  "created_at": "2008-04-16T12:35:44+09:00",
+  "updated_at": "2019-07-12T10:02:32+09:00"
 },
 {
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
@@ -56346,19 +56546,19 @@
 },
 {
   "resource_url": "http://wedata.net/items/472",
-  "name": "Google Search",
   "created_by": "swdyh",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2019-01-17T06:38:28+09:00",
+  "name": "Google Search",
   "data": {
+    "exampleUrl": "http://www.google.com/search?q=AutoPagerize\r\nhttp://www.google.co.jp/custom?q=firefox\r\nhttps://www.google.com/search?q=bucket&tbm=pts\r\nhttps://www.google.com/search?q=autopagerize&client=firefox-b-1-d&source=lnms&tbm=nws&sa=X&ved=0ahUKEwjImsSLhq7jAhVUa80KHbVfDPMQ_AUIECgB&biw=1536&bih=728",
     "Stylish": "/* Displays images when using search preview extension. Example:https://www.google.com/search?q=food&num=20&source=lnms&tbm=nws&sa=X&ved=0ahUKEwjalvHv0OHWAhXD2SYKHSRwBqUQ_AUIDCgD */ @-moz-document domain(\"google.com\") { div.bkWMgd > div > div > a > img{ display: inline-block !important; }}",
-    "exampleUrl": "http://www.google.com/search?q=AutoPagerize\r\nhttp://www.google.co.jp/custom?q=firefox\r\nhttps://www.google.com/search?q=bucket&tbm=pts",
+    "nextLink": "id('pnnext')|id('navbar navcnt nav')//td[span]/following-sibling::td[1]/a|id('nn')/parent::a",
     "comment": "Google Custom Search Result: http://wedata.net/items/60908\r\nGoogle Movies: http://wedata.net/items/58112\r\nGoogle Shopping: http://wedata.net/items/38952\r\nGoogle Custom Search Result: http://wedata.net/items/60908",
     "url": "^https?://[^./]+\\.google(?:\\.[^./]{2,3}){1,2}/(?:c(?:se|ustom)|search|webhp|m|#)",
-    "pageElement": "id('res')//li[div]|//div[@class='gsc-webResult gsc-result' or @class='psli']|id('rso')//div[contains(concat(\" \", normalize-space(@class), \" \"), \" g \") or contains(concat(\" \", normalize-space(@class), \" \"), \" g _cy \")]",
-    "nextLink": "id('pnnext')|id('navbar navcnt nav')//td[span]/following-sibling::td[1]/a|id('nn')/parent::a"
+    "pageElement": "id('res')//li[div]|//div[@class='gsc-webResult gsc-result' or @class='psli']|id('rso')//div[contains(concat(' ', normalize-space(@class), ' '), ' g ') or contains(concat(' ', normalize-space(@class), ' '), ' g _cy ') or contains(concat(' ', normalize-space(@class), ' '), ' bkWMgd ')]"
   },
-  "created_at": "2008-04-16T12:35:37+09:00"
+  "created_at": "2008-04-16T12:35:37+09:00",
+  "updated_at": "2019-07-12T08:59:34+09:00"
 },
 {
   "name": "Getchu.com \u8a73\u7d30\u691c\u7d22",
@@ -56629,19 +56829,19 @@
   "updated_at": "2014-09-10T19:16:16+09:00"
 },
 {
-  "resource_url": "http://wedata.net/items/418",
-  "name": "Amazon 検索結果",
   "created_by": "swdyh",
   "database_resource_url": "http://wedata.net/databases/AutoPagerize",
-  "updated_at": "2019-06-15T18:06:08+09:00",
+  "name": "Amazon 検索結果",
   "data": {
+    "exampleUrl": "http://www.amazon.co.jp/s/?field-keywords=windows\r\nhttp://www.amazon.co.jp/s/?url=search-alias%3Dtoys&field-keywords=lego\r\nhttp://www.amazon.co.jp/s/rh=n%3A13299531 http://www.amazon.co.jp/exec/obidos/search-handle-url?_encoding=UTF8&search-type=ss&index=books-jp&field-author=%E6%9D%91%E4%B8%8A%20%E6%98%A5%E6%A8%B9\r\nhttp://www.amazon.co.jp/gp/search/rh=k%3A%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%2Ci%3Avideogames&keywords=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3\r\nhttp://www.amazon.co.jp/b?ie=UTF8&node=2515445051\r\nhttp://www.amazon.co.jp/%E6%A9%99%E4%B9%83-%E3%81%BE%E3%81%BE%E3%82%8C/e/B006AIETUI/\r\nhttp://www.amazon.com/gp/aag/main?ie=UTF8&seller=AGHVE2KVOZA3D\r\nhttp://www.amazon.co.jp/s/ref=lp_3452196051_pg_2?rh=n%3A2250738051%2Cn%3A!2275265051%2Cn%3A!2275277051%2Cn%3A3452196051&page=2&ie=UTF8&qid=1438764067\r\nhttps://www.amazon.co.jp/s?rh=n%3A6990947051&page=2\r\nhttps://www.amazon.co.jp/kindle-dbs/entity/author/B00J1JKSOY?_encoding=UTF8&offset=0&pageSize=12&searchAlias=stripbooks&sort=author-pages-popularity-rank&page=4&langFilter=default#formatSelectorHeader",
     "Stylish": "@-moz-document url-prefix(\"http://www.amazon.co.jp/\") {\r\nul.s-result-list p.autopagerize_page_info{\r\n    letter-spacing:normal !important;}\r\n}\r\n\r\n@-moz-document url-prefix(\"http://www.amazon.co.jp/s/?rh\"), url-prefix(\"http://www.amazon.co.jp/s/ref=sr_pg_1\") {\r\n.autopagerize_page_separator~#resultsCol .s-result-item{\r\n    display: inline-block;\r\n    border-top: 1px solid #DDD;\r\n    padding-top:10px;\r\n}\r\n.autopagerize_page_separator~#resultsCol .a-fixed-left-grid-inner{\r\n    padding-left: 120px !important;\r\n}\r\n\r\n.autopagerize_page_separator~#resultsCol .a-fixed-left-grid-inner a h2{\r\n    font-weight:bold !important;\r\n      font-size: 1.25em;\r\n}\r\n.autopagerize_page_separator~#resultsCol .med {\r\n    font-size: 1.2em;\r\n}\r\n.autopagerize_page_separator~#resultsCol .a-icon-alt{\r\n    display:none;\r\n}\r\n}",
-    "exampleUrl": "http://www.amazon.co.jp/s/?field-keywords=windows\r\nhttp://www.amazon.co.jp/s/?url=search-alias%3Dtoys&field-keywords=lego\r\nhttp://www.amazon.co.jp/s/rh=n%3A13299531 http://www.amazon.co.jp/exec/obidos/search-handle-url?_encoding=UTF8&search-type=ss&index=books-jp&field-author=%E6%9D%91%E4%B8%8A%20%E6%98%A5%E6%A8%B9\r\nhttp://www.amazon.co.jp/gp/search/rh=k%3A%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%2Ci%3Avideogames&keywords=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3\r\nhttp://www.amazon.co.jp/b?ie=UTF8&node=2515445051\r\nhttp://www.amazon.co.jp/%E6%A9%99%E4%B9%83-%E3%81%BE%E3%81%BE%E3%82%8C/e/B006AIETUI/\r\nhttp://www.amazon.com/gp/aag/main?ie=UTF8&seller=AGHVE2KVOZA3D\r\nhttp://www.amazon.co.jp/s/ref=lp_3452196051_pg_2?rh=n%3A2250738051%2Cn%3A!2275265051%2Cn%3A!2275277051%2Cn%3A3452196051&page=2&ie=UTF8&qid=1438764067\r\nhttps://www.amazon.co.jp/s?rh=n%3A6990947051&page=2",
-    "url": "^https?://www\\.amazon\\.(?:c(?:a|n|o(?:m|\\.(?:jp|uk)))|de|fr)/(?:[^/]+/)?(?:[bes]|(?:gp|exec/obidos)/(search|aag))",
-    "pageElement": "id(\"rightResults atfResults btfResults mainResults Results sparseWrapper\")[not(//link[@rel=\"canonical\"][contains(@href,\"page\")])]//*[starts-with(@id,\"result_\")]|//li[@class=\"shoveler-cell\"]|id(\"resultsCol\")[//link[@rel=\"canonical\"][contains(@href,\"page\")]]|//div[contains(concat(' ',@class,' '),' s-search-results ')]/div",
-    "nextLink": "id('pagnNextLink')|//a[@class='next-button-link']|//li[@class='a-selected']/following-sibling::li/a"
+    "nextLink": "id('pagnNextLink')|//a[@class='next-button-link']|//li[@class='a-selected']/following-sibling::li/a",
+    "url": "^https?://www\\.amazon\\.(?:c(?:a|n|o(?:m|\\.(?:jp|uk)))|de|fr)/(?:[^/]+/)?(?:[bes]|(?:gp|exec/obidos)/(search|aag)|entity/author)",
+    "pageElement": "id(\"rightResults atfResults btfResults mainResults Results sparseWrapper\")[not(//link[@rel=\"canonical\"][contains(@href,\"page\")])]//*[starts-with(@id,\"result_\")]|//li[@class=\"shoveler-cell\"]|id(\"resultsCol\")[//link[@rel=\"canonical\"][contains(@href,\"page\")]]|//div[contains(concat(' ',@class,' '),' s-search-results ')]/div|id(\"searchWidget\")/*[self::div or self::hr]"
   },
-  "created_at": "2008-04-16T12:35:23+09:00"
+  "created_at": "2008-04-16T12:35:23+09:00",
+  "resource_url": "http://wedata.net/items/418",
+  "updated_at": "2019-08-29T00:20:01+09:00"
 },
 {
   "name": "Amazon \u304a\u3059\u3059\u3081\u5546\u54c1",
