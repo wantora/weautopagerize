@@ -64,7 +64,8 @@ function fixLazyload(root, items) {
 
 async function iframeFetch(url) {
   const iframe = document.createElement("iframe");
-  iframe.style.display = "none";
+  iframe.style.width = "0";
+  iframe.style.height = "0";
   iframe.src = url;
   document.body.appendChild(iframe);
 
