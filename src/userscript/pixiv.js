@@ -49,10 +49,10 @@ function fixLazyload(root, items) {
   for (const element of root.querySelectorAll(".js-lazyload")) {
     const link = getParentLink(element);
     if (link) {
-      const params = new URLSearchParams(link.search);
-      const imageURL =
-        illustImageMap.get(params.get("illust_id")) ||
-        userImageMap.get(params.get("id"));
+      const m = link.pathname.match(/^\/artworks\/(\d+)$/);
+      const imageURL = m
+        ? illustImageMap.get(m[1])
+        : userImageMap.get(new URLSearchParams(link.search).get("id"));
 
       if (imageURL) {
         element.style.backgroundImage = `url("${imageURL}")`;
