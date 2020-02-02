@@ -1,0 +1,56 @@
+{
+  "extension_description": {
+    "message": "Nächste Seite automatisch einfügen."
+  },
+  "browserAction_label": {
+    "message": "weAutoPagerize"
+  },
+  "browserAction_menu_globalDisable": {
+    "message": "Alle Seiten deaktivieren"
+  },
+  "browserAction_menu_tabDisable": {
+    "message": "Aktuellen Tab deaktivieren"
+  },
+  "options_options_legend": {
+    "message": "Optionen"
+  },
+  "options_openLinkInNewTab_label": {
+    "message": "Eingefügten Link in einer neuen Registerkarte öffnen"
+  },
+  "options_addHistory_label": {
+    "message": "Eingefügte Seite zur Browser-Chronik hinzufügen"
+  },
+  "options_excludeList_label": {
+    "message": "URL ausschließen"
+  },
+  "options_excludeList_pattern": {
+    "message": "Platzhalter und Regex"
+  },
+  "options_userSiteinfo_label": {
+    "message": "Nutzer-SITEINFO"
+  },
+  "options_userSiteinfo_open": {
+    "message": "Öffnen"
+  },
+  "options_siteinfo_legend": {
+    "message": "SITEINFO"
+  },
+  "options_lastUpdatedTime_label": {
+    "message": "Letzte Aktualisierung"
+  },
+  "options_siteinfoCount": {
+    "message": "$COUNT$ Einträge",
+    "placeholders": {
+      "count" : {
+        "content" : "$1",
+        "example" : "1000"
+      }
+    }
+  },
+  "options_updateSiteinfoButton_label": {
+    "message": "SITEINFO aktualisieren"
+  },
+  "popup_openOptionsButton_label": {
+    "message": "Optionen"
+  }
+}
