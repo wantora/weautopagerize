@@ -34,7 +34,7 @@
     "eslint-config-wantora": "github:wantora/eslint-config-wantora#v1.3.0",
     "eslint-loader": "^2.1.2",
     "glob": "^7.1.4",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "rimraf": "^2.6.3",
     "sort-package-json": "^1.22.1",
     "web-ext": "^3.1.1",
