@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "events": "^3.0.0",
-    "json5": "^0.5.1",
+    "json5": "^1.0.2",
     "whatwg-mimetype": "^2.3.0"
   },
   "devDependencies": {
