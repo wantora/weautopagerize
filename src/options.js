@@ -1,6 +1,5 @@
 import I18n from "./lib/I18n";
 import OptionManager from "./lib/background/OptionManager";
-import SiteinfoCache from "./lib/background/SiteinfoCache";
 import parseGlobList from "./lib/parseGlobList";
 
 const BooleanCheckbox = {
@@ -40,7 +39,6 @@ const AddHistoryPermitter = async (value) => {
 
 I18n.initHTML();
 
-const siteinfoCache = new SiteinfoCache();
 const optionManager = new OptionManager([
   {name: "openLinkInNewTab", updater: BooleanCheckbox},
   {
@@ -56,40 +54,26 @@ const optionManager = new OptionManager([
 ]);
 optionManager.init();
 
-const lastUpdatedTimeElement = document.getElementById("lastUpdatedTime");
-const updateSiteinfoButton = document.getElementById("updateSiteinfoButton");
+const siteinfoStatusElement = document.getElementById("siteinfoStatus");
 const openUserSiteinfoButton = document.getElementById(
   "openUserSiteinfoButton"
 );
 
-async function updateLastUpdatedTime() {
-  const infos = await siteinfoCache.getInfo();
-  lastUpdatedTimeElement.textContent = "";
+async function updateSiteinfoStatus() {
+  const siteinfoStatus = await browser.runtime.sendMessage({
+    type: "getSiteinfoStatus",
+  });
+  siteinfoStatusElement.textContent = "";
 
-  for (const {url, count, time} of infos) {
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.textContent = anchor;
-
+  for (const {name, count} of siteinfoStatus) {
     const element = document.createElement("div");
-    const timeStr = new Date(time).toLocaleString([], {hour12: false});
-    element.appendChild(anchor);
-    element.appendChild(
-      document.createTextNode(
-        `: ${timeStr} (${browser.i18n.getMessage(
-          "options_siteinfoCount",
-          count
-        )})`
-      )
-    );
-    lastUpdatedTimeElement.appendChild(element);
+    element.textContent = `${name}: ${browser.i18n.getMessage(
+      "options_siteinfoCount",
+      count
+    )}`;
+    siteinfoStatusElement.appendChild(element);
   }
 }
-
-updateSiteinfoButton.addEventListener("click", async () => {
-  await browser.runtime.sendMessage({type: "forceUpdateSiteinfo"});
-  updateLastUpdatedTime();
-});
 
 openUserSiteinfoButton.addEventListener("click", () => {
   open(
@@ -98,4 +82,4 @@ openUserSiteinfoButton.addEventListener("click", () => {
   );
 });
 
-updateLastUpdatedTime();
+updateSiteinfoStatus();

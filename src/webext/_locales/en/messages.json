@@ -35,8 +35,8 @@
   "options_siteinfo_legend": {
     "message": "SITEINFO"
   },
-  "options_lastUpdatedTime_label": {
-    "message": "Last updated time"
+  "options_siteinfoStatus_label": {
+    "message": "Status"
   },
   "options_siteinfoCount": {
     "message": "$COUNT$ items",

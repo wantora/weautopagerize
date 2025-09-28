@@ -35,8 +35,8 @@
   "options_siteinfo_legend": {
     "message": "SITEINFO"
   },
-  "options_lastUpdatedTime_label": {
-    "message": "最終更新日時"
+  "options_siteinfoStatus_label": {
+    "message": "ステータス"
   },
   "options_siteinfoCount": {
     "message": "$COUNT$ アイテム",
