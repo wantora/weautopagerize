@@ -116,5 +116,4 @@ See [src/userscript (1.7.6)](https://github.com/wantora/weautopagerize/tree/v1.7
 
 ## Contributors
 
-* [@yfdyh000](https://github.com/yfdyh000)
-* [@Mr-Update](https://github.com/Mr-Update)
+[Contributors (GitHub)](https://github.com/wantora/weautopagerize/graphs/contributors)
