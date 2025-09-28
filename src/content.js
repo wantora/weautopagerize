@@ -38,7 +38,7 @@ async function getContinueAutoPager(info, options) {
         pageNo: pageNo,
       })
     );
-  } catch (error) {
+  } catch {
     return null;
   }
 }

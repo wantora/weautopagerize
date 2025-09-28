@@ -236,7 +236,7 @@ export default class AutoPager {
     if (base) {
       try {
         return new URL(base.getAttribute("href"), this._url);
-      } catch (error) {
+      } catch {
         // pass
       }
     }
@@ -261,7 +261,7 @@ export default class AutoPager {
     let nextURL = null;
     try {
       nextURL = new URL(value, this._baseURL);
-    } catch (error) {
+    } catch {
       return null;
     }
     if (nextURL.protocol !== "http:" && nextURL.protocol !== "https:") {
@@ -274,7 +274,7 @@ export default class AutoPager {
     if (
       this._insertPoint === null ||
       this._insertPoint.compareDocumentPosition(document) &
-        Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC // eslint-disable-line max-len
+        Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
     ) {
       let newInsertPoint = null;
       if (
@@ -332,10 +332,10 @@ export default class AutoPager {
       try {
         // 相対パスなら例外発生
         new URL(value);
-      } catch (e1) {
+      } catch {
         try {
           attr.value = new URL(value, this._baseURL).href;
-        } catch (e2) {
+        } catch {
           // pass
         }
       }

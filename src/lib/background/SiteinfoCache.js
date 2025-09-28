@@ -31,24 +31,25 @@ export default class SiteinfoCache {
             };
             updateFlag = true;
           } catch (error) {
-            console.error(error); // eslint-disable-line no-console
+            console.error(error);
 
             if (
               url === WEDATA_URL &&
               !Object.prototype.hasOwnProperty.call(siteinfoCache, url)
             ) {
               try {
-                const localData = await (await fetch(
-                  browser.runtime.getURL("wedata-items.json")
-                )).json();
+                const localData = await (
+                  await fetch(browser.runtime.getURL("wedata-items.json"))
+                ).json();
 
+                // eslint-disable-next-line require-atomic-updates
                 siteinfoCache[url] = {
                   data: localData,
                   time: new Date(0),
                 };
                 updateFlag = true;
               } catch (err2) {
-                console.error(err2); // eslint-disable-line no-console
+                console.error(err2);
               }
             }
           }

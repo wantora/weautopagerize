@@ -13,32 +13,25 @@
   "license": "GPL-3.0+",
   "author": "wantora <wantora@gmail.com>",
   "scripts": {
-    "build": "npm run clean && npm run build:js && npm run build:ext",
-    "build:ext": "web-ext build --source-dir dist",
-    "build:js": "webpack --mode production",
-    "clean": "rimraf dist",
-    "format": "sort-package-json && eslint --fix .",
-    "lint": "web-ext lint --source-dir dist && eslint .",
+    "build": "node ./scripts/build.mjs && web-ext build --source-dir dist",
+    "format": "eslint --fix .",
+    "lint": "eslint .",
     "start": "web-ext run --source-dir dist",
-    "version": "node ./scripts/version.js",
-    "watch": "webpack --mode development --watch"
+    "watch": "node ./scripts/build.mjs --watch",
+    "update-wedata-items": "node ./scripts/update-wedata-items.mjs"
   },
   "dependencies": {
-    "events": "^3.0.0",
-    "json5": "^0.5.1",
-    "whatwg-mimetype": "^2.3.0"
-  },
-  "devDependencies": {
-    "copy-webpack-plugin": "^5.0.3",
-    "eslint": "^5.16.0",
-    "eslint-config-wantora": "github:wantora/eslint-config-wantora#v1.3.0",
-    "eslint-loader": "^2.1.2",
-    "glob": "^7.1.4",
-    "node-fetch": "^2.6.0",
-    "rimraf": "^2.6.3",
-    "sort-package-json": "^1.22.1",
-    "web-ext": "^3.1.1",
-    "webpack": "^4.35.2",
-    "webpack-cli": "^3.3.5"
+    "@eslint/js": "^9.36.0",
+    "esbuild": "^0.25.10",
+    "eslint": "^9.36.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "events": "^3.3.0",
+    "glob": "^11.0.3",
+    "globals": "^16.4.0",
+    "json5": "^2.2.3",
+    "prettier": "^3.6.2",
+    "web-ext": "^8.10.0",
+    "whatwg-mimetype": "^4.0.0"
   }
 }

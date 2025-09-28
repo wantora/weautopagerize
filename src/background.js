@@ -17,10 +17,7 @@ async function gatUserActive(urlStr, tabId) {
 }
 
 async function updateUserActive(tabId) {
-  const port = browser.tabs.connect(
-    tabId,
-    {name: "pageInfoPort"}
-  );
+  const port = browser.tabs.connect(tabId, {name: "pageInfoPort"});
   const data = await new Promise((resolve, reject) => {
     port.onMessage.addListener(resolve);
   });
@@ -118,6 +115,6 @@ async function initContextmenu() {
 
     await initContextmenu();
   } catch (error) {
-    console.error(error); // eslint-disable-line no-console
+    console.error(error);
   }
 })();

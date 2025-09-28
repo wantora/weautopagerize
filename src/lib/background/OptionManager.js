@@ -26,6 +26,7 @@ export default class OptionManager {
               return;
             }
           } finally {
+            // eslint-disable-next-line require-atomic-updates
             element.disabled = false;
           }
         }

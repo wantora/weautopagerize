@@ -81,7 +81,7 @@ async function iframeFetch(url) {
 
     fixLazyload(root, items);
   } catch (error) {
-    console.error(error); // eslint-disable-line no-console
+    console.error(error);
   }
 
   const result = {
