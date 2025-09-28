@@ -56,16 +56,6 @@ pnpm run build
 
 #### GM_AutoPagerizeNextPageLoaded
 
-#### AutoPagerize_DOMNodeInserted
-
-```js
-document.addEventListener("AutoPagerize_DOMNodeInserted", function(event) {
-  console.log("pageElement: ", event.target);
-  console.log("parentNode: ", event.relatedNode);
-  console.log("url: ", event.newValue);
-}, false);
-```
-
 #### AutoPagerizeToggleRequest, AutoPagerizeEnableRequest, AutoPagerizeDisableRequest
 
 ```js
@@ -105,7 +95,7 @@ See [src/userscript/pixiv.js](src/userscript/pixiv.js).
 | SITEINFO options.useResponseFilter | ✔  |     |     |     |
 | GM_AutoPagerizeLoaded              | ✔  | ✔  | ✔  | ✔  |
 | GM_AutoPagerizeNextPageLoaded      | ✔  | ✔  | ✔  | ✔  |
-| AutoPagerize_DOMNodeInserted       | ✔  | ✔  | ✔  | ✔  |
+| AutoPagerize_DOMNodeInserted       |     | ✔  | ✔  | ✔  |
 | AutoPagerizeToggleRequest          | ✔  | ✔  | ✔  | ✔  |
 | AutoPagerizeEnableRequest          | ✔  |     | ✔  | ✔  |
 | AutoPagerizeDisableRequest         | ✔  |     | ✔  | ✔  |
