@@ -38,23 +38,6 @@
       "matches": ["*://*/*"],
       "js": ["content.js"],
       "run_at": "document_start"
-    },
-    {
-      "matches": [
-        "*://matome.naver.jp/odai/*",
-        "*://matome.naver.jp/topic/*"
-      ],
-      "js": ["userscript/naver-matome.js"],
-      "run_at": "document_idle"
-    },
-    {
-      "matches": [
-        "*://www.pixiv.net/bookmark_new_illust.php*",
-        "*://www.pixiv.net/bookmark_new_illust_r18.php*",
-        "*://www.pixiv.net/search.php*"
-      ],
-      "js": ["userscript/pixiv.js"],
-      "run_at": "document_end"
     }
   ],
   "options_ui": {
