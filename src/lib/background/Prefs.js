@@ -1,8 +1,5 @@
 import events from "events";
 
-export const WEDATA_URL =
-  "http://wedata.net/databases/AutoPagerize/items_all.json";
-
 class Prefs {
   constructor(defaultKeys) {
     this._defaultKeys = defaultKeys;
@@ -35,8 +32,6 @@ class Prefs {
 }
 
 export default new Prefs({
-  siteinfoList: [WEDATA_URL],
-  siteinfoCache: {},
   userSiteinfo: "",
   excludeList: [],
   openLinkInNewTab: true,

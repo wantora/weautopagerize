@@ -1,5 +1,4 @@
 import Prefs from "./Prefs";
-import SiteinfoCache from "./SiteinfoCache";
 import parseUserSiteinfo from "../siteinfo/parseUserSiteinfo";
 import buildSiteinfo from "../siteinfo/buildSiteinfo";
 
@@ -13,44 +12,28 @@ const MICROFORMAT = buildSiteinfo([
 ]);
 
 export default class SiteinfoManager {
-  constructor() {
-    this._siteinfo = [];
-    this._userSiteinfo = [];
-    this._siteinfoCache = new SiteinfoCache();
-  }
+  #siteinfo = [];
+  #userSiteinfo = [];
+
   async init() {
-    Prefs.on("siteinfoList", (newValue) => {
-      this._updateSiteinfo(newValue);
-    });
+    await this.#loadSiteinfo();
+
+    const {userSiteinfo} = await Prefs.get(["userSiteinfo"]);
+    this.#updateUserSiteinfo(userSiteinfo);
 
     Prefs.on("userSiteinfo", (newValue) => {
-      this._updateUserSiteinfo(newValue);
+      this.#updateUserSiteinfo(newValue);
     });
-
-    setInterval(
-      async () => {
-        const {siteinfoList} = await Prefs.get(["siteinfoList"]);
-        this._updateSiteinfo(siteinfoList);
-      },
-      60 * 60 * 1000
-    );
-
-    const {siteinfoList, userSiteinfo} = await Prefs.get([
-      "siteinfoList",
-      "userSiteinfo",
-    ]);
-    this._updateSiteinfo(siteinfoList);
-    this._updateUserSiteinfo(userSiteinfo);
   }
   getSiteinfo(urlStr) {
     const newSiteinfo = [];
 
-    for (const info of this._userSiteinfo) {
+    for (const info of this.#userSiteinfo) {
       if (info.urlRegExp.test(urlStr)) {
         newSiteinfo.push(info);
       }
     }
-    for (const info of this._siteinfo) {
+    for (const info of this.#siteinfo) {
       if (info.urlRegExp.test(urlStr)) {
         newSiteinfo.push(info);
       }
@@ -59,23 +42,18 @@ export default class SiteinfoManager {
 
     return newSiteinfo;
   }
-  async forceUpdateSiteinfo() {
-    const {siteinfoList} = await Prefs.get(["siteinfoList"]);
-    return this._updateSiteinfo(siteinfoList, true);
+  getStatus() {
+    return [
+      {name: "internal", count: this.#siteinfo.length},
+      {name: "user", count: this.#userSiteinfo.length},
+    ];
   }
-  async _updateSiteinfo(siteinfoList, forceUpdate = false) {
-    const jsons = await this._siteinfoCache.update({
-      urls: siteinfoList,
-      updateFn: async (url) => {
-        const res = await fetch(url, {
-          redirect: "follow",
-          cache: forceUpdate ? "no-store" : "no-cache",
-        });
-        return res.json();
-      },
-      forceUpdate: forceUpdate,
-    });
-    const ary = buildSiteinfo([].concat(...jsons)).map((value, index) => ({
+  async #loadSiteinfo() {
+    const localData = await (
+      await fetch(browser.runtime.getURL("wedata-items.json"))
+    ).json();
+
+    const ary = buildSiteinfo(localData).map((value, index) => ({
       value,
       index,
       key: value.url.length,
@@ -85,13 +63,13 @@ export default class SiteinfoManager {
       return b.key - a.key || a.index - b.index;
     });
 
-    this._siteinfo = ary.map(({value}) => value);
+    this.#siteinfo = ary.map(({value}) => value);
   }
-  _updateUserSiteinfo(userSiteinfo) {
-    this._userSiteinfo = [];
+  #updateUserSiteinfo(userSiteinfo) {
+    this.#userSiteinfo = [];
 
     try {
-      this._userSiteinfo = buildSiteinfo(parseUserSiteinfo(userSiteinfo));
+      this.#userSiteinfo = buildSiteinfo(parseUserSiteinfo(userSiteinfo));
     } catch (error) {
       console.error(error);
     }
