@@ -19,6 +19,7 @@ export default [
         ...globals.commonjs,
         ...globals.webextensions,
         content: false,
+        cloneInto: false,
       },
     },
     rules: {

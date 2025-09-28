@@ -30,16 +30,23 @@ async function nativeFetch(url) {
   return {responseURL, responseText};
 }
 
+function dispatchCustomEvent(type, options) {
+  document.dispatchEvent(
+    new document.defaultView.CustomEvent(
+      type,
+      cloneInto(options, document.defaultView)
+    )
+  );
+}
+
 async function userFetch(url) {
   const eventPromise = waitForEvent(document, "AutoPagerizeUserFetchResponse");
-  document.dispatchEvent(
-    new CustomEvent("AutoPagerizeUserFetchRequest", {
-      bubbles: true,
-      detail: {
-        url: url.href,
-      },
-    })
-  );
+  dispatchCustomEvent("AutoPagerizeUserFetchRequest", {
+    bubbles: true,
+    detail: {
+      url: url.href,
+    },
+  });
 
   const ev = await eventPromise;
   const {responseURL, responseText} = ev.detail;
@@ -51,15 +58,13 @@ async function responseFilter(response) {
     document,
     "AutoPagerizeResponseFilterResponse"
   );
-  document.dispatchEvent(
-    new CustomEvent("AutoPagerizeResponseFilterRequest", {
-      bubbles: true,
-      detail: {
-        responseURL: response.responseURL.href,
-        responseText: response.responseText,
-      },
-    })
-  );
+  dispatchCustomEvent("AutoPagerizeResponseFilterRequest", {
+    bubbles: true,
+    detail: {
+      responseURL: response.responseURL.href,
+      responseText: response.responseText,
+    },
+  });
 
   const ev = await eventPromise;
   const {responseText} = ev.detail;
