@@ -154,9 +154,6 @@ export default class AutoPager {
     });
     this._insertPoint.parentNode.insertBefore(fragment, this._insertPoint);
 
-    pageElements.forEach((pageElement) => {
-      this._dispatchInsertedEvent(pageElement);
-    });
     document.dispatchEvent(
       new Event("GM_AutoPagerizeNextPageLoaded", {bubbles: true})
     );
@@ -384,19 +381,5 @@ export default class AutoPager {
     }
 
     return fragment;
-  }
-  _dispatchInsertedEvent(pageElement) {
-    const ev = document.createEvent("MutationEvent");
-    ev.initMutationEvent(
-      "AutoPagerize_DOMNodeInserted",
-      true,
-      false,
-      this._insertPoint.parentNode,
-      null,
-      this._url,
-      null,
-      null
-    );
-    pageElement.dispatchEvent(ev);
   }
 }
