@@ -7,7 +7,7 @@ const CONFIG = {
   entryPoints: glob.sync("./src/*.js"),
   outdir: "./dist",
   copydir: "./src/webext",
-  copyfiles: ["./README.md", "./LICENSE.md", "./gpl-3.0.txt"],
+  copyfiles: ["./README.md", "./LICENSE"],
 };
 const watchMode = process.argv.includes("--watch");
 
