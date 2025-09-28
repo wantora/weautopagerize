@@ -77,13 +77,9 @@ document.dispatchEvent(new CustomEvent("AutoPagerize_launchAutoPager", {detail: 
 }}));
 ```
 
-#### AutoPagerizeResponseFilterRequest, AutoPagerizeResponseFilterResponse
+#### AutoPagerizeResponseFilterRequest, AutoPagerizeResponseFilterResponse, AutoPagerizeUserFetchRequest, AutoPagerizeUserFetchResponse
 
-See [src/userscript/naver-matome.js](src/userscript/naver-matome.js).
-
-#### AutoPagerizeUserFetchRequest, AutoPagerizeUserFetchResponse
-
-See [src/userscript/pixiv.js](src/userscript/pixiv.js).
+See [src/userscript (1.7.6)](https://github.com/wantora/weautopagerize/tree/v1.7.6/src/userscript).
 
 ### Compatibility table
 
