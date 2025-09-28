@@ -2,6 +2,15 @@
 
 Automatically inserts the next page.
 
+## Build instructions
+
+```
+git clone https://github.com/wantora/weautopagerize.git
+cd weautopagerize
+pnpm install
+pnpm run build
+```
+
 ## AutoPagerize API Reference
 
 ### SITEINFO
@@ -118,15 +127,6 @@ See [src/userscript/pixiv.js](src/userscript/pixiv.js).
 * [AutoPagerize (userscript)](https://github.com/swdyh/autopagerize) 0.0.66
 * [AutoPagerize](https://github.com/swdyh/autopagerize_for_chrome) 0.3.9
 * [uAutoPagerize](https://addons.mozilla.org/firefox/addon/uautopagerize/) 0.1.4.1
-
-## Build instructions
-
-```
-git clone https://github.com/wantora/weautopagerize.git
-cd weautopagerize
-npm install
-npm run build
-```
 
 ## Contributors
 

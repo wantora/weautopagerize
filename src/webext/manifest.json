@@ -7,10 +7,9 @@
     "name": "wantora",
     "url": "https://github.com/wantora/weautopagerize"
   },
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
-      "id": "weautopagerize@wantora.github.io",
-      "strict_min_version": "60.0"
+      "id": "weautopagerize@wantora.github.io"
     }
   },
   "default_locale": "en",

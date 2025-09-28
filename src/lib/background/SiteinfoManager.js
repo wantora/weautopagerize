@@ -27,10 +27,13 @@ export default class SiteinfoManager {
       this._updateUserSiteinfo(newValue);
     });
 
-    setInterval(async () => {
-      const {siteinfoList} = await Prefs.get(["siteinfoList"]);
-      this._updateSiteinfo(siteinfoList);
-    }, 60 * 60 * 1000);
+    setInterval(
+      async () => {
+        const {siteinfoList} = await Prefs.get(["siteinfoList"]);
+        this._updateSiteinfo(siteinfoList);
+      },
+      60 * 60 * 1000
+    );
 
     const {siteinfoList, userSiteinfo} = await Prefs.get([
       "siteinfoList",
@@ -90,7 +93,7 @@ export default class SiteinfoManager {
     try {
       this._userSiteinfo = buildSiteinfo(parseUserSiteinfo(userSiteinfo));
     } catch (error) {
-      console.error(error); // eslint-disable-line no-console
+      console.error(error);
     }
   }
 }

@@ -51,7 +51,7 @@ class PageInfo {
     this._postPort();
   }
   logError(error) {
-    console.error(error); // eslint-disable-line no-console
+    console.error(error);
     this.log({type: "error", name: error.name, message: error.message});
   }
   _initListener() {

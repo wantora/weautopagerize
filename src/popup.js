@@ -75,10 +75,7 @@ class PageInfoPanel {
     window.addEventListener("resize", listener);
   }
   _initPort() {
-    this._port = browser.tabs.connect(
-      this._tabId,
-      {name: "pageInfoPort"}
-    );
+    this._port = browser.tabs.connect(this._tabId, {name: "pageInfoPort"});
     this._port.onDisconnect.addListener(async () => {
       this._onDisconnect();
       await sleep(500);

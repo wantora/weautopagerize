@@ -17,7 +17,7 @@ export default function buildSiteinfo(siteinfo, options = {}) {
   const {errorCallback} = Object.assign(
     {
       errorCallback(error) {
-        console.error(error); // eslint-disable-line no-console
+        console.error(error);
       },
     },
     options

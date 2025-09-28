@@ -20,7 +20,7 @@ export default class ExcludeList {
     try {
       this._regExp = parseGlobList(excludeList);
     } catch (error) {
-      console.error(error); // eslint-disable-line no-console
+      console.error(error);
     }
   }
 }
