@@ -32,6 +32,8 @@ class Prefs {
 }
 
 export default new Prefs({
+  siteinfoURL: "",
+  siteinfoData: {url: "", updateTime: 0, body: "[]"},
   userSiteinfo: "",
   excludeList: [],
   openLinkInNewTab: true,

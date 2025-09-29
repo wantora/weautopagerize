@@ -10,13 +10,23 @@ const MICROFORMAT = buildSiteinfo([
     insertBefore: '//*[contains(@class, "autopagerize_insert_before")]',
   },
 ]);
+const CACHE_MAX_AGE = 24 * 60 * 60 * 1000;
 
 export default class SiteinfoManager {
   #siteinfo = [];
+  #siteinfoURL = "";
+  #siteinfoUpdateTime = 0;
   #userSiteinfo = [];
 
   async init() {
-    await this.#loadSiteinfo();
+    await this.#updateSiteinfo();
+
+    setInterval(
+      async () => {
+        await this.#updateSiteinfo();
+      },
+      60 * 60 * 1000
+    );
 
     const {userSiteinfo} = await Prefs.get(["userSiteinfo"]);
     this.#updateUserSiteinfo(userSiteinfo);
@@ -43,17 +53,82 @@ export default class SiteinfoManager {
     return newSiteinfo;
   }
   getStatus() {
+    let siteinfoStatus = {
+      name: null,
+      count: this.#siteinfo.length,
+      updateTime: null,
+    };
+
+    if (this.#siteinfoURL === "") {
+      siteinfoStatus.name = browser.i18n.getMessage(
+        "options_siteinfoLocal_label"
+      );
+    } else {
+      siteinfoStatus.name = this.#siteinfoURL;
+      siteinfoStatus.updateTime = new Date(
+        this.#siteinfoUpdateTime
+      ).toLocaleString([], {
+        hour12: false,
+      });
+    }
+
     return [
-      {name: "internal", count: this.#siteinfo.length},
-      {name: "user", count: this.#userSiteinfo.length},
+      siteinfoStatus,
+      {
+        name: browser.i18n.getMessage("options_userSiteinfo_label"),
+        count: this.#userSiteinfo.length,
+        updateTime: null,
+      },
     ];
   }
-  async #loadSiteinfo() {
-    const localData = await (
-      await fetch(browser.runtime.getURL("wedata-items.json"))
-    ).json();
+  async forceUpdateSiteinfo() {
+    const {siteinfoData} = await Prefs.get(["siteinfoData"]);
+    siteinfoData.updateTime = 0;
+    await Prefs.set({siteinfoData});
 
-    const ary = buildSiteinfo(localData).map((value, index) => ({
+    await this.#updateSiteinfo();
+  }
+  async #updateSiteinfo() {
+    const {siteinfoURL, siteinfoData} = await Prefs.get([
+      "siteinfoURL",
+      "siteinfoData",
+    ]);
+
+    if (siteinfoURL !== siteinfoData.url) {
+      siteinfoData.url = siteinfoURL;
+      siteinfoData.updateTime = 0;
+      siteinfoData.body = "[]";
+    }
+
+    if (siteinfoURL === "") {
+      siteinfoData.body = await (
+        await fetch(browser.runtime.getURL("wedata-items.json"))
+      ).text();
+    } else if (Date.now() >= siteinfoData.updateTime + CACHE_MAX_AGE) {
+      siteinfoData.updateTime = Date.now();
+
+      try {
+        siteinfoData.body = await (
+          await fetch(siteinfoURL, {
+            redirect: "follow",
+            cache: "no-cache",
+          })
+        ).text();
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    await Prefs.set({siteinfoData});
+
+    let data = [];
+    try {
+      data = JSON.parse(siteinfoData.body);
+    } catch (error) {
+      console.error(error);
+    }
+
+    const ary = buildSiteinfo(data).map((value, index) => ({
       value,
       index,
       key: value.url.length,
@@ -64,6 +139,8 @@ export default class SiteinfoManager {
     });
 
     this.#siteinfo = ary.map(({value}) => value);
+    this.#siteinfoURL = siteinfoURL;
+    this.#siteinfoUpdateTime = siteinfoData.updateTime;
   }
   #updateUserSiteinfo(userSiteinfo) {
     this.#userSiteinfo = [];

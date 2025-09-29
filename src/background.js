@@ -106,6 +106,8 @@ async function initContextmenu() {
           if (!sender.tab.incognito) {
             return browser.history.addUrl(message.value);
           }
+        } else if (message.type === "forceUpdateSiteinfo") {
+          return siteinfoManager.forceUpdateSiteinfo();
         } else if (message.type === "getSiteinfoStatus") {
           return siteinfoManager.getStatus();
         }

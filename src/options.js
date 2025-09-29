@@ -20,22 +20,31 @@ const ArrayTextarea = {
   },
 };
 
-const ExcludeListValidator = (value) => {
+const TextInput = {
+  load(element, value) {
+    element.value = value;
+  },
+  save(element) {
+    return element.value.trim();
+  },
+};
+
+function ExcludeListValidator(value) {
   try {
     parseGlobList(value);
   } catch (error) {
     return `${error.name}: ${error.message}\n`;
   }
   return "";
-};
+}
 
-const AddHistoryPermitter = async (value) => {
+async function AddHistoryPermitter(value) {
   if (value) {
     return browser.permissions.request({permissions: ["history"]});
   } else {
     return true;
   }
-};
+}
 
 I18n.initHTML();
 
@@ -51,13 +60,14 @@ const optionManager = new OptionManager([
     updater: ArrayTextarea,
     validator: ExcludeListValidator,
   },
+  {
+    name: "siteinfoURL",
+    updater: TextInput,
+  },
 ]);
 optionManager.init();
 
 const siteinfoStatusElement = document.getElementById("siteinfoStatus");
-const openUserSiteinfoButton = document.getElementById(
-  "openUserSiteinfoButton"
-);
 
 async function updateSiteinfoStatus() {
   const siteinfoStatus = await browser.runtime.sendMessage({
@@ -65,21 +75,34 @@ async function updateSiteinfoStatus() {
   });
   siteinfoStatusElement.textContent = "";
 
-  for (const {name, count} of siteinfoStatus) {
-    const element = document.createElement("div");
-    element.textContent = `${name}: ${browser.i18n.getMessage(
-      "options_siteinfoCount",
-      count
-    )}`;
-    siteinfoStatusElement.appendChild(element);
+  for (const {name, count, updateTime} of siteinfoStatus) {
+    const dt = document.createElement("dt");
+    dt.textContent = name;
+    siteinfoStatusElement.appendChild(dt);
+
+    const dd = document.createElement("dd");
+    dd.textContent = browser.i18n.getMessage("options_siteinfoCount", count);
+    if (updateTime) {
+      dd.textContent += ` (${updateTime})`;
+    }
+    siteinfoStatusElement.appendChild(dd);
   }
 }
 
-openUserSiteinfoButton.addEventListener("click", () => {
-  open(
-    browser.runtime.getURL("user-siteinfo-editor.html"),
-    "weautopagerize-user-siteinfo-editor"
-  );
-});
+document
+  .getElementById("updateSiteinfoButton")
+  .addEventListener("click", async () => {
+    await browser.runtime.sendMessage({type: "forceUpdateSiteinfo"});
+    await updateSiteinfoStatus();
+  });
+
+document
+  .getElementById("openUserSiteinfoButton")
+  .addEventListener("click", () => {
+    open(
+      browser.runtime.getURL("user-siteinfo-editor.html"),
+      "weautopagerize-user-siteinfo-editor"
+    );
+  });
 
 updateSiteinfoStatus();

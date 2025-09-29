@@ -26,6 +26,12 @@
   "options_excludeList_pattern": {
     "message": "ワイルドカードと正規表現"
   },
+  "options_siteinfoURL_label": {
+    "message": "SITEINFO URL"
+  },
+  "options_siteinfoLocal_label": {
+    "message": "ローカル SITEINFO"
+  },
   "options_userSiteinfo_label": {
     "message": "ユーザー SITEINFO"
   },

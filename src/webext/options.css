@@ -38,6 +38,10 @@ fieldset {
   font-size: inherit;
   width: 100%;
 }
+.deflist > dd select,
+.deflist > dd button {
+  font-size: inherit;
+}
 .deflist > dd textarea {
   height: 15em;
 }

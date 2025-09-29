@@ -4,9 +4,10 @@ Automatically inserts the next page.
 
 ## Build instructions
 
+1. Install [Node.js](https://nodejs.org/).
+2. Run commands.
 ```
-git clone https://github.com/wantora/weautopagerize.git
-cd weautopagerize
+npm install -g pnpm
 pnpm install
 pnpm run build
 ```

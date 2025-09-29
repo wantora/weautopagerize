@@ -26,6 +26,12 @@
   "options_excludeList_pattern": {
     "message": "Wildcard & Regexp"
   },
+  "options_siteinfoURL_label": {
+    "message": "SITEINFO URL"
+  },
+  "options_siteinfoLocal_label": {
+    "message": "Local SITEINFO"
+  },
   "options_userSiteinfo_label": {
     "message": "User SITEINFO"
   },

@@ -24,6 +24,11 @@
         <textarea id="pref_excludeList"></textarea>
         <div id="prefMessage_excludeList" class="messageBox"></div>
       </dd>
+      <dt><label for="pref_siteinfoURL"><span data-i18n="options_siteinfoURL_label"></span><br></label></dt>
+      <dd>
+        <input type="text" id="pref_siteinfoURL">
+        <button id="updateSiteinfoButton" data-i18n="options_updateSiteinfoButton_label"></button>
+      </dd>
       <dt>
         <label>
           <a href="https://github.com/wantora/weautopagerize#siteinfo" data-i18n="options_userSiteinfo_label"></a>
@@ -40,7 +45,7 @@
 
     <dl class="deflist">
       <dt data-i18n="options_siteinfoStatus_label"></dt>
-      <dd id="siteinfoStatus"></dd>
+      <dd><dl id="siteinfoStatus" class="deflist"></dl></dd>
     </dl>
   </fieldset>
 
